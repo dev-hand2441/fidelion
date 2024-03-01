@@ -1,0 +1,18 @@
+@charset 'utf-8';
+
+/**
+ * 변수
+**/
+
+$color_main: #000;
+
+$color_text_base: 14px;
+
+$font_family_base: 'PretendardVariable', sans-serif;// ie에서 31자 이상 적용 안됨
+
+/** transition sec */
+$time_base: 0.4s;
+$time_fast: 0.2s;
+$time_faster: 0.1s;
+$time_slow: 0.7s;
+$time_slower: 1s;
