@@ -1,9 +1,56 @@
 @charset 'utf-8';
+@use '../abstracts/mixin';
 
 /**
  * grid
 **/
 
+:root,
 body {
+    overflow: hidden;
+    height: 100%;
+}
+
+:root {
     font-family: 'PretendardVariable';
+}
+
+body {
+    background-color: #f5f5f5;
+}
+
+.pb-layout-app {
+    position: relative;
+    height: 100%;
+}
+
+.gn-layout-view {
+    display: grid;
+    grid-template-rows: $header_height_base auto $footer_height_base;
+    height: 100%;
+}
+
+.gn-layout-page {
+    height: 100%;
+
+    .gn-scroller {
+        overflow-y: auto;
+        overflow-x: hidden;
+        height: 100%;
+    }
+
+    &-content {
+        padding: 12px 24px;
+    }
+}
+
+.pb-layout-sidemenu {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    height: 100%;
+    width: 80%;
+    transform: translateX(-100%);
+    background-color: #fff;
 }

@@ -3,7 +3,7 @@ import React from 'react'
 
 function Footer() {
     return (
-        <footer>
+        <footer className="gn-layout-footer">
             <p>© 2024 FIDELION Simulator</p>
         </footer>
     )
