@@ -1,69 +1,64 @@
 import React, { useState, useEffect } from 'react'
 
 function TokenPrices() {
-    const [price2080, setPrice2080] = useState(null)
     const [priceSolana, setPriceSolana] = useState(null)
+    const [price2080, setPrice2080] = useState(null)
 
     useEffect(() => {
-        // 2080 토큰 가격 정보를 불러오는 함수
-        const fetchPrice2080 = () => {
-            fetch(
-                'https://api.coingecko.com/api/v3/simple/price?ids=2080&vs_currencies=usd'
+        const fetchPrices = async () => {
+            // Solana 토큰 가격 정보 요청
+            const responseSolana = await fetch(
+                'https://public-api.birdeye.so/public/price?address=So11111111111111111111111111111111111111112',
+                {
+                    method: 'GET',
+                    headers: {
+                        'x-chain': 'solana',
+                        'X-API-KEY': '72e6d89433b645cf8993ad398f95aeea',
+                    },
+                }
             )
-                .then(response => response.json())
-                .then(data => setPrice2080(data['2080'].usd))
-                .catch(error =>
-                    console.error(
-                        '2080 토큰 가격 정보 요청 중 에러 발생:',
-                        error
-                    )
-                )
-        }
+            const dataSolana = await responseSolana.json()
+            setPriceSolana(dataSolana.data.value.toFixed(2)) // Solana 토큰 가격 정보 저장 (소수점 2자리)
 
-        // Solana 토큰 가격 정보를 불러오는 함수
-        const fetchPriceSolana = () => {
-            fetch(
-                'https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd'
+            // 2080 토큰 가격 정보 요청
+            const response2080 = await fetch(
+                'https://public-api.birdeye.so/public/price?address=Dwri1iuy5pDFf2u2GwwsH2MxjR6dATyDv9En9Jk8Fkof',
+                {
+                    method: 'GET',
+                    headers: {
+                        'x-chain': 'solana',
+                        'X-API-KEY': '72e6d89433b645cf8993ad398f95aeea',
+                    },
+                }
             )
-                .then(response => response.json())
-                .then(data => setPriceSolana(data.solana.usd))
-                .catch(error =>
-                    console.error(
-                        'Solana 토큰 가격 정보 요청 중 에러 발생:',
-                        error
-                    )
-                )
+            const data2080 = await response2080.json()
+            setPrice2080(data2080.data.value.toFixed(4)) // 2080 토큰 가격 정보 저장 (소수점 5자리)
         }
 
-        // 컴포넌트 마운트 시 두 토큰의 가격 정보를 불러옵니다.
-        fetchPrice2080()
-        fetchPriceSolana()
-
-        // 5분마다 두 토큰의 가격 정보를 갱신합니다.
-        const intervalId2080 = setInterval(fetchPrice2080, 300000) // 300,000ms = 5min
-        const intervalIdSolana = setInterval(fetchPriceSolana, 300000) // 300,000ms = 5min
-
-        // 컴포넌트가 언마운트될 때 인터벌을 정리합니다.
-        return () => {
-            clearInterval(intervalId2080)
-            clearInterval(intervalIdSolana)
-        }
+        fetchPrices() // 토큰 가격 정보 요청 함수 실행
     }, [])
 
     return (
         <div className="gn-token-price-inner">
-            <h2>토큰 현재가</h2>
+            <h3>코인 현재가</h3>
+            <p>Powered by Birdeye</p>
             <ul>
                 <li>
-                    <h3>2080</h3>
-                    <p className="text-price">
-                        {price2080 ? `$${price2080}` : '로딩 중...'}
-                    </p>
+                    <i className="image-token">
+                        <img src="/image/token_2080.png" alt="" />
+                    </i>
+                    <span className="text-token">2080</span>
+                    <strong className="text-price">
+                        {price2080 ? `$${price2080}` : 'Loading...'}
+                    </strong>
                 </li>
                 <li>
-                    <h3>SOLANA</h3>
+                    <i className="image-token">
+                        <img src="/image/token_sol.png" alt="" />
+                    </i>
+                    <span className="text-token">SOL</span>
                     <p className="text-price">
-                        {priceSolana ? `$${priceSolana}` : '로딩 중...'}
+                        {priceSolana ? `$${priceSolana}` : 'Loading...'}
                     </p>
                 </li>
             </ul>

@@ -5,9 +5,10 @@
 @import 'base/typography';
 
 @import 'layout/header';
-@import 'layout/footer';
+@import 'layout/toolbar';
 @import 'layout/grid';
 
+@import 'components/block';
 @import 'components/tokenPrice';
 
 @import 'page/main.scss';

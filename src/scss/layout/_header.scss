@@ -6,8 +6,13 @@
 **/
 
 .gn-layout-header {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
     padding: 0 14px;
     height: $header_height_base;
+    background-color: #fff;
 
     h1 {
         padding-top: 15px;

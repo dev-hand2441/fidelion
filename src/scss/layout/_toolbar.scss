@@ -1,0 +1,32 @@
+@charset 'utf-8';
+
+/**
+ * 푸터
+**/
+
+.gn-layout-toolbar {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    height: $toolbar_height_base;
+    border-top: 1px solid #e8e8e8;
+    background-color: #fff;
+
+    ul {
+        display: flex;
+
+        li {
+            flex: 1;
+
+            > a {
+                display: block;
+                padding: 15px 0;
+                height: 50px;
+                font-size: 14px;
+                line-height: 20px;
+                text-align: center;
+            }
+        }
+    }
+}

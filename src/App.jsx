@@ -1,12 +1,12 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Header from './components/Header'
-import Footer from './components/Footer'
+import Toolbar from './components/Toolbar'
 import SideMenu from './components/SideMenu'
 
 import TokenPrice from './components/TokenPrice'
-import DexSimulator from './pages/DexSimulator' // 예시 페이지 컴포넌트
-import LevelUp from './pages/LevelUp' // 예시 페이지 컴포넌트
+import DexSimulator from './pages/DexSimulator'
+import LevelUp from './pages/LevelUp'
 
 import './scss/App.scss'
 
@@ -19,7 +19,7 @@ function App() {
                 <div className="gn-layout-page">
                     <div className="gn-scroller">
                         <div className="gn-layout-page-content">
-                            <div className="gn-token-price">
+                            <div className="gn-block gn-token-price">
                                 <TokenPrice />
                             </div>
                             <Routes>
@@ -29,7 +29,7 @@ function App() {
                         </div>
                     </div>
                 </div>
-                <Footer />
+                <Toolbar />
             </div>
         </Router>
     )

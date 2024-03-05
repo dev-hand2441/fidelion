@@ -1,5 +1,6 @@
 @charset 'utf-8';
 @use '../abstracts/mixin';
+@use '../abstracts/variables';
 
 /**
  * grid
@@ -12,11 +13,13 @@ body {
 }
 
 :root {
+    color: $color_main;
+    font-weight: 400;
     font-family: 'PretendardVariable';
 }
 
 body {
-    background-color: #f5f5f5;
+    background-color: #e3eaf5;
 }
 
 .pb-layout-app {
@@ -25,12 +28,11 @@ body {
 }
 
 .gn-layout-view {
-    display: grid;
-    grid-template-rows: $header_height_base auto $footer_height_base;
     height: 100%;
 }
 
 .gn-layout-page {
+    padding: $header_height_base 0 $toolbar_height_base;
     height: 100%;
 
     .gn-scroller {
@@ -40,7 +42,7 @@ body {
     }
 
     &-content {
-        padding: 12px 24px;
+        padding: 20px 14px;
     }
 }
 
