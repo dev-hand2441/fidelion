@@ -36,32 +36,36 @@ function TokenPrices() {
         }
 
         fetchPrices() // 토큰 가격 정보 요청 함수 실행
+
+        // https://www.koreaexim.go.kr/site/program/financial/exchangeJSON?authkey=CKxFJAScH4L3j7YmIpni9PZs14LhBams&searchdate=20240306&data=AP01
     }, [])
 
     return (
-        <div className="gn-token-price-inner">
-            <h3>코인 현재가</h3>
-            <p>Powered by Birdeye</p>
-            <ul>
-                <li>
-                    <i className="image-token">
-                        <img src="/image/token_2080.png" alt="" />
-                    </i>
-                    <span className="text-token">2080</span>
-                    <strong className="text-price">
-                        {price2080 ? `$${price2080}` : 'Loading...'}
-                    </strong>
-                </li>
-                <li>
-                    <i className="image-token">
-                        <img src="/image/token_sol.png" alt="" />
-                    </i>
-                    <span className="text-token">SOL</span>
-                    <p className="text-price">
-                        {priceSolana ? `$${priceSolana}` : 'Loading...'}
-                    </p>
-                </li>
-            </ul>
+        <div className="gn-token-price">
+            <div className="gn-token-price-inner">
+                <h3 className="text-heading">코인 현재가</h3>
+                <p>Powered by Birdeye</p>
+                <ul>
+                    <li className="gn-block">
+                        <i className="image-token">
+                            <img src="/image/token_2080.png" alt="" />
+                        </i>
+                        <b className="text-token">2080</b>
+                        <p className="text-price">
+                            {price2080 ? `$${price2080}` : 'Loading...'}
+                        </p>
+                    </li>
+                    <li className="gn-block">
+                        <i className="image-token">
+                            <img src="/image/token_sol.png" alt="" />
+                        </i>
+                        <b className="text-token">Solana</b>
+                        <p className="text-price">
+                            {priceSolana ? `$${priceSolana}` : 'Loading...'}
+                        </p>
+                    </li>
+                </ul>
+            </div>
         </div>
     )
 }

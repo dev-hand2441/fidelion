@@ -77,7 +77,8 @@ ul,
 ol,
 dl {
 	&::after {
-        content: '';
+		content: '';
+		display: block;
         clear: both;
     }
 }
@@ -237,7 +238,6 @@ input {
 	&[type="month"],
 	&[type="time"],
 	&[type="week"] {
-		border: 1px solid #000;
 		appearance: none;
 	}
 }

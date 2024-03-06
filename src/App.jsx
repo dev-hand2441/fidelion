@@ -19,9 +19,7 @@ function App() {
                 <div className="gn-layout-page">
                     <div className="gn-scroller">
                         <div className="gn-layout-page-content">
-                            <div className="gn-block gn-token-price">
-                                <TokenPrice />
-                            </div>
+                            <TokenPrice />
                             <Routes>
                                 <Route path="/" element={<DexSimulator />} />
                                 <Route path="/level" element={<LevelUp />} />

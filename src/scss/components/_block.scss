@@ -5,8 +5,12 @@
 **/
 
 .gn-block {
-    padding: 20px 14px;
-    background-color: #fff;
+    padding: 20px;
+    background-color: #f9f9f9;
     border-radius: 12px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.05);
+
+    + .gn-block {
+        margin-top: 12px;
+    }
 }

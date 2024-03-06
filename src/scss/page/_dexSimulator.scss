@@ -5,7 +5,69 @@
 **/
 
 .gn-dex-simulator {
-    padding: 20px 14px;
-    background-color: #fff;
-    border-radius: 12px;
+    margin-top: 42px;
+
+    .gn-form-box {
+        position: relative;
+
+        .text-level {
+            position: absolute;
+            top: -32px;
+            right: 0;
+            margin: 0;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .form-slider {
+            margin: 0 auto;
+        }
+    }
+    .btn-today {
+        margin-top: 20px;
+        background-color: #131313;
+
+        &:hover {
+            background-color: #131313;
+        }
+    }
+
+    &-looting {
+        margin-top: 12px;
+
+        .text-faction {
+            padding-bottom: 12px;
+            font-weight: 700;
+            font-size: 20px;
+        }
+
+        dl:not(.gn__looting-today) {
+            padding: 4px 0;
+            display: flex;
+
+            dt {
+                width: 110px;
+                color: #767676;
+                font-size: 14px;
+            }
+
+            dd {
+                flex: 1;
+                font-weight: 600;
+                text-align: right;
+            }
+        }
+
+        .gn__looting-today {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid #ddd;
+
+            > dt {
+                padding-bottom: 8px;
+                font-weight: 600;
+                font-size: 18px;
+            }
+        }
+    }
 }

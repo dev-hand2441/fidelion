@@ -6,16 +6,16 @@ function Footer() {
         <div className="gn-layout-toolbar">
             <ul>
                 <li>
-                    <Link to="/">DEX Stats</Link>
+                    <Link to="/">루팅</Link>
                 </li>
                 <li>
-                    <Link to="/level">Fame Level</Link>
+                    <Link to="/level">레벨</Link>
+                </li>
+                <li>
+                    <Link to="/stats">스탯</Link>
                 </li>
                 <li>
                     <Link to="/roi">ROI</Link>
-                </li>
-                <li>
-                    <Link to="/guide">초보자 가이드</Link>
                 </li>
             </ul>
         </div>

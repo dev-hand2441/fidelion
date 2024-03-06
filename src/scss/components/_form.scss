@@ -1,0 +1,11 @@
+@charset 'utf-8';
+
+/**
+ * 폼
+**/
+
+.gn-form-box {
+    + .text-label {
+        margin-top: 20px;
+    }
+}
