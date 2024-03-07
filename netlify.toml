@@ -10,3 +10,8 @@
   to = "https://www.koreaexim.go.kr/site/program/financial/exchangeJSON/:splat"
   status = 200
   force = true
+
+  [[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
