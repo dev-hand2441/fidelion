@@ -3,7 +3,7 @@ import React from 'react'
 
 function SideMenu() {
     return (
-        <div className="pb-layout-sidemenu">
+        <div className="gn-layout-sidemenu">
             <ul>
                 <li>메뉴1</li>
                 <li>메뉴2</li>
