@@ -1,21 +1,27 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom';
-
+import { NavLink } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHouse } from '@fortawesome/free-solid-svg-icons';
-import { faBolt } from '@fortawesome/free-solid-svg-icons';
-import { faSliders } from '@fortawesome/free-solid-svg-icons';
-import { faMoneyBillTransfer } from '@fortawesome/free-solid-svg-icons';
+import { faHouse, faBolt } from '@fortawesome/free-solid-svg-icons'
 
 function Toolbar() {
     return (
         <div className="gn-layout-toolbar">
             <ul>
                 <li>
-                    <NavLink to="/" activeClassName="active"><i><FontAwesomeIcon icon={faHouse} /></i>Home</NavLink>
+                    <NavLink to="/" className={({ isActive }) => (isActive ? 'active' : undefined)}>
+                        <i>
+                            <FontAwesomeIcon icon={faHouse} />
+                        </i>
+                        Home
+                    </NavLink>
                 </li>
                 <li>
-                    <NavLink to="/looting" activeClassName="active"><i><FontAwesomeIcon icon={faBolt} /></i>Looting</NavLink>
+                    <NavLink to="/looting" className={({ isActive }) => (isActive ? 'active' : undefined)}>
+                        <i>
+                            <FontAwesomeIcon icon={faBolt} />
+                        </i>
+                        Looting
+                    </NavLink>
                 </li>
                 {/* <li>
                     <NavLink to="/level" activeClassName="active"><i><FontAwesomeIcon icon={faSliders} /></i>Lv/Stats</NavLink>

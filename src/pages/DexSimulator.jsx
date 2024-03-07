@@ -1,15 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import Slider from '@mui/material/Slider'
-import Typography from '@mui/material/Typography'
-import Box from '@mui/material/Box'
-import { Select, MenuItem, FormControl } from '@mui/material'
-import Button from '@mui/material/Button'
+import { Select, MenuItem, FormControl, Slider, Typography, Box, Button, TextField } from '@mui/material'
 
 import dexData from '../json/dex.json' // dex.json 파일 import
 import lootingData from '../json/looting.json' // looting.json 파일 import
 
 function DexSimulator() {
-    const [value, setValue] = useState(38) // 슬라이더의 초기값을 25로 설정
+    const [dexLevel, setDexLevel] = useState(38) // 슬라이더의 초기값을 25로 설정
     const [faction, setFaction] = useState('[BT] Blattas') // 선택된 항목을 저장할 상태
     const [decreaseTime, setDecreaseTime] = useState('') // 시간 감소 값을 저장할 상태
     const [lootingTime, setLootingTime] = useState('') // 포맷된 루팅 기간을 저장할 상태
@@ -19,11 +15,11 @@ function DexSimulator() {
 
     // 레벨 슬라이더
     useEffect(() => {
-        setDecreaseTime(dexData[value.toString()]) // 슬라이더 값에 해당하는 시간 감소 값을 설정
-    }, [value]) // 슬라이더 값이 변경될 때마다 실행
+        setDecreaseTime(dexData[dexLevel.toString()]) // 슬라이더 값에 해당하는 시간 감소 값을 설정
+    }, [dexLevel]) // 슬라이더 값이 변경될 때마다 실행
 
     const handleSliderChange = (event, newValue) => {
-        setValue(newValue) // 슬라이더의 값을 상태에 저장
+        setDexLevel(newValue) // 슬라이더의 값을 상태에 저장
     }
 
     // 팩션 선택
@@ -44,9 +40,7 @@ function DexSimulator() {
         const format = hours => {
             const days = Math.floor(hours / 24)
             const remainingHours = Math.floor(hours % 24)
-            const minutes = Math.floor(
-                (hours - days * 24 - remainingHours) * 60
-            )
+            const minutes = Math.floor((hours - days * 24 - remainingHours) * 60)
             return `${days}일 ${remainingHours}시 ${minutes}분`
         }
 
@@ -69,9 +63,7 @@ function DexSimulator() {
 
     // 현재 시간으로 계산
     const calculateEndTime = hoursStr => {
-        const [days, hours, minutes] = hoursStr
-            .split(' ')
-            .map(part => parseInt(part, 10))
+        const [days, hours, minutes] = hoursStr.split(' ').map(part => parseInt(part, 10))
         const totalMinutes = days * 24 * 60 + hours * 60 + minutes
 
         const now = new Date()
@@ -88,107 +80,57 @@ function DexSimulator() {
         setPenaltyEndTime(penaltyEndTimeFormatted)
     }
 
+    // 날짜 입력
+
     return (
         <div className="gn-dex-simulator">
             <h3 className="text-heading">루팅 시간 계산</h3>
             <div className="gn-block">
                 <h5 className="text-label">Dex Level</h5>
                 <div className="gn-form-box">
-                    <Typography
-                        className="text-level"
-                        id="slider-value"
-                        gutterBottom
-                    >
-                        {value} <span>Lv.</span>
+                    <Typography className="text-level" id="slider-value" gutterBottom>
+                        {dexLevel} <span>Lv.</span>
                     </Typography>
-                    <Box sx={{ width: `93%` }} className="form-slider">
-                        <Slider
-                            aria-label="Slider"
-                            value={value}
-                            onChange={handleSliderChange}
-                            min={0} // 최소값을 1로 설정
-                            max={60} // 최대값을 50으로 설정
-                            sx={{
-                                '& .MuiSlider-thumb': {
-                                    color: '#131313', // 슬라이더 핸들의 색상
-                                    '&::before, &.Mui-focusVisible': {
-                                        boxShadow: 'none', // 여기서 RGBA 값을 조정하여 색상과 투명도를 변경합니다.
-                                    },
-                                    '&.Mui-active': {
-                                        boxShadow:
-                                            '0px 0px 0px 14px rgba(19, 19, 19, 0.3)', // 핸들을 활성화(클릭)했을 때의 퍼지는 효과 색상
-                                    },
-                                    '&:hover': {
-                                        boxShadow:
-                                            '0px 0px 0px 8px rgba(19, 19, 19, 0.3)', // 여기서 RGBA 값을 조정하여 색상과 투명도를 변경합니다.
-                                    },
-                                },
-                                '& .MuiSlider-track': {
-                                    color: '#131313', // 슬라이더 트랙의 색상
-                                },
-                                '& .MuiSlider-rail': {
-                                    color: 'grey', // 슬라이더 레일(트랙 뒷부분)의 색상
-                                },
-                            }}
-                        />
+                    <Box className="form-slider">
+                        <Slider aria-label="Slider" value={dexLevel} onChange={handleSliderChange} min={0} max={60} />
                     </Box>
                 </div>
+
                 <h5 className="text-label">Faction</h5>
                 <div className="gn-form-box">
-                    <FormControl fullWidth>
+                    <FormControl fullWidth className="form-select">
                         <Select
                             displayEmpty // 선택되지 않은 상태에서도 첫 번째 MenuItem 표시
                             value={faction}
                             onChange={handleChange}
                             renderValue={selected => {
-                                if (selected === '') {
-                                    return <em>Faction을 선택하세요</em> // placeholder처럼 보이는 텍스트
-                                }
+                                if (selected === '') return <em>Faction을 선택하세요</em> // placeholder처럼 보이는 텍스트
                                 return selected
                             }}
                         >
-                            <MenuItem value={`[BT] Blattas`}>
-                                [BT] Blattas
-                            </MenuItem>
+                            <MenuItem value={`[BT] Blattas`}>[BT] Blattas</MenuItem>
                             <MenuItem value={`[HT] Hunter`}>[HT] Hunter</MenuItem>
-                            <MenuItem value={`[JB] Jack N Boyz`}>
-                                [JB] Jack N Boyz
-                            </MenuItem>
-                            <MenuItem value={`[NF] Nine Fingers`}>
-                                [NF] Nine Fingers
-                            </MenuItem>
-                            <MenuItem value={`[GL] Gary's Lounge`}>
-                                [GL] Gary's Lounge
-                            </MenuItem>
-                            <MenuItem value={`[CL] Caballeros`}>
-                                [CL] Caballeros
-                            </MenuItem>
-                            <MenuItem value={`[QS] Quasars`}>
-                                [QS] Quasars
-                            </MenuItem>
-                            <MenuItem value={`[ZK] Zaikasha`}>
-                                [ZK] Zaikasha
-                            </MenuItem>
-                            <MenuItem value={`[KS] Kossacks`}>
-                                [KS] Kossacks
-                            </MenuItem>
+                            <MenuItem value={`[JB] Jack N Boyz`}>[JB] Jack N Boyz</MenuItem>
+                            <MenuItem value={`[NF] Nine Fingers`}>[NF] Nine Fingers</MenuItem>
+                            <MenuItem value={`[GL] Gary's Lounge`}>[GL] Gary's Lounge</MenuItem>
+                            <MenuItem value={`[CL] Caballeros`}>[CL] Caballeros</MenuItem>
+                            <MenuItem value={`[QS] Quasars`}>[QS] Quasars</MenuItem>
+                            <MenuItem value={`[ZK] Zaikasha`}>[ZK] Zaikasha</MenuItem>
+                            <MenuItem value={`[KS] Kossacks`}>[KS] Kossacks</MenuItem>
                         </Select>
                     </FormControl>
                 </div>
-                <Button
-                    className="btn-today"
-                    fullWidth
-                    variant="contained"
-                    onClick={handleClick}
-                >
-                    현재 시간으로 계산
-                </Button>
+                <h5 className="text-label">루팅 시간 입력</h5>
+                <div className="gn-form-box">
+                    <Button className="btn-today" fullWidth variant="contained" onClick={handleClick}>
+                        현재 시간으로 계산
+                    </Button>
+                </div>
             </div>
+
             <div className="gn-dex-simulator-looting">
                 <div className="gn-block">
-                    <h5 className="text-faction">
-                        {faction ? faction : 'Faction'}
-                    </h5>
+                    <h5 className="text-faction">{faction ? faction : 'Faction'}</h5>
                     <dl>
                         <dt>기간 감소율</dt>
                         <dd>{decreaseTime ? decreaseTime : '-'}</dd>

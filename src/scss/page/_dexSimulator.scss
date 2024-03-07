@@ -5,10 +5,39 @@
 **/
 
 .gn-dex-simulator {
-    // margin-top: 42px;
-
     .gn-form-box {
         position: relative;
+
+        // 레벨 슬라이더
+        .form-slider {
+            margin: 0 auto;
+            width: 93%;
+
+            .MuiSlider-thumb {
+                color: #131313;
+
+                &::before,
+                &.Mui-focusVisible {
+                    box-shadow: none;
+                }
+
+                &.Mui-active {
+                    box-shadow: 0px 0px 0px 14px rgba(19, 19, 19, 0.3);
+                }
+
+                &:hover {
+                    box-shadow: 0px 0px 0px 8px rgba(19, 19, 19, 0.3);
+                }
+            }
+
+            .MuiSlider-track {
+                background-color: #131313;
+            }
+
+            .MuiSlider-rail {
+                background-color: #999;
+            }
+        }
 
         .text-level {
             position: absolute;
@@ -19,10 +48,13 @@
             font-size: 16px;
         }
 
-        .form-slider {
-            margin: 0 auto;
+        .form-select {
+            .MuiSelect-select {
+                padding: 12px 14px;
+            }
         }
     }
+
     .btn-today {
         margin-top: 20px;
         background-color: #131313;
