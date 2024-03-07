@@ -6,7 +6,7 @@ import SideMenu from './components/SideMenu'
 
 import Main from './pages/Main'
 import DexSimulator from './pages/DexSimulator'
-import LevelUp from './pages/LevelUp'
+// import LevelUp from './pages/LevelUp'
 
 import './scss/App.scss'
 
@@ -22,7 +22,7 @@ function App() {
                             <Routes>
                                 <Route path="/" element={<Main />} />
                                 <Route path="/looting" element={<DexSimulator />} />
-                                <Route path="/level" element={<LevelUp />} />
+                                {/* <Route path="/level" element={<LevelUp />} /> */}
                             </Routes>
                         </div>
                     </div>
