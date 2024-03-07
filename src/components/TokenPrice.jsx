@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react'
 function TokenPrices() {
     const [priceSolana, setPriceSolana] = useState(null)
     const [price2080, setPrice2080] = useState(null)
+    const [token2080ToKRW, setToken2080ToKRW] = useState(null)
+    const [solanaToKRW, setSolanaToKRW] = useState(null)
 
     useEffect(() => {
         const fetchPrices = async () => {
@@ -37,11 +39,19 @@ function TokenPrices() {
 
         fetchPrices() // 토큰 가격 정보 요청 함수 실행
 
+        // 환율
         const apiUrl = '/exchange-api?authkey=CKxFJAScH4L3j7YmIpni9PZs14LhBams&searchdate=20240306&data=AP01'
-
         fetch(apiUrl)
             .then(response => response.json())
-            .then(data => console.log(data))
+            .then(data => {
+                // 미국 달러 정보 찾기
+                const usdInfo = data.find(currency => currency.cur_unit === 'USD')
+                const kftcDealBasR = parseFloat(usdInfo.kftc_deal_bas_r.replace(/,/g, ''))
+
+                // token2080ToKRW 및 solanaToKRW 값 설정
+                setToken2080ToKRW((price2080 * kftcDealBasR).toFixed(2))
+                setSolanaToKRW((priceSolana * kftcDealBasR).toFixed(2))
+            })
             .catch(error => console.error('Error fetching data:', error))
     }, [])
 
@@ -56,14 +66,18 @@ function TokenPrices() {
                             <img src="/image/token_2080.png" alt="" />
                         </i>
                         <b className="text-token">2080</b>
-                        <p className="text-price">{price2080 ? `$${price2080}` : 'Loading...'}</p>
+                        <p className="text-price">
+                            {price2080 ? `$${price2080}` : 'Loading...'} {token2080ToKRW ? `≈ ${token2080ToKRW}원` : ''}
+                        </p>
                     </li>
                     <li className="gn-block">
                         <i className="image-token">
                             <img src="/image/token_sol.png" alt="" />
                         </i>
                         <b className="text-token">Solana</b>
-                        <p className="text-price">{priceSolana ? `$${priceSolana}` : 'Loading...'}</p>
+                        <p className="text-price">
+                            {priceSolana ? `$${priceSolana}` : 'Loading...'} {solanaToKRW ? `≈ ${solanaToKRW}원` : ''}
+                        </p>
                     </li>
                 </ul>
             </div>
