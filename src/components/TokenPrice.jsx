@@ -47,8 +47,6 @@ function TokenPrices() {
                     const usdInfo = data.find(currency => currency.cur_unit === 'USD')
                     const kftcDealBasR = parseFloat(usdInfo.kftc_deal_bas_r.replace(/,/g, ''))
 
-                    console.log(usdInfo, kftcDealBasR)
-
                     // token2080ToKRW 및 solanaToKRW 값 설정
                     setToken2080ToKRW((token2080Price * kftcDealBasR).toFixed(2))
                     setSolanaToKRW((solanaPrice * kftcDealBasR).toLocaleString('ko-KR', { maximumFractionDigits: 0 }))
