@@ -47,7 +47,7 @@ function DexSimulator() {
             const minutes = Math.floor(
                 (hours - days * 24 - remainingHours) * 60
             )
-            return `${days}Day ${remainingHours}Hour ${minutes}Min`
+            return `${days}일 ${remainingHours}시 ${minutes}분`
         }
 
         setLootingTime(format(decreasedHours))
@@ -106,7 +106,7 @@ function DexSimulator() {
                             aria-label="Slider"
                             value={value}
                             onChange={handleSliderChange}
-                            min={1} // 최소값을 1로 설정
+                            min={0} // 최소값을 1로 설정
                             max={60} // 최대값을 50으로 설정
                             sx={{
                                 '& .MuiSlider-thumb': {

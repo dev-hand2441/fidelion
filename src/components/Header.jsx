@@ -8,9 +8,9 @@ function Header() {
                 <i className="icon-logo"></i>
                 <b>Fidelion</b> Simulator
             </h1>
-            <button type="button" className="btn-menu">
+            {/* <button type="button" className="btn-menu">
                 <i className="icon-menu"></i>
-            </button>
+            </button> */}
         </header>
     )
 }

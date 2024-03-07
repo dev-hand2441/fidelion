@@ -9,6 +9,8 @@
     bottom: 0;
     right: 0;
     left: 0;
+    margin: 0 auto;
+    max-width: $layout_max_width;
     height: $toolbar_height_base;
     border-top: 1px solid #e8e8e8;
     background-color: #fff;

@@ -10,7 +10,9 @@
     top: 0;
     right: 0;
     left: 0;
+    margin: 0 auto;
     padding: 0 14px;
+    max-width: $layout_max_width;
     height: $header_height_base;
 
     h1 {

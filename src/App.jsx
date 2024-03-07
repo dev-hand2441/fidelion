@@ -27,7 +27,7 @@ function App() {
                         </div>
                     </div>
                 </div>
-                <Toolbar />
+                {/* <Toolbar /> */}
             </div>
         </Router>
     )
