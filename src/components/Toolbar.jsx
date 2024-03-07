@@ -1,25 +1,31 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom';
 
-function Footer() {
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faHouse } from '@fortawesome/free-solid-svg-icons';
+import { faBolt } from '@fortawesome/free-solid-svg-icons';
+import { faSliders } from '@fortawesome/free-solid-svg-icons';
+import { faMoneyBillTransfer } from '@fortawesome/free-solid-svg-icons';
+
+function Toolbar() {
     return (
         <div className="gn-layout-toolbar">
             <ul>
                 <li>
-                    <Link to="/">루팅</Link>
+                    <NavLink to="/" activeClassName="active"><i><FontAwesomeIcon icon={faHouse} /></i>Home</NavLink>
                 </li>
                 <li>
-                    <Link to="/level">레벨</Link>
+                    <NavLink to="/looting" activeClassName="active"><i><FontAwesomeIcon icon={faBolt} /></i>Looting</NavLink>
+                </li>
+                {/* <li>
+                    <NavLink to="/level" activeClassName="active"><i><FontAwesomeIcon icon={faSliders} /></i>Lv/Stats</NavLink>
                 </li>
                 <li>
-                    <Link to="/stats">스탯</Link>
-                </li>
-                <li>
-                    <Link to="/roi">ROI</Link>
-                </li>
+                    <NavLink to="/roi" activeClassName="active"><i><FontAwesomeIcon icon={faMoneyBillTransfer} /></i>ROI</NavLink>
+                </li> */}
             </ul>
         </div>
     )
 }
 
-export default Footer
+export default Toolbar

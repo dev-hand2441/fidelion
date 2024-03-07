@@ -154,8 +154,8 @@ function DexSimulator() {
                             <MenuItem value={`[JB] Jack N Boyz`}>
                                 [JB] Jack N Boyz
                             </MenuItem>
-                            <MenuItem value={`[NF] Nine Figers`}>
-                                [NF] Nine Figers
+                            <MenuItem value={`[NF] Nine Fingers`}>
+                                [NF] Nine Fingers
                             </MenuItem>
                             <MenuItem value={`[GL] Gary's Lounge`}>
                                 [GL] Gary's Lounge

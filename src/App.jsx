@@ -4,8 +4,7 @@ import Header from './components/Header'
 import Toolbar from './components/Toolbar'
 import SideMenu from './components/SideMenu'
 
-import NftInfo from './components/NftInfo'
-import TokenPrice from './components/TokenPrice'
+import Main from './pages/Main'
 import DexSimulator from './pages/DexSimulator'
 import LevelUp from './pages/LevelUp'
 
@@ -20,16 +19,15 @@ function App() {
                 <div className="gn-layout-page">
                     <div className="gn-scroller">
                         <div className="gn-layout-page-content">
-                            <NftInfo />
-                            <TokenPrice />
                             <Routes>
-                                <Route path="/" element={<DexSimulator />} />
+                                <Route path="/" element={<Main />} />
+                                <Route path="/looting" element={<DexSimulator />} />
                                 <Route path="/level" element={<LevelUp />} />
                             </Routes>
                         </div>
                     </div>
                 </div>
-                {/* <Toolbar /> */}
+                <Toolbar />
             </div>
         </Router>
     )
