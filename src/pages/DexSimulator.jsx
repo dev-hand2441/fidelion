@@ -8,13 +8,6 @@ import Button from '@mui/material/Button'
 import dexData from '../json/dex.json' // dex.json 파일 import
 import lootingData from '../json/looting.json' // looting.json 파일 import
 
-const options = {method: 'GET', headers: {accept: 'application/json'}};
-
-fetch('/api/listings', options)
-    .then(response => response.json())
-    .then(response => console.log(response))
-    .catch(err => console.error(err));
-
 function DexSimulator() {
     const [value, setValue] = useState(38) // 슬라이더의 초기값을 25로 설정
     const [faction, setFaction] = useState('Blattas[BT]') // 선택된 항목을 저장할 상태
