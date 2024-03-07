@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { Select, MenuItem, FormControl, Slider, Typography, Box, Button, TextField } from '@mui/material'
+import { Select, MenuItem, FormControl, Slider, Typography, Box, Button, TextField, InputLabel } from '@mui/material'
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import { LocalizationProvider, DatePicker } from '@mui/x-date-pickers'
+import dayjs from 'dayjs'
 
 import dexData from '../json/dex.json' // dex.json 파일 import
 import lootingData from '../json/looting.json' // looting.json 파일 import
@@ -13,7 +16,11 @@ function DexSimulator() {
     const [lootingEndTime, setLootingEndTime] = useState('')
     const [penaltyEndTime, setPenaltyEndTime] = useState('')
 
-    // 레벨 슬라이더
+    const [selectedDate, setSelectedDate] = useState(dayjs())
+    const [hour, setHour] = useState(0)
+    const [minute, setMinute] = useState(0)
+
+    //< 레벨 슬라이더
     useEffect(() => {
         setDecreaseTime(dexData[dexLevel.toString()]) // 슬라이더 값에 해당하는 시간 감소 값을 설정
     }, [dexLevel]) // 슬라이더 값이 변경될 때마다 실행
@@ -21,8 +28,9 @@ function DexSimulator() {
     const handleSliderChange = (event, newValue) => {
         setDexLevel(newValue) // 슬라이더의 값을 상태에 저장
     }
+    //> 레벨 슬라이더
 
-    // 팩션 선택
+    //< 팩션 선택
     const handleChange = event => {
         setFaction(event.target.value) // 선택된 항목을 상태에 저장
     }
@@ -45,7 +53,7 @@ function DexSimulator() {
         }
 
         setLootingTime(format(decreasedHours))
-        setPenaltyTime(format(penaltyHours)) // 패널티 시간을 상태에 저장
+        setPenaltyTime(format(penaltyHours))
     }
 
     useEffect(() => {
@@ -56,31 +64,73 @@ function DexSimulator() {
                 formatTime(time, decreaseTime)
             } else {
                 setLootingTime('')
-                setPenaltyTime('') // 선택이 해제되면 패널티 시간도 초기화
+                setPenaltyTime('')
             }
         }
     }, [faction, decreaseTime])
+    //> 팩션 선택
 
-    // 현재 시간으로 계산
-    const calculateEndTime = hoursStr => {
-        const [days, hours, minutes] = hoursStr.split(' ').map(part => parseInt(part, 10))
-        const totalMinutes = days * 24 * 60 + hours * 60 + minutes
+    //< 시간 계산
+    const hours = Array.from({ length: 24 }, (_, index) => index)
+    const minutes = Array.from({ length: 60 }, (_, index) => index)
 
-        const now = new Date()
-        const endTime = new Date(now.getTime() + totalMinutes * 60000)
+    // 주어진 루팅 시간 문자열을 파싱하여 일, 시간, 분으로 변환
+    function parseLootingTime(lootingTimeStr) {
+        const [daysStr, hoursStr, minutesStr] = lootingTimeStr.match(/\d+/g)
+        return {
+            days: parseInt(daysStr, 10),
+            hours: parseInt(hoursStr, 10),
+            minutes: parseInt(minutesStr, 10),
+        }
+    }
 
-        return `${endTime.getMonth() + 1}월 ${endTime.getDate()}일 ${endTime.getHours()}시 ${endTime.getMinutes()}분`
+    // 주어진 시간과 루팅 시간을 이용하여 최종 종료 시간 계산
+    function calculateEndTime(startTime, { days, hours, minutes }) {
+        return startTime.add(days, 'day').add(hours, 'hour').add(minutes, 'minute')
+    }
+
+    // dayjs 객체를 "월 일 시 분" 형식의 문자열로 포맷팅
+    function formatDate(date) {
+        return date.format('M월 D일 HH시 mm분')
+    }
+
+    // 패널티를 적용한 루팅 시간을 계산하는 함수
+    const calculateWithPenalty = lootingTime => {
+        const totalMinutes = lootingTime.days * 24 * 60 + lootingTime.hours * 60 + lootingTime.minutes
+        const totalMinutesWithPenalty = totalMinutes * 1.2 // 20% 패널티 추가
+
+        // 패널티가 적용된 총 시간을 일, 시간, 분으로 변환
+        const daysWithPenalty = Math.floor(totalMinutesWithPenalty / (24 * 60))
+        const hoursWithPenalty = Math.floor((totalMinutesWithPenalty % (24 * 60)) / 60)
+        const minutesWithPenalty = Math.floor(totalMinutesWithPenalty % 60)
+
+        return { days: daysWithPenalty, hours: hoursWithPenalty, minutes: minutesWithPenalty }
+    }
+
+    const handleCalculate = () => {
+        const startDate = dayjs(selectedDate).hour(hour).minute(minute)
+        const looting = parseLootingTime(lootingTime)
+
+        const endTime = calculateEndTime(startDate, looting)
+        const penaltyLootingTime = calculateWithPenalty(looting)
+        const penaltyEndTime = calculateEndTime(startDate, penaltyLootingTime)
+
+        setLootingEndTime(formatDate(endTime))
+        setPenaltyEndTime(formatDate(penaltyEndTime))
     }
 
     const handleClick = () => {
-        const lootingEndTimeFormatted = calculateEndTime(lootingTime)
-        const penaltyEndTimeFormatted = calculateEndTime(penaltyTime)
+        const now = dayjs()
+        const looting = parseLootingTime(lootingTime)
 
-        setLootingEndTime(lootingEndTimeFormatted)
-        setPenaltyEndTime(penaltyEndTimeFormatted)
+        const endTime = calculateEndTime(now, looting)
+        const penaltyLootingTime = calculateWithPenalty(looting)
+        const penaltyEndTime = calculateEndTime(now, penaltyLootingTime)
+
+        setLootingEndTime(formatDate(endTime))
+        setPenaltyEndTime(formatDate(penaltyEndTime))
     }
-
-    // 날짜 입력
+    //> 시간 계산
 
     return (
         <div className="gn-dex-simulator">
@@ -122,9 +172,50 @@ function DexSimulator() {
                 </div>
                 <h5 className="text-label">루팅 시간 입력</h5>
                 <div className="gn-form-box">
-                    <Button className="btn-today" fullWidth variant="contained" onClick={handleClick}>
-                        현재 시간으로 계산
-                    </Button>
+                    <Box className="gn-dex-simulator-date">
+                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                            <DatePicker
+                                className="form-datepicker"
+                                value={selectedDate}
+                                format="YYYY-MM-DD"
+                                renderInput={params => <TextField {...params} />}
+                                onChange={newDate => {
+                                    setSelectedDate(newDate)
+                                }}
+                            />
+
+                            <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
+                                <FormControl className="form-select" fullWidth>
+                                    <InputLabel>시간</InputLabel>
+                                    <Select value={hour} onChange={e => setHour(e.target.value)} label="시간">
+                                        {hours.map(h => (
+                                            <MenuItem key={h} value={h}>
+                                                {`${h}시`}
+                                            </MenuItem>
+                                        ))}
+                                    </Select>
+                                </FormControl>
+                                <FormControl className="form-select" fullWidth>
+                                    <InputLabel>분</InputLabel>
+                                    <Select value={minute} onChange={e => setMinute(e.target.value)} label="분">
+                                        {minutes.map(m => (
+                                            <MenuItem key={m} value={m}>
+                                                {`${m}분`}
+                                            </MenuItem>
+                                        ))}
+                                    </Select>
+                                </FormControl>
+                            </Box>
+                        </LocalizationProvider>
+                        <Box sx={{ display: 'flex', gap: 1, alignItems: 'center', mt: '20px' }}>
+                            <Button className="btn-calculate" variant="outlined" onClick={handleCalculate}>
+                                계산
+                            </Button>
+                            <Button className="btn-today" variant="contained" onClick={handleClick}>
+                                현재 시간으로 계산
+                            </Button>
+                        </Box>
+                    </Box>
                 </div>
             </div>
 

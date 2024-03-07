@@ -31,6 +31,7 @@
             }
 
             .MuiSlider-track {
+                border-color: #131313;
                 background-color: #131313;
             }
 
@@ -55,12 +56,35 @@
         }
     }
 
-    .btn-today {
-        margin-top: 20px;
-        background-color: #131313;
+    &-date {
+        .form-datepicker {
+            margin-bottom: 12px;
+            width: 100%;
 
-        &:hover {
+            .MuiOutlinedInput-input {
+                padding: 12px 14px;
+            }
+        }
+
+        .form-select {
+            .MuiInputLabel-root {
+                top: -3px;
+            }
+        }
+
+        .btn-calculate {
+            width: 35%;
+            border-color: #131313;
+            color: #131313;
+        }
+
+        .btn-today {
+            flex: 1;
             background-color: #131313;
+
+            &:hover {
+                background-color: #131313;
+            }
         }
     }
 
