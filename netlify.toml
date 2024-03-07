@@ -1,5 +1,5 @@
 [[redirects]]
-  from = "/api/*"  # 클라이언트가 사용할 API 경로 접두사
+  from = "/api/*"
   to = "https://api-mainnet.magiceden.dev/v2/collections/fidelion/:splat"
   status = 200
   force = true

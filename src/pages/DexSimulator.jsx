@@ -10,7 +10,7 @@ import lootingData from '../json/looting.json' // looting.json 파일 import
 
 const options = {method: 'GET', headers: {accept: 'application/json'}};
 
-fetch('https://api-mainnet.magiceden.dev/v2/collections/fidelion/listings', options)
+fetch('/api/listings', options)
     .then(response => response.json())
     .then(response => console.log(response))
     .catch(err => console.error(err));
