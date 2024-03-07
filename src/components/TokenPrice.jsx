@@ -51,7 +51,7 @@ function TokenPrices() {
 
                     // token2080ToKRW 및 solanaToKRW 값 설정
                     setToken2080ToKRW((token2080Price * kftcDealBasR).toFixed(2))
-                    setSolanaToKRW((solanaPrice * kftcDealBasR).toLocaleString())
+                    setSolanaToKRW((solanaPrice * kftcDealBasR).toLocaleString('ko-KR', { maximumFractionDigits: 0 }))
                 })
                 .catch(error => console.error('Error fetching data:', error))
         }
