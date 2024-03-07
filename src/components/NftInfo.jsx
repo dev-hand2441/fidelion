@@ -10,6 +10,7 @@ function NFTPriceInfo() {
         fetch('/api/listings', options)
             .then(response => response.json())
             .then(data => {
+                console.log(data);
                 // API로부터 받은 floorPrice 값을 1,000,000,000로 나누어 상태에 저장
                 setFloorPrice(data.floorPrice / 1000000000);
                 setListedCount(data.listedCount);
