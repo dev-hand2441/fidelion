@@ -3,3 +3,10 @@
   to = "https://api-mainnet.magiceden.dev/v2/collections/fidelion/:splat"
   status = 200
   force = true
+
+
+[[redirects]]
+  from = "/exchange-api/*"
+  to = "https://www.koreaexim.go.kr/site/program/financial/exchangeJSON/:splat"
+  status = 200
+  force = true

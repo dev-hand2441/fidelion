@@ -37,7 +37,12 @@ function TokenPrices() {
 
         fetchPrices() // 토큰 가격 정보 요청 함수 실행
 
-        // https://www.koreaexim.go.kr/site/program/financial/exchangeJSON?authkey=CKxFJAScH4L3j7YmIpni9PZs14LhBams&searchdate=20240306&data=AP01
+        const apiUrl = '/exchange-api?authkey=CKxFJAScH4L3j7YmIpni9PZs14LhBams&searchdate=20240306&data=AP01'
+
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => console.error('Error fetching data:', error))
     }, [])
 
     return (
@@ -51,18 +56,14 @@ function TokenPrices() {
                             <img src="/image/token_2080.png" alt="" />
                         </i>
                         <b className="text-token">2080</b>
-                        <p className="text-price">
-                            {price2080 ? `$${price2080}` : 'Loading...'}
-                        </p>
+                        <p className="text-price">{price2080 ? `$${price2080}` : 'Loading...'}</p>
                     </li>
                     <li className="gn-block">
                         <i className="image-token">
                             <img src="/image/token_sol.png" alt="" />
                         </i>
                         <b className="text-token">Solana</b>
-                        <p className="text-price">
-                            {priceSolana ? `$${priceSolana}` : 'Loading...'}
-                        </p>
+                        <p className="text-price">{priceSolana ? `$${priceSolana}` : 'Loading...'}</p>
                     </li>
                 </ul>
             </div>
