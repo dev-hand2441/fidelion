@@ -5,7 +5,7 @@ function NFTPriceInfo() {
     const [listedCount, setListedCount] = useState(null);
 
     useEffect(() => {
-        const options = { method: 'GET', headers: { accept: 'application/json' } };
+        const options = {method: 'GET', headers: {accept: 'application/json'}};
 
         fetch('/api/stats', options)
             .then(response => response.json())

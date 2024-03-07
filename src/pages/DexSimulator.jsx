@@ -10,7 +10,7 @@ import lootingData from '../json/looting.json' // looting.json 파일 import
 
 function DexSimulator() {
     const [value, setValue] = useState(38) // 슬라이더의 초기값을 25로 설정
-    const [faction, setFaction] = useState('Blattas[BT]') // 선택된 항목을 저장할 상태
+    const [faction, setFaction] = useState('[BT] Blattas') // 선택된 항목을 저장할 상태
     const [decreaseTime, setDecreaseTime] = useState('') // 시간 감소 값을 저장할 상태
     const [lootingTime, setLootingTime] = useState('') // 포맷된 루팅 기간을 저장할 상태
     const [penaltyTime, setPenaltyTime] = useState('') // 패널티 시간을 저장할 상태
@@ -147,30 +147,30 @@ function DexSimulator() {
                                 return selected
                             }}
                         >
-                            <MenuItem value={`Blattas[BT]`}>
-                                Blattas[BT]
+                            <MenuItem value={`[BT] Blattas`}>
+                                [BT] Blattas
                             </MenuItem>
-                            <MenuItem value={`Hunter[HT]`}>Hunter[HT]</MenuItem>
-                            <MenuItem value={`Jack N Boyz[JB]`}>
-                                Jack N Boyz[JB]
+                            <MenuItem value={`[HT] Hunter`}>[HT] Hunter</MenuItem>
+                            <MenuItem value={`[JB] Jack N Boyz`}>
+                                [JB] Jack N Boyz
                             </MenuItem>
-                            <MenuItem value={`Nine Figers[NF]`}>
-                                Nine Figers[NF]
+                            <MenuItem value={`[NF] Nine Figers`}>
+                                [NF] Nine Figers
                             </MenuItem>
-                            <MenuItem value={`Gary's Lounge[GL]`}>
-                                Gary's Lounge[GL]
+                            <MenuItem value={`[GL] Gary's Lounge`}>
+                                [GL] Gary's Lounge
                             </MenuItem>
-                            <MenuItem value={`Caballeros[CL]`}>
-                                Caballeros[CL]
+                            <MenuItem value={`[CL] Caballeros`}>
+                                [CL] Caballeros
                             </MenuItem>
-                            <MenuItem value={`Quasars[QS]`}>
-                                Quasars[QS]
+                            <MenuItem value={`[QS] Quasars`}>
+                                [QS] Quasars
                             </MenuItem>
-                            <MenuItem value={`Zaikasha[ZK]`}>
-                                Zaikasha[ZK]
+                            <MenuItem value={`[ZK] Zaikasha`}>
+                                [ZK] Zaikasha
                             </MenuItem>
-                            <MenuItem value={`Kossacks[KS]`}>
-                                Kossacks[KS]
+                            <MenuItem value={`[KS] Kossacks`}>
+                                [KS] Kossacks
                             </MenuItem>
                         </Select>
                     </FormControl>
