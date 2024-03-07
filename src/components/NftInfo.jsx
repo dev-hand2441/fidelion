@@ -7,12 +7,13 @@ function NFTPriceInfo() {
     useEffect(() => {
         const options = { method: 'GET', headers: { accept: 'application/json' } };
 
-        fetch('/api/listings', options)
+        fetch('/api/stats', options)
             .then(response => response.json())
             .then(data => {
                 console.log(data);
                 // API로부터 받은 floorPrice 값을 1,000,000,000로 나누어 상태에 저장
-                setFloorPrice(data.floorPrice / 1000000000);
+                const calculatedPrice = (data.floorPrice / 1000000000) * 1.05;
+                setFloorPrice(parseFloat(calculatedPrice.toFixed(2)));
                 setListedCount(data.listedCount);
             })
             .catch(err => console.error(err));
