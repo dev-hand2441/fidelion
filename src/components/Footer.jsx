@@ -16,7 +16,7 @@ function Footer() {
                             <i className="icon">
                                 <FontAwesomeIcon icon={faComment} />
                             </i>
-                            카카오톡 오픈 채팅(비번: 191191)
+                            카카오톡 오픈 채팅<small>(비번: 191191)</small>
                         </b>
                     </a>
                 </li>
