@@ -67,7 +67,7 @@ function Level() {
                 </div>
             </div>
             <div className="gn-block">
-                <h4 className="text-strapline">레벨 구간 별 필요 코인량</h4>
+                <h4 className="text-strapline">레벨 구간 별 비용</h4>
                 <table>
                     <thead>
                         <tr>
