@@ -6,39 +6,40 @@ import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import levelData from '../json/level.json' // level.json 파일 import
 
 function Level() {
-    // 구간 정의
+    // 구간 정의 (기본 구간 + 추가 구간)
     const ranges = [
-        { start: 1, end: 10, mercenary: 2 },
-        { start: 10, end: 20, mercenary: 3 },
-        { start: 20, end: 30, mercenary: 4 },
-        { start: 30, end: 40, mercenary: 5 },
-        { start: 40, end: 50, mercenary: 5 },
-        { start: 15, end: 20, mercenary: 3 },
-        { start: 15, end: 30, mercenary: 4 },
-        { start: 15, end: 40, mercenary: 5 },
-        { start: 15, end: 50, mercenary: 5 },
+        { start: 1, end: 10, mercenary: 2, isAdditional: false },
+        { start: 10, end: 20, mercenary: 3, isAdditional: false },
+        { start: 20, end: 30, mercenary: 4, isAdditional: false },
+        { start: 30, end: 40, mercenary: 5, isAdditional: false },
+        { start: 40, end: 50, mercenary: 5, isAdditional: false },
+        { start: 15, end: 20, mercenary: 3, isAdditional: true },
+        { start: 15, end: 30, mercenary: 4, isAdditional: true },
+        { start: 15, end: 40, mercenary: 5, isAdditional: true },
+        { start: 15, end: 50, mercenary: 5, isAdditional: true },
     ]
 
-    // 각 구간별 누적 합계를 계산
     const calculatedRanges = ranges.reduce((acc, range) => {
         const sum = levelData
             .filter(({ lv }) => lv > range.start && lv <= range.end)
-            .reduce((sum, { Price }) => sum + Price, 0)
-        const cumulativeSum = acc.length > 0 ? acc[acc.length - 1].cumulativeSum + sum : sum
+            .reduce((acc, { Price }) => acc + Price, 0)
+
+        const lastCumulativeSum = acc.length > 0 ? acc[acc.length - 1].cumulativeSum : 0
+        const cumulativeSum = range.isAdditional ? '-' : lastCumulativeSum + sum
+
         acc.push({ ...range, sum, cumulativeSum })
         return acc
     }, [])
 
-    const [value, setValue] = useState([0, 30])
+    const [value, setValue] = useState([0, 50])
 
     const handleChange = (event, newValue) => {
         setValue(newValue)
     }
 
-    // 선택된 범위에 따른 Price 합계 계산
     const selectedSum = levelData
-        .filter(({ lv }) => lv >= value[0] && lv <= value[1])
-        .reduce((sum, { Price }) => sum + Price, 0)
+        .filter(({ lv }) => lv > value[0] && lv <= value[1]) // 최소값 초과, 최대값 이하인 레벨 필터링
+        .reduce((sum, { Price }) => sum + Price, 0) // 필터링된 요소들의 Price 합계 계산
 
     return (
         <div className="gn-level">
@@ -52,10 +53,7 @@ function Level() {
                         <dt>
                             {value[0]}Lv ~ {value[1]}Lv 까지의 레벨업 비용
                         </dt>
-                        <dd>
-                            <i className="image-token-2080"></i>
-                            {selectedSum.toLocaleString()}
-                        </dd>
+                        <dd>{selectedSum.toLocaleString()}</dd>
                     </dl>
                 </div>
             </div>
@@ -82,7 +80,11 @@ function Level() {
                                 </td>
                                 <td>{range.mercenary}</td>
                                 <td>{range.sum.toLocaleString()}</td>
-                                <td>{range.cumulativeSum.toLocaleString()}</td>
+                                <td>
+                                    {typeof range.cumulativeSum === 'number'
+                                        ? range.cumulativeSum.toLocaleString()
+                                        : range.cumulativeSum}
+                                </td>
                             </tr>
                         ))}
                     </tbody>
