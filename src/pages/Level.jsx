@@ -13,6 +13,10 @@ function Level() {
         { start: 20, end: 30, mercenary: 4 },
         { start: 30, end: 40, mercenary: 5 },
         { start: 40, end: 50, mercenary: 5 },
+        { start: 15, end: 20, mercenary: 3 },
+        { start: 15, end: 30, mercenary: 4 },
+        { start: 15, end: 40, mercenary: 5 },
+        { start: 15, end: 50, mercenary: 5 },
     ]
 
     // 각 구간별 누적 합계를 계산
@@ -83,6 +87,11 @@ function Level() {
                         ))}
                     </tbody>
                 </table>
+                <div className="gn-note">
+                    <ul>
+                        <li>블랙마켓 마켓플레이스에서 15레벨 이하 NFT 구매시 자동으로 15렙까지 레벨업 이벤트 진행중</li>
+                    </ul>
+                </div>
             </div>
         </div>
     )
