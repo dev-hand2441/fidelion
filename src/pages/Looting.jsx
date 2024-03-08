@@ -4,10 +4,11 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { LocalizationProvider, DatePicker } from '@mui/x-date-pickers'
 import dayjs from 'dayjs'
 
+import LootingInfo from '../components/LootingInfo'
 import dexData from '../json/dex.json' // dex.json 파일 import
 import lootingData from '../json/looting.json' // looting.json 파일 import
 
-function DexSimulator() {
+function Looting() {
     const [dexLevel, setDexLevel] = useState(38) // 슬라이더의 초기값을 25로 설정
     const [faction, setFaction] = useState('[BT] Blattas') // 선택된 항목을 저장할 상태
     const [decreaseTime, setDecreaseTime] = useState('') // 시간 감소 값을 저장할 상태
@@ -133,7 +134,7 @@ function DexSimulator() {
     //> 시간 계산
 
     return (
-        <div className="gn-dex-simulator">
+        <div className="gn-looting">
             <h3 className="text-heading">루팅 시간 계산</h3>
             <div className="gn-block">
                 <h5 className="text-label">Dex Level</h5>
@@ -172,7 +173,7 @@ function DexSimulator() {
                 </div>
                 <h5 className="text-label">루팅 시간 입력</h5>
                 <div className="gn-form-box">
-                    <Box className="gn-dex-simulator-date">
+                    <Box className="gn-looting-date">
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <DatePicker
                                 className="form-datepicker"
@@ -219,8 +220,8 @@ function DexSimulator() {
                 </div>
             </div>
 
-            <div className="gn-dex-simulator-looting">
-                <div className="gn-block">
+            <div className="gn-block">
+                <div className="gn-looting-period">
                     <h5 className="text-faction">{faction ? faction : 'Faction'}</h5>
                     <dl>
                         <dt>기간 감소율</dt>
@@ -234,7 +235,7 @@ function DexSimulator() {
                         <dt>패널티 + 20%</dt>
                         <dd>{penaltyTime ? penaltyTime : '-'}</dd>
                     </dl>
-                    <dl className="gn__looting-today">
+                    <dl className="gn__period-today">
                         <dt>다음 루팅 종료일</dt>
                         <dd>
                             <dl>
@@ -249,8 +250,10 @@ function DexSimulator() {
                     </dl>
                 </div>
             </div>
+
+            <LootingInfo/>
         </div>
     )
 }
 
-export default DexSimulator
+export default Looting

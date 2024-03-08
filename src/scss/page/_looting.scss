@@ -4,7 +4,7 @@
  * 덱스 시뮬레이터
 **/
 
-.gn-dex-simulator {
+.gn-looting {
     .gn-form-box {
         position: relative;
 
@@ -91,7 +91,7 @@
         }
     }
 
-    &-looting {
+    &-period {
         margin-top: 20px;
 
         .text-faction {
@@ -100,7 +100,7 @@
             font-size: 20px;
         }
 
-        dl:not(.gn__looting-today) {
+        dl:not(.gn__period-today) {
             padding: 4px 0;
             display: flex;
 
@@ -117,7 +117,7 @@
             }
         }
 
-        .gn__looting-today {
+        .gn__period-today {
             margin-top: 16px;
             padding-top: 16px;
             border-top: 1px solid #ddd;

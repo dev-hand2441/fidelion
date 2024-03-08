@@ -5,7 +5,7 @@ import Toolbar from './components/Toolbar'
 import SideMenu from './components/SideMenu'
 
 import Main from './pages/Main'
-import DexSimulator from './pages/DexSimulator'
+import Looting from './pages/Looting'
 // import LevelUp from './pages/LevelUp'
 
 import './scss/App.scss'
@@ -21,7 +21,7 @@ function App() {
                         <div className="gn-layout-page-content">
                             <Routes>
                                 <Route path="/" element={<Main />} />
-                                <Route path="/looting" element={<DexSimulator />} />
+                                <Route path="/looting" element={<Looting />} />
                                 {/* <Route path="/level" element={<LevelUp />} /> */}
                             </Routes>
                         </div>
