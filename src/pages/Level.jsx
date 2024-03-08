@@ -62,7 +62,10 @@ function Level() {
                         <dt>
                             {value[0]}Lv ~ {value[1]}Lv 까지의 레벨업 비용
                         </dt>
-                        <dd>{selectedSum.toLocaleString()}</dd>
+                        <dd>
+                            <i className="image-token-2080"></i>
+                            {selectedSum.toLocaleString()}
+                        </dd>
                     </dl>
                 </div>
             </div>
