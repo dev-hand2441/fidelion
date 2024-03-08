@@ -31,4 +31,60 @@
             }
         }
     }
+
+    &-calc {
+        // 레벨 슬라이더
+        .form-slider {
+            margin: 0 auto;
+            width: 93%;
+
+            .MuiSlider-thumb {
+                color: #131313;
+
+                &::before,
+                &.Mui-focusVisible {
+                    box-shadow: none;
+                }
+
+                &.Mui-active {
+                    box-shadow: 0px 0px 0px 14px rgba(19, 19, 19, 0.3);
+                }
+
+                &:hover {
+                    box-shadow: 0px 0px 0px 8px rgba(19, 19, 19, 0.3);
+                }
+            }
+
+            .MuiSlider-track {
+                border-color: #131313;
+                background-color: #131313;
+            }
+
+            .MuiSlider-rail {
+                background-color: #999;
+            }
+        }
+
+        dl {
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px solid #ddd;
+
+            dt {
+                color: #666;
+                font-size: 13px;
+            }
+
+            dd {
+                margin-top: 4px;
+                font-weight: 500;
+                font-size: 20px;
+                line-height: 1.4;
+
+                .image-token-2080 {
+                    margin: 4px 4px 0 0;
+                }
+            }
+        }
+    }
 }

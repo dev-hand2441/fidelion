@@ -136,7 +136,7 @@ function Looting() {
     return (
         <div className="gn-looting">
             <h3 className="text-heading">루팅 정보</h3>
-            <LootingInfo/>
+            <LootingInfo />
 
             <h3 className="text-heading">루팅 시간 계산</h3>
             <div className="gn-block">
