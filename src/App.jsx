@@ -7,7 +7,8 @@ import SideMenu from './components/SideMenu'
 
 import Main from './pages/Main'
 import Looting from './pages/Looting'
-// import LevelUp from './pages/LevelUp'
+import Level from './pages/Level'
+import Stats from './pages/Stats'
 
 import './scss/App.scss'
 
@@ -23,7 +24,8 @@ function App() {
                             <Routes>
                                 <Route path="/" element={<Main />} />
                                 <Route path="/looting" element={<Looting />} />
-                                {/* <Route path="/level" element={<LevelUp />} /> */}
+                                <Route path="/level" element={<Level />} />
+                                {/* <Route path="/stats" element={<Stats />} /> */}
                             </Routes>
                         </div>
                         <Footer />

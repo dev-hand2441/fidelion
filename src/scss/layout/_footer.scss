@@ -6,7 +6,9 @@
 **/
 
 .gn-layout-footer {
+    margin: 0 auto;
     padding: 10px 14px;
+    max-width: $layout_max_width;
 
     &-channel {
         display: flex;
