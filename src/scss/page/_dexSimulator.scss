@@ -51,18 +51,18 @@
 
         .form-select {
             .MuiSelect-select {
-                padding: 12px 14px;
+                padding: 8px 14px;
             }
         }
     }
 
     &-date {
         .form-datepicker {
-            margin-bottom: 20px;
+            margin-bottom: 16px;
             width: 100%;
 
             .MuiOutlinedInput-input {
-                padding: 12px 14px;
+                padding: 8px 14px;
             }
         }
 
@@ -74,12 +74,15 @@
 
         .btn-calculate {
             width: 35%;
+            padding: 8px 15px;
             border-color: #131313;
             color: #131313;
         }
 
         .btn-today {
             flex: 1;
+            padding: 8px 15px;
+            border: 1px solid #131313;
             background-color: #131313;
 
             &:hover {
@@ -89,7 +92,7 @@
     }
 
     &-looting {
-        margin-top: 12px;
+        margin-top: 20px;
 
         .text-faction {
             padding-bottom: 12px;

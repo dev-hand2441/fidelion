@@ -207,7 +207,7 @@ function DexSimulator() {
                                 </FormControl>
                             </Box>
                         </LocalizationProvider>
-                        <Box sx={{ display: 'flex', gap: 1, alignItems: 'center', mt: '20px' }}>
+                        <Box sx={{ display: 'flex', gap: 1, alignItems: 'center', mt: '16px' }}>
                             <Button className="btn-calculate" variant="outlined" onClick={handleCalculate}>
                                 계산
                             </Button>
