@@ -8,9 +8,6 @@ function Header() {
                 <i className="icon-logo"></i>
                 <b>Fidelion</b> Calculator
             </h1>
-            {/* <button type="button" className="btn-menu">
-                <i className="icon-menu"></i>
-            </button> */}
         </header>
     )
 }

@@ -1,6 +1,7 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Header from './components/Header'
+import Footer from './components/Footer'
 import Toolbar from './components/Toolbar'
 import SideMenu from './components/SideMenu'
 
@@ -25,6 +26,7 @@ function App() {
                                 {/* <Route path="/level" element={<LevelUp />} /> */}
                             </Routes>
                         </div>
+                        <Footer />
                     </div>
                 </div>
                 <Toolbar />

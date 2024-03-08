@@ -39,25 +39,25 @@
         }
     }
 
-    .btn-menu {
-        position: absolute;
-        top: 0;
-        right: 0;
+    // .btn-menu {
+    //     position: absolute;
+    //     top: 0;
+    //     right: 0;
 
-        .icon-menu {
-            padding: 18px;
-            width: $header_height_base;
-            height: $header_height_base;
+    //     .icon-menu {
+    //         padding: 18px;
+    //         width: $header_height_base;
+    //         height: $header_height_base;
 
-            &::before {
-                content: '';
-                mask-image: url("/image/icon_menu.svg");
-                mask-size: auto 100%;
-                mask-repeat: no-repeat;
-                background-color: #000;
-                width: 18px;
-                height: 18px;
-            }
-        }
-    }
+    //         &::before {
+    //             content: '';
+    //             mask-image: url("/image/icon_menu.svg");
+    //             mask-size: auto 100%;
+    //             mask-repeat: no-repeat;
+    //             background-color: #000;
+    //             width: 18px;
+    //             height: 18px;
+    //         }
+    //     }
+    // }
 }

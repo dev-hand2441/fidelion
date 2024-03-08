@@ -82,6 +82,11 @@ function TokenPrices() {
                         </p>
                     </li>
                 </ul>
+                <div className="gn-note">
+                    <ul>
+                        <li>원화 가격은 매매 기준 환율을 이용하여 실제와 오차가 발생할 수 있습니다.</li>
+                    </ul>
+                </div>
             </div>
         </div>
     )

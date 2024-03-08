@@ -27,3 +27,26 @@
         }
     }
 }
+
+.gn-note {
+    margin-top: 12px;
+    padding: 0 6px;
+
+    ul {
+
+        li {
+            position: relative;
+            padding-left: 10px;
+            color: #767676;
+            font-size: 13px;
+            line-height: 1.4;
+
+            &::before {
+                content: '*';
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+        }
+    }
+}

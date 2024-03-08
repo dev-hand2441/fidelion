@@ -29,6 +29,11 @@ function NFTPriceInfo() {
                     </b>
                     <p className="text-price">{floorPrice ? `${floorPrice.toFixed(2)} SOL` : 'Loading...'}</p>
                 </div>
+                <div className="gn-note">
+                    <ul>
+                        <li>Creator Royalties(5%)만 반영된 가격으로 수수료는 미포함된 Floor Price입니다.</li>
+                    </ul>
+                </div>
             </div>
         </div>
     )
