@@ -115,15 +115,15 @@ function Stats() {
 
                 <div className="gn-box">
                     <dl>
-                        <dt>CounterAttact</dt>
+                        <dt>백파이어 카운터어택</dt>
                         <dd>{counterAttack}</dd>
                     </dl>
                     <dl>
-                        <dt>FortuneRush Chance Multiple</dt>
+                        <dt>포춘러시 멀티플라이어</dt>
                         <dd>{fortuneRush}x</dd>
                     </dl>
                     <dl>
-                        <dt>FortuneRush Price Multiple</dt>
+                        <dt>포춘러시 적용 배율</dt>
                         <dd>{fortuneRushMultiple}x</dd>
                     </dl>
                     <dl>
