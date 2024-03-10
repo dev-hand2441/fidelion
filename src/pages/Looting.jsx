@@ -142,124 +142,128 @@ function Looting() {
 
     return (
         <div className="gn-looting">
-            <h3 className="text-heading">루팅 정보</h3>
-            <LootingInfo />
-
-            <h3 className="text-heading">루팅 시간 계산</h3>
-            <div className="gn-block">
-                <h5 className="text-label">Dex Level</h5>
-                <div className="gn-form-box">
-                    <Typography className="text-level" id="slider-value" gutterBottom>
-                        {dexLevel} <span>Lv.</span>
-                    </Typography>
-                    <Box className="form-slider">
-                        <Slider
-                            aria-label="Slider"
-                            value={dexLevel}
-                            onChange={dexSliderChangeHandle}
-                            min={0}
-                            max={60}
-                        />
-                    </Box>
-                </div>
-
-                <h5 className="text-label">Faction</h5>
-                <div className="gn-form-box">
-                    <FormControl fullWidth className="form-select">
-                        <Select
-                            displayEmpty // 선택되지 않은 상태에서도 첫 번째 MenuItem 표시
-                            value={selectFaction}
-                            onChange={selectFactionHandle}
-                        >
-                            <MenuItem value={`bt`}>[BT] Blattas</MenuItem>
-                            <MenuItem value={`ht`}>[HT] Hunter</MenuItem>
-                            <MenuItem value={`jb`}>[JB] Jack N Boyz</MenuItem>
-                            <MenuItem value={`nf`}>[NF] Nine Fingers</MenuItem>
-                            <MenuItem value={`gl`}>[GL] Gary's Lounge</MenuItem>
-                            <MenuItem value={`cl`}>[CL] Caballeros</MenuItem>
-                            <MenuItem value={`qs`}>[QS] Quasars</MenuItem>
-                            <MenuItem value={`zk`}>[ZK] Zaikasha</MenuItem>
-                            <MenuItem value={`ks`}>[KS] Kossacks</MenuItem>
-                        </Select>
-                    </FormControl>
-                </div>
-                <h5 className="text-label">루팅 시간 입력</h5>
-                <div className="gn-form-box">
-                    <Box className="gn-looting-date">
-                        <LocalizationProvider dateAdapter={AdapterDayjs}>
-                            <DatePicker
-                                className="form-datepicker"
-                                value={selectedDate}
-                                format="YYYY-MM-DD"
-                                renderInput={params => <TextField {...params} />}
-                                onChange={newDate => {
-                                    setSelectedDate(newDate)
-                                }}
-                            />
-
-                            <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
-                                <FormControl className="form-select" fullWidth>
-                                    <InputLabel>시간</InputLabel>
-                                    <Select value={hour} onChange={e => setHour(e.target.value)} label="시간">
-                                        {Array.from({ length: 24 }).map((_, index) => (
-                                            <MenuItem key={index} value={index}>
-                                                {`${index}시`}
-                                            </MenuItem>
-                                        ))}
-                                    </Select>
-                                </FormControl>
-                                <FormControl className="form-select" fullWidth>
-                                    <InputLabel>분</InputLabel>
-                                    <Select value={minute} onChange={e => setMinute(e.target.value)} label="분">
-                                        {Array.from({ length: 60 }).map((_, index) => (
-                                            <MenuItem key={index} value={index}>
-                                                {`${index}분`}
-                                            </MenuItem>
-                                        ))}
-                                    </Select>
-                                </FormControl>
-                            </Box>
-                        </LocalizationProvider>
-                        <Box sx={{ display: 'flex', gap: 1, alignItems: 'center', mt: '16px' }}>
-                            <Button className="btn-calculate" variant="outlined" onClick={LootingDateCalc}>
-                                계산
-                            </Button>
-                            <Button className="btn-today" variant="contained" onClick={todayLootingDateCalc}>
-                                현재 시간으로 계산
-                            </Button>
-                        </Box>
-                    </Box>
-                </div>
+            <div className="gn-block gn-looting-info">
+                <h3 className="text-heading">루팅 정보</h3>
+                <LootingInfo />
             </div>
 
             <div className="gn-block">
-                <div className="gn-looting-period">
-                    <h5 className="text-faction">{faction ? faction : 'Faction'}</h5>
-                    <dl>
-                        <dt>기간 감소율</dt>
-                        <dd>{decreaseTime ? decreaseTime : '-'}</dd>
-                    </dl>
-                    <dl>
-                        <dt>루팅 기간</dt>
-                        <dd>{lootingTime ? lootingTime : '-'}</dd>
-                    </dl>
-                    <dl>
-                        <dt>패널티 + 20%</dt>
-                        <dd>{penaltyTime ? penaltyTime : '-'}</dd>
-                    </dl>
-                    <dl className="gn__period-today">
-                        <dt>다음 루팅 종료일</dt>
-                        <dd>
-                            <dl>
-                                <dt>종료일</dt>
-                                <dd className="text-highlight">{lootingEndTime ? lootingEndTime : '-'}</dd>
-                            </dl>
-                            <dl>
-                                <dt>패널티</dt>
-                                <dd>{penaltyEndTime ? penaltyEndTime : '-'}</dd>
-                            </dl>
-                        </dd>
-                    </dl>
+                <h3 className="text-heading">루팅 시간 계산</h3>
+                <div className="gn-box">
+                    <h5 className="text-label">Dex Level</h5>
+                    <div className="gn-form-box">
+                        <Typography className="text-level" id="slider-value" gutterBottom>
+                            {dexLevel} <span>Lv.</span>
+                        </Typography>
+                        <Box className="form-slider">
+                            <Slider
+                                aria-label="Slider"
+                                value={dexLevel}
+                                onChange={dexSliderChangeHandle}
+                                min={0}
+                                max={60}
+                            />
+                        </Box>
+                    </div>
+
+                    <h5 className="text-label">Faction</h5>
+                    <div className="gn-form-box">
+                        <FormControl fullWidth className="form-select">
+                            <Select
+                                displayEmpty // 선택되지 않은 상태에서도 첫 번째 MenuItem 표시
+                                value={selectFaction}
+                                onChange={selectFactionHandle}
+                            >
+                                <MenuItem value={`bt`}>[BT] Blattas</MenuItem>
+                                <MenuItem value={`ht`}>[HT] Hunter</MenuItem>
+                                <MenuItem value={`jb`}>[JB] Jack N Boyz</MenuItem>
+                                <MenuItem value={`nf`}>[NF] Nine Fingers</MenuItem>
+                                <MenuItem value={`gl`}>[GL] Gary's Lounge</MenuItem>
+                                <MenuItem value={`cl`}>[CL] Caballeros</MenuItem>
+                                <MenuItem value={`qs`}>[QS] Quasars</MenuItem>
+                                <MenuItem value={`zk`}>[ZK] Zaikasha</MenuItem>
+                                <MenuItem value={`ks`}>[KS] Kossacks</MenuItem>
+                            </Select>
+                        </FormControl>
+                    </div>
+                    <h5 className="text-label">루팅 시간 입력</h5>
+                    <div className="gn-form-box">
+                        <Box className="gn-looting-date">
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                <DatePicker
+                                    className="form-datepicker"
+                                    value={selectedDate}
+                                    format="YYYY-MM-DD"
+                                    renderInput={params => <TextField {...params} />}
+                                    onChange={newDate => {
+                                        setSelectedDate(newDate)
+                                    }}
+                                />
+
+                                <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
+                                    <FormControl className="form-select" fullWidth>
+                                        <InputLabel>시간</InputLabel>
+                                        <Select value={hour} onChange={e => setHour(e.target.value)} label="시간">
+                                            {Array.from({ length: 24 }).map((_, index) => (
+                                                <MenuItem key={index} value={index}>
+                                                    {`${index}시`}
+                                                </MenuItem>
+                                            ))}
+                                        </Select>
+                                    </FormControl>
+                                    <FormControl className="form-select" fullWidth>
+                                        <InputLabel>분</InputLabel>
+                                        <Select value={minute} onChange={e => setMinute(e.target.value)} label="분">
+                                            {Array.from({ length: 60 }).map((_, index) => (
+                                                <MenuItem key={index} value={index}>
+                                                    {`${index}분`}
+                                                </MenuItem>
+                                            ))}
+                                        </Select>
+                                    </FormControl>
+                                </Box>
+                            </LocalizationProvider>
+                            <Box sx={{ display: 'flex', gap: 1, alignItems: 'center', mt: '16px' }}>
+                                <Button className="btn-calculate" variant="outlined" onClick={LootingDateCalc}>
+                                    계산
+                                </Button>
+                                <Button className="btn-today" variant="contained" onClick={todayLootingDateCalc}>
+                                    현재 시간으로 계산
+                                </Button>
+                            </Box>
+                        </Box>
+                    </div>
+                </div>
+
+                <div className="gn-box">
+                    <div className="gn-looting-period">
+                        <h5 className="text-faction">{faction ? faction : 'Faction'}</h5>
+                        <dl>
+                            <dt>기간 감소율</dt>
+                            <dd>{decreaseTime ? decreaseTime : '-'}</dd>
+                        </dl>
+                        <dl>
+                            <dt>루팅 기간</dt>
+                            <dd>{lootingTime ? lootingTime : '-'}</dd>
+                        </dl>
+                        <dl>
+                            <dt>패널티 + 20%</dt>
+                            <dd>{penaltyTime ? penaltyTime : '-'}</dd>
+                        </dl>
+                        <dl className="gn__period-today">
+                            <dt>다음 루팅 종료일</dt>
+                            <dd>
+                                <dl>
+                                    <dt>종료일</dt>
+                                    <dd className="text-highlight">{lootingEndTime ? lootingEndTime : '-'}</dd>
+                                </dl>
+                                <dl>
+                                    <dt>패널티</dt>
+                                    <dd>{penaltyEndTime ? penaltyEndTime : '-'}</dd>
+                                </dl>
+                            </dd>
+                        </dl>
+                    </div>
                 </div>
             </div>
         </div>

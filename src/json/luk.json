@@ -1,548 +1,548 @@
 [
     {
         "lv":0,
-        "stats":1.0000 ,
-        "multiple":"12.50%",
-        "price":2
+        "Multiplier":1.0000,
+        "Reward Multiplier":2,
+        "price":0
     },
     {
         "lv":1,
-        "stats":1.0112 ,
-        "multiple":"12.64%",
-        "price":2
+        "Multiplier":1.0112,
+        "Reward Multiplier":2,
+        "price":299
     },
     {
         "lv":2,
-        "stats":1.0227 ,
-        "multiple":"12.78%",
-        "price":2
+        "Multiplier":1.0227,
+        "Reward Multiplier":2,
+        "price":301
     },
     {
         "lv":3,
-        "stats":1.0345 ,
-        "multiple":"12.93%",
-        "price":2
+        "Multiplier":1.0345,
+        "Reward Multiplier":2,
+        "price":304
     },
     {
         "lv":4,
-        "stats":1.0464 ,
-        "multiple":"13.08%",
-        "price":2
+        "Multiplier":1.0464,
+        "Reward Multiplier":2,
+        "price":306
     },
     {
         "lv":5,
-        "stats":1.0587 ,
-        "multiple":"13.23%",
-        "price":2
+        "Multiplier":1.0587,
+        "Reward Multiplier":2,
+        "price":309
     },
     {
         "lv":6,
-        "stats":1.0712 ,
-        "multiple":"13.39%",
-        "price":2
+        "Multiplier":1.0712,
+        "Reward Multiplier":2,
+        "price":311
     },
     {
         "lv":7,
-        "stats":1.0839 ,
-        "multiple":"13.55%",
-        "price":2
+        "Multiplier":1.0839,
+        "Reward Multiplier":2,
+        "price":314
     },
     {
         "lv":8,
-        "stats":1.0969 ,
-        "multiple":"13.71%",
-        "price":2
+        "Multiplier":1.0969,
+        "Reward Multiplier":2,
+        "price":316
     },
     {
         "lv":9,
-        "stats":1.1101 ,
-        "multiple":"13.88%",
-        "price":2
+        "Multiplier":1.1101,
+        "Reward Multiplier":2,
+        "price":319
     },
     {
         "lv":10,
-        "stats":1.1236 ,
-        "multiple":"14.05%",
-        "price":2
+        "Multiplier":1.1236,
+        "Reward Multiplier":2,
+        "price":321
     },
     {
         "lv":11,
-        "stats":1.1373 ,
-        "multiple":"14.22%",
-        "price":2
+        "Multiplier":1.1373,
+        "Reward Multiplier":2,
+        "price":324
     },
     {
         "lv":12,
-        "stats":1.1513 ,
-        "multiple":"14.39%",
-        "price":2
+        "Multiplier":1.1513,
+        "Reward Multiplier":2,
+        "price":326
     },
     {
         "lv":13,
-        "stats":1.1655 ,
-        "multiple":"14.57%",
-        "price":2
+        "Multiplier":1.1655,
+        "Reward Multiplier":2,
+        "price":329
     },
     {
         "lv":14,
-        "stats":1.1800 ,
-        "multiple":"14.75%",
-        "price":2
+        "Multiplier":1.1800,
+        "Reward Multiplier":2,
+        "price":331
     },
     {
         "lv":15,
-        "stats":1.1948 ,
-        "multiple":"14.94%",
-        "price":2
+        "Multiplier":1.1948,
+        "Reward Multiplier":2,
+        "price":334
     },
     {
         "lv":16,
-        "stats":1.2097 ,
-        "multiple":"15.12%",
-        "price":2
+        "Multiplier":1.2097,
+        "Reward Multiplier":2,
+        "price":337
     },
     {
         "lv":17,
-        "stats":1.2250 ,
-        "multiple":"15.31%",
-        "price":2
+        "Multiplier":1.2250,
+        "Reward Multiplier":2,
+        "price":339
     },
     {
         "lv":18,
-        "stats":1.2404 ,
-        "multiple":"15.51%",
-        "price":2
+        "Multiplier":1.2404,
+        "Reward Multiplier":2,
+        "price":342
     },
     {
         "lv":19,
-        "stats":1.2562 ,
-        "multiple":"15.70%",
-        "price":2
+        "Multiplier":1.2562,
+        "Reward Multiplier":2,
+        "price":344
     },
     {
         "lv":20,
-        "stats":1.2722 ,
-        "multiple":"15.90%",
-        "price":2
+        "Multiplier":1.2722,
+        "Reward Multiplier":2,
+        "price":347
     },
     {
         "lv":21,
-        "stats":1.2884 ,
-        "multiple":"16.11%",
-        "price":2
+        "Multiplier":1.2884,
+        "Reward Multiplier":2,
+        "price":349
     },
     {
         "lv":22,
-        "stats":1.3049 ,
-        "multiple":"16.31%",
-        "price":2
+        "Multiplier":1.3049,
+        "Reward Multiplier":2,
+        "price":352
     },
     {
         "lv":23,
-        "stats":1.3216 ,
-        "multiple":"16.52%",
-        "price":2
+        "Multiplier":1.3216,
+        "Reward Multiplier":2,
+        "price":354
     },
     {
         "lv":24,
-        "stats":1.3386 ,
-        "multiple":"16.73%",
-        "price":2
+        "Multiplier":1.3386,
+        "Reward Multiplier":2,
+        "price":357
     },
     {
         "lv":25,
-        "stats":1.3558 ,
-        "multiple":"16.95%",
-        "price":2
+        "Multiplier":1.3558,
+        "Reward Multiplier":2,
+        "price":359
     },
     {
         "lv":26,
-        "stats":1.3733 ,
-        "multiple":"17.17%",
-        "price":2
+        "Multiplier":1.3733,
+        "Reward Multiplier":2,
+        "price":362
     },
     {
         "lv":27,
-        "stats":1.3910 ,
-        "multiple":"17.39%",
-        "price":2
+        "Multiplier":1.3910,
+        "Reward Multiplier":2,
+        "price":364
     },
     {
         "lv":28,
-        "stats":1.4090 ,
-        "multiple":"17.61%",
-        "price":2
+        "Multiplier":1.4090,
+        "Reward Multiplier":2,
+        "price":367
     },
     {
         "lv":29,
-        "stats":1.4272 ,
-        "multiple":"17.84%",
-        "price":2
+        "Multiplier":1.4272,
+        "Reward Multiplier":2,
+        "price":369
     },
     {
         "lv":30,
-        "stats":1.4457 ,
-        "multiple":"18.07%",
-        "price":2
+        "Multiplier":1.4457,
+        "Reward Multiplier":2,
+        "price":372
     },
     {
         "lv":31,
-        "stats":1.4644 ,
-        "multiple":"18.31%",
-        "price":2
+        "Multiplier":1.4644,
+        "Reward Multiplier":2,
+        "price":560
     },
     {
         "lv":32,
-        "stats":1.4834 ,
-        "multiple":"18.54%",
-        "price":2
+        "Multiplier":1.4834,
+        "Reward Multiplier":2,
+        "price":563
     },
     {
         "lv":33,
-        "stats":1.5026 ,
-        "multiple":"18.78%",
-        "price":2
+        "Multiplier":1.5026,
+        "Reward Multiplier":2,
+        "price":565
     },
     {
         "lv":34,
-        "stats":1.5221 ,
-        "multiple":"19.03%",
-        "price":2
+        "Multiplier":1.5221,
+        "Reward Multiplier":2,
+        "price":568
     },
     {
         "lv":35,
-        "stats":1.5418 ,
-        "multiple":"19.27%",
-        "price":2
+        "Multiplier":1.5418,
+        "Reward Multiplier":2,
+        "price":570
     },
     {
         "lv":36,
-        "stats":1.5618 ,
-        "multiple":"19.52%",
-        "price":2
+        "Multiplier":1.5618,
+        "Reward Multiplier":2,
+        "price":573
     },
     {
         "lv":37,
-        "stats":1.5820 ,
-        "multiple":"19.78%",
-        "price":2
+        "Multiplier":1.5820,
+        "Reward Multiplier":2,
+        "price":575
     },
     {
         "lv":38,
-        "stats":1.6025 ,
-        "multiple":"20.03%",
-        "price":2
+        "Multiplier":1.6025,
+        "Reward Multiplier":2,
+        "price":578
     },
     {
         "lv":39,
-        "stats":1.6232 ,
-        "multiple":"20.29%",
-        "price":2
+        "Multiplier":1.6232,
+        "Reward Multiplier":2,
+        "price":580
     },
     {
         "lv":40,
-        "stats":1.6442 ,
-        "multiple":"20.55%",
-        "price":2
+        "Multiplier":1.6442,
+        "Reward Multiplier":2,
+        "price":583
     },
     {
         "lv":41,
-        "stats":1.6654 ,
-        "multiple":"20.82%",
-        "price":2
+        "Multiplier":1.6654,
+        "Reward Multiplier":2,
+        "price":585
     },
     {
         "lv":42,
-        "stats":1.6869 ,
-        "multiple":"21.09%",
-        "price":2
+        "Multiplier":1.6869,
+        "Reward Multiplier":2,
+        "price":588
     },
     {
         "lv":43,
-        "stats":1.7086 ,
-        "multiple":"21.36%",
-        "price":2
+        "Multiplier":1.7086,
+        "Reward Multiplier":2,
+        "price":590
     },
     {
         "lv":44,
-        "stats":1.7306 ,
-        "multiple":"21.63%",
-        "price":2
+        "Multiplier":1.7306,
+        "Reward Multiplier":2,
+        "price":593
     },
     {
         "lv":45,
-        "stats":1.7528 ,
-        "multiple":"21.91%",
-        "price":2
+        "Multiplier":1.7528,
+        "Reward Multiplier":2,
+        "price":595
     },
     {
         "lv":46,
-        "stats":1.7753 ,
-        "multiple":"22.19%",
-        "price":4
+        "Multiplier":1.7753,
+        "Reward Multiplier":4,
+        "price":3162
     },
     {
         "lv":47,
-        "stats":1.7980 ,
-        "multiple":"22.48%",
-        "price":4
+        "Multiplier":1.7980,
+        "Reward Multiplier":4,
+        "price":3103
     },
     {
         "lv":48,
-        "stats":1.8210 ,
-        "multiple":"22.76%",
-        "price":4
+        "Multiplier":1.8210,
+        "Reward Multiplier":4,
+        "price":3108
     },
     {
         "lv":49,
-        "stats":1.8442 ,
-        "multiple":"23.05%",
-        "price":4
+        "Multiplier":1.8442,
+        "Reward Multiplier":4,
+        "price":3113
     },
     {
         "lv":50,
-        "stats":1.8677 ,
-        "multiple":"23.35%",
-        "price":4
+        "Multiplier":1.8677,
+        "Reward Multiplier":4,
+        "price":3118
     },
     {
         "lv":51,
-        "stats":1.8914 ,
-        "multiple":"23.64%",
-        "price":4
+        "Multiplier":1.8914,
+        "Reward Multiplier":4,
+        "price":3123
     },
     {
         "lv":52,
-        "stats":1.9154 ,
-        "multiple":"23.94%",
-        "price":4
+        "Multiplier":1.9154,
+        "Reward Multiplier":4,
+        "price":3128
     },
     {
         "lv":53,
-        "stats":1.9396 ,
-        "multiple":"24.25%",
-        "price":4
+        "Multiplier":1.9396,
+        "Reward Multiplier":4,
+        "price":3133
     },
     {
         "lv":54,
-        "stats":1.9640 ,
-        "multiple":"24.55%",
-        "price":4
+        "Multiplier":1.9640,
+        "Reward Multiplier":4,
+        "price":3138
     },
     {
         "lv":55,
-        "stats":1.9888 ,
-        "multiple":"24.86%",
-        "price":4
+        "Multiplier":1.9888,
+        "Reward Multiplier":4,
+        "price":3143
     },
     {
         "lv":56,
-        "stats":2.0137 ,
-        "multiple":"25.17%",
-        "price":4
+        "Multiplier":2.0137,
+        "Reward Multiplier":4,
+        "price":3148
     },
     {
         "lv":57,
-        "stats":2.0390 ,
-        "multiple":"25.49%",
-        "price":4
+        "Multiplier":2.0390,
+        "Reward Multiplier":4,
+        "price":3153
     },
     {
         "lv":58,
-        "stats":2.0644 ,
-        "multiple":"25.81%",
-        "price":4
+        "Multiplier":2.0644,
+        "Reward Multiplier":4,
+        "price":3158
     },
     {
         "lv":59,
-        "stats":2.0901 ,
-        "multiple":"26.13%",
-        "price":4
+        "Multiplier":2.0901,
+        "Reward Multiplier":4,
+        "price":3163
     },
     {
         "lv":60,
-        "stats":2.1161 ,
-        "multiple":"26.45%",
-        "price":4
+        "Multiplier":2.1161,
+        "Reward Multiplier":4,
+        "price":3168
     },
     {
         "lv":61,
-        "stats":2.1423 ,
-        "multiple":"26.78%",
-        "price":7
+        "Multiplier":2.1423,
+        "Reward Multiplier":7,
+        "price":4301
     },
     {
         "lv":62,
-        "stats":2.1688 ,
-        "multiple":"27.11%",
-        "price":7
+        "Multiplier":2.1688,
+        "Reward Multiplier":7,
+        "price":4310
     },
     {
         "lv":63,
-        "stats":2.1955 ,
-        "multiple":"27.44%",
-        "price":7
+        "Multiplier":2.1955,
+        "Reward Multiplier":7,
+        "price":4318
     },
     {
         "lv":64,
-        "stats":2.2225 ,
-        "multiple":"27.78%",
-        "price":7
+        "Multiplier":2.2225,
+        "Reward Multiplier":7,
+        "price":4327
     },
     {
         "lv":66,
-        "stats":2.2497 ,
-        "multiple":"28.12%",
-        "price":7
+        "Multiplier":2.2497,
+        "Reward Multiplier":7,
+        "price":4336
     },
     {
         "lv":68,
-        "stats":2.2772 ,
-        "multiple":"28.47%",
-        "price":7
+        "Multiplier":2.2772,
+        "Reward Multiplier":7,
+        "price":4345
     },
     {
         "lv":69,
-        "stats":2.3049 ,
-        "multiple":"28.81%",
-        "price":7
+        "Multiplier":2.3049,
+        "Reward Multiplier":7,
+        "price":4353
     },
     {
         "lv":65,
-        "stats":2.3328 ,
-        "multiple":"29.16%",
-        "price":7
+        "Multiplier":2.3328,
+        "Reward Multiplier":7,
+        "price":4362
     },
     {
         "lv":67,
-        "stats":2.3610 ,
-        "multiple":"29.51%",
-        "price":7
+        "Multiplier":2.3610,
+        "Reward Multiplier":7,
+        "price":4371
     },
     {
         "lv":70,
-        "stats":2.3895 ,
-        "multiple":"29.87%",
-        "price":7
+        "Multiplier":2.3895,
+        "Reward Multiplier":7,
+        "price":4380
     },
     {
         "lv":73,
-        "stats":2.4182 ,
-        "multiple":"30.23%",
-        "price":7
+        "Multiplier":2.4182,
+        "Reward Multiplier":7,
+        "price":4389
     },
     {
         "lv":71,
-        "stats":2.4472 ,
-        "multiple":"30.59%",
-        "price":7
+        "Multiplier":2.4472,
+        "Reward Multiplier":7,
+        "price":4397
     },
     {
         "lv":72,
-        "stats":2.4764 ,
-        "multiple":"30.96%",
-        "price":7
+        "Multiplier":2.4764,
+        "Reward Multiplier":7,
+        "price":4406
     },
     {
         "lv":74,
-        "stats":2.5059 ,
-        "multiple":"31.32%",
-        "price":7
+        "Multiplier":2.5059,
+        "Reward Multiplier":7,
+        "price":4415
     },
     {
         "lv":75,
-        "stats":2.5356 ,
-        "multiple":"31.70%",
-        "price":7
+        "Multiplier":2.5356,
+        "Reward Multiplier":7,
+        "price":4424
     },
     {
         "lv":76,
-        "stats":2.5655 ,
-        "multiple":"32.07%",
-        "price":10
+        "Multiplier":2.5655,
+        "Reward Multiplier":10,
+        "price":5116
     },
     {
         "lv":77,
-        "stats":2.5958 ,
-        "multiple":"32.45%",
-        "price":10
+        "Multiplier":2.5958,
+        "Reward Multiplier":10,
+        "price":4896
     },
     {
         "lv":78,
-        "stats":2.6262 ,
-        "multiple":"32.83%",
-        "price":10
+        "Multiplier":2.6262,
+        "Reward Multiplier":10,
+        "price":4909
     },
     {
         "lv":79,
-        "stats":2.6569 ,
-        "multiple":"33.21%",
-        "price":10
+        "Multiplier":2.6569,
+        "Reward Multiplier":10,
+        "price":4922
     },
     {
         "lv":80,
-        "stats":2.6879 ,
-        "multiple":"33.60%",
-        "price":10
+        "Multiplier":2.6879,
+        "Reward Multiplier":10,
+        "price":4934
     },
     {
         "lv":81,
-        "stats":2.7191 ,
-        "multiple":"33.99%",
-        "price":10
+        "Multiplier":2.7191,
+        "Reward Multiplier":10,
+        "price":4947
     },
     {
         "lv":82,
-        "stats":2.7506 ,
-        "multiple":"34.38%",
-        "price":10
+        "Multiplier":2.7506,
+        "Reward Multiplier":10,
+        "price":4959
     },
     {
         "lv":83,
-        "stats":2.7823 ,
-        "multiple":"34.78%",
-        "price":10
+        "Multiplier":2.7823,
+        "Reward Multiplier":10,
+        "price":4972
     },
     {
         "lv":84,
-        "stats":2.8142 ,
-        "multiple":"35.18%",
-        "price":10
+        "Multiplier":2.8142,
+        "Reward Multiplier":10,
+        "price":4984
     },
     {
         "lv":85,
-        "stats":2.8464 ,
-        "multiple":"35.58%",
-        "price":10
+        "Multiplier":2.8464,
+        "Reward Multiplier":10,
+        "price":4997
     },
     {
         "lv":86,
-        "stats":2.8789 ,
-        "multiple":"35.99%",
-        "price":10
+        "Multiplier":2.8789,
+        "Reward Multiplier":10,
+        "price":5009
     },
     {
         "lv":87,
-        "stats":2.9116 ,
-        "multiple":"36.40%",
-        "price":10
+        "Multiplier":2.9116,
+        "Reward Multiplier":10,
+        "price":5022
     },
     {
         "lv":88,
-        "stats":2.9446 ,
-        "multiple":"36.81%",
-        "price":10
+        "Multiplier":2.9446,
+        "Reward Multiplier":10,
+        "price":5034
     },
     {
         "lv":89,
-        "stats":2.9778 ,
-        "multiple":"37.22%",
-        "price":10
+        "Multiplier":2.9778,
+        "Reward Multiplier":10,
+        "price":5047
     },
     {
         "lv":90,
-        "stats":3.0112 ,
-        "multiple":"37.64%",
-        "price":10
+        "Multiplier":3.0112,
+        "Reward Multiplier":10,
+        "price":5060
     }
 ]

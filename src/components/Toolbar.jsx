@@ -31,14 +31,14 @@ function Toolbar() {
                         Level
                     </NavLink>
                 </li>
-                {/* <li>
+                <li>
                     <NavLink to="/stats" className={({ isActive }) => (isActive ? 'active' : undefined)}>
                         <i>
                             <FontAwesomeIcon icon={faChartSimple} />
                         </i>
                         Stats
                     </NavLink>
-                </li> */}
+                </li>
                 {/* <li>
                     <NavLink to="/roi" activeClassName="active"><i><FontAwesomeIcon icon={faMoneyBillTransfer} /></i>ROI</NavLink>
                 </li> */}

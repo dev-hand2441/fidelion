@@ -5,12 +5,9 @@
 **/
 
 .text-heading {
+    padding-bottom: 10px;
     font-weight: 700;
     font-size: 22px;
-
-    + .gn-block {
-        margin-top: 10px;
-    }
 }
 
 .text-strapline {

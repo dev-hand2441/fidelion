@@ -25,7 +25,7 @@ function App() {
                                 <Route path="/" element={<Main />} />
                                 <Route path="/looting" element={<Looting />} />
                                 <Route path="/level" element={<Level />} />
-                                {/* <Route path="/stats" element={<Stats />} /> */}
+                                <Route path="/stats" element={<Stats />} />
                             </Routes>
                         </div>
                         <Footer />
