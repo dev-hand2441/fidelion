@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Slider, Typography, Box } from '@mui/material'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
+import { faArrowRight, faArrowsRotate } from '@fortawesome/free-solid-svg-icons'
 
 import defData from '../json/def.json' // looting.json 파일 import
 import lukData from '../json/luk.json' // looting.json 파일 import
@@ -17,31 +17,27 @@ function Stats() {
     const [fortuneRushMultiple, setFortuneRushMultiple] = useState(0)
     const [decreaseRatio, setDecreaseRatio] = useState(0)
 
-    useEffect(() => {
-        // 지정된 구간 내의 price 값들을 누적하여 합산
-        const calculatePriceSum = (data, range) => {
-            return data.slice(range[0], range[1] + 1).reduce((acc, item) => acc + item.price, 0)
-        }
+    // 지정된 구간 내의 price 값들을 누적하여 합산
+    const calculatePriceSum = (data, range) => {
+        return data.slice(range[0], range[1] + 1).reduce((acc, item) => acc + item.price, 0)
+    }
 
+    useEffect(() => {
         const defPriceSum = calculatePriceSum(defData, defRange)
         const lukPriceSum = calculatePriceSum(lukData, lukRange)
         const dexPriceSum = calculatePriceSum(dexData, dexRange)
 
         setStatsPriceSum(defPriceSum + lukPriceSum + dexPriceSum)
 
-        // DEF 최대값에 따른 CounterAttack 설정
         const defMaxValue = defData.find(item => item.lv === defRange[1])
-        setCounterAttack(defMaxValue ? defMaxValue.counter : '0.00%')
-
-        // LUK 최대값에 따른 FortuneRush 및 FortuneRushMultiple 설정
         const lukMaxValue = lukData.find(item => item.lv === lukRange[1])
-        setFortuneRush(lukMaxValue ? Number(lukMaxValue.Multiplier).toFixed(2) : '1.00')
-        setFortuneRushMultiple(lukMaxValue ? lukMaxValue['Reward Multiplier'] : '2')
-
-        // DEX 최대값에 따른 DecreaseRatio 설정
         const dexMaxValue = dexData.find(item => item.lv === dexRange[1])
-        setDecreaseRatio(dexMaxValue ? dexMaxValue.reduction : '0.00%')
-    }, [defRange, lukRange, dexRange])
+
+        setCounterAttack(defMaxValue?.counter || '0.00%')
+        setFortuneRush(Number(lukMaxValue?.Multiplier).toFixed(2) || '1.00')
+        setFortuneRushMultiple(lukMaxValue?.['Reward Multiplier'] || '2')
+        setDecreaseRatio(dexMaxValue?.reduction || '0.00%')
+    }, [calculatePriceSum, defRange, lukRange, dexRange])
 
     //슬라이더 change 이벤트
     // 각 슬라이더 변경 이벤트 핸들러
@@ -49,82 +45,66 @@ function Stats() {
     const handleLukRangeChange = (event, newValue) => setLukRange(newValue)
     const handleDexRangeChange = (event, newValue) => setDexRange(newValue)
 
-    const [priceSolana, setPriceSolana] = useState(null)
-    const [price2080, setPrice2080] = useState(null)
     const [token2080ToKRW, setToken2080ToKRW] = useState(0)
     const [token2080ToSol, setToken2080ToSol] = useState(0)
     const [token2080ToUSD, setToken2080ToUSD] = useState(0)
 
-    useEffect(() => {
-        const fetchPrices = async () => {
-            try {
-                // 2080 토큰 가격 정보 요청
-                const response2080 = await fetch(
-                    'https://public-api.birdeye.so/public/price?address=Dwri1iuy5pDFf2u2GwwsH2MxjR6dATyDv9En9Jk8Fkof',
-                    {
-                        method: 'GET',
-                        headers: {
-                            'x-chain': 'solana',
-                            'X-API-KEY': '72e6d89433b645cf8993ad398f95aeea',
-                        },
-                    }
-                )
-                const data2080 = await response2080.json()
-                const token2080Price = parseFloat(data2080.data.value) // 2080 토큰 가격
-
-                // Solana 토큰 가격 정보 요청
-                const responseSolana = await fetch(
-                    'https://public-api.birdeye.so/public/price?address=So11111111111111111111111111111111111111112',
-                    {
-                        method: 'GET',
-                        headers: {
-                            'x-chain': 'solana',
-                            'X-API-KEY': '72e6d89433b645cf8993ad398f95aeea',
-                        },
-                    }
-                )
-                const dataSolana = await responseSolana.json()
-                const solanaPrice = parseFloat(dataSolana.data.value) // Solana 토큰 가격
-
-                // USD 가치 계산
-                const token2080ToUSD = statsPriceSum * token2080Price
-                setToken2080ToUSD(token2080ToUSD.toFixed(2))
-
-                // Sol 가치 계산
-                const token2080ToSol = token2080ToUSD / solanaPrice
-                setToken2080ToSol(token2080ToSol.toFixed(4))
-            } catch (error) {
-                console.error('가격 정보를 불러오는 중 에러가 발생했습니다:', error)
-            }
-        }
-
-        fetchPrices() // 가격 정보 요청 함수 실행
-    }, [statsPriceSum])
-
-    // 환율 API 요청(30분마다 갱신)
-    const fetchExchange = async () => {
+    const fetchPrices = async () => {
         try {
-            console.log('fetchExchange')
+            console.log('load api')
+            // 2080 토큰 가격 정보 요청
+            const response2080 = await fetch(
+                'https://public-api.birdeye.so/public/price?address=Dwri1iuy5pDFf2u2GwwsH2MxjR6dATyDv9En9Jk8Fkof',
+                {
+                    method: 'GET',
+                    headers: {
+                        'x-chain': 'solana',
+                        'X-API-KEY': '72e6d89433b645cf8993ad398f95aeea',
+                    },
+                }
+            )
+            const data2080 = await response2080.json()
+            const token2080Price = parseFloat(data2080.data.value) // 2080 토큰 가격
+
+            // Solana 토큰 가격 정보 요청
+            const responseSolana = await fetch(
+                'https://public-api.birdeye.so/public/price?address=So11111111111111111111111111111111111111112',
+                {
+                    method: 'GET',
+                    headers: {
+                        'x-chain': 'solana',
+                        'X-API-KEY': '72e6d89433b645cf8993ad398f95aeea',
+                    },
+                }
+            )
+            const dataSolana = await responseSolana.json()
+            const solanaPrice = parseFloat(dataSolana.data.value) // Solana 토큰 가격
+
+            // USD 가치 계산
+            const token2080ToUSD = statsPriceSum * token2080Price
+            setToken2080ToUSD(token2080ToUSD.toFixed(2))
+
+            // Sol 가치 계산
+            const token2080ToSol = token2080ToUSD / solanaPrice
+            setToken2080ToSol(token2080ToSol.toFixed(2))
+
             // USD와 KRW 환율 정보를 가져오는 API 요청
-            const apiUrl = '/exchange-api?authkey=CKxFJAScH4L3j7YmIpni9PZs14LhBams&searchdate=20240306&data=AP01'
-            const response = await fetch(apiUrl)
+            const response = await fetch(
+                '/exchange-api?authkey=CKxFJAScH4L3j7YmIpni9PZs14LhBams&searchdate=20240306&data=AP01'
+            )
             const data = await response.json()
             const usdInfo = data.find(currency => currency.cur_unit === 'USD')
             const kftcDealBasR = parseFloat(usdInfo.kftc_deal_bas_r.replace(/,/g, ''))
-            console.log(kftcDealBasR)
+
             setToken2080ToKRW(kftcDealBasR)
         } catch (error) {
-            console.error('환율 정보를 불러오는 중 에러가 발생했습니다:', error)
+            console.error('가격 정보를 불러오는 중 에러가 발생했습니다:', error)
         }
     }
 
     useEffect(() => {
-        console.log('exchange useeffect')
-        fetchExchange() // 컴포넌트가 마운트될 때 함수 실행
-        const interval = setInterval(fetchExchange, 1800000) // 30분마다 함수를 반복 실행
-
-        return () => clearInterval(interval) // 컴포넌트가 언마운트될 때 인터벌을 정리
-    }, [])
+        fetchPrices() // 페이지 접속 시 1회 API 호출
+    }, [fetchPrices])
 
     return (
         <div className="gn-stats">
@@ -219,25 +199,27 @@ function Stats() {
                         <dd>{decreaseRatio}</dd>
                     </dl>
                     <dl>
-                        <dt>스탯 레벨업 예상 비용</dt>
+                        <dt>
+                            스탯 레벨업 예상 비용{' '}
+                            <button className="btn-reload-api" onClick={fetchPrices}>
+                                <i>
+                                    <FontAwesomeIcon icon={faArrowsRotate} />
+                                </i>
+                                <b>코인 가격 갱신</b>
+                            </button>
+                        </dt>
                         <dd>
                             <dl>
-                                <dt>$2080</dt>
-                                <dd>
+                                <dt>
                                     <i className="image-token-2080"></i>
-                                    {statsPriceSum.toLocaleString()}
-                                </dd>
+                                </dt>
+                                <dd>{statsPriceSum.toLocaleString()}</dd>
                             </dl>
-                            {/* <dl>
-                                <dt>USD</dt>
-                                <dd>${token2080ToUSD.toLocaleString()}</dd>
-                            </dl> */}
-                            {/* <dl>
-                                <dt>$SOL</dt>
-                                <dd>
+                            <dl>
+                                <dt>
                                     <i className="image-token-sol"></i>
-                                    {token2080ToSol}
-                                </dd>
+                                </dt>
+                                <dd>{token2080ToSol} SOL</dd>
                             </dl>
                             <dl>
                                 <dt>USD</dt>
@@ -246,7 +228,7 @@ function Stats() {
                             <dl>
                                 <dt>KRW</dt>
                                 <dd>{token2080ToKRW.toLocaleString()}원</dd>
-                            </dl> */}
+                            </dl>
                         </dd>
                     </dl>
                     <div className="gn-note">

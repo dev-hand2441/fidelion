@@ -80,6 +80,15 @@
             dt {
                 color: #666;
                 font-size: 13px;
+
+                .btn-reload-api {
+                    color: #767676;
+                    font-size: 13px;
+
+                    i {
+                        width: 22px;
+                    }
+                }
             }
 
             dd {
@@ -89,14 +98,14 @@
 
                 .image-token-2080 {
                     margin: 2px 4px 0 0;
-                    width: 16px;
-                    height: 16px;
+                    width: 18px;
+                    height: 18px;
                 }
 
                 .image-token-sol {
                     margin: 2px 4px 0 0;
-                    width: 16px;
-                    height: 16px;
+                    width: 18px;
+                    height: 18px;
                 }
             }
 
@@ -111,6 +120,8 @@
                 border-top: 1px solid #ddd;
 
                 > dt {
+                    display: flex;
+                    justify-content: space-between;
                     color: $color_main;
                     font-weight: 600;
                     font-size: 18px;
@@ -121,13 +132,9 @@
 
                     > dl {
                         dt {
-                            font-weight: 400;
-                            font-size: 16px;
+                            font-weight: 500;
+                            font-size: 14px;
                             text-align: left;
-
-                            i {
-                                margin-top: 3px;
-                            }
                         }
 
                         dd {
