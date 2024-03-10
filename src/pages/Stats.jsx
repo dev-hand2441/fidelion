@@ -58,20 +58,6 @@ function Stats() {
     useEffect(() => {
         const fetchPrices = async () => {
             try {
-                // Solana 토큰 가격 정보 요청
-                const responseSolana = await fetch(
-                    'https://public-api.birdeye.so/public/price?address=So11111111111111111111111111111111111111112',
-                    {
-                        method: 'GET',
-                        headers: {
-                            'x-chain': 'solana',
-                            'X-API-KEY': '72e6d89433b645cf8993ad398f95aeea',
-                        },
-                    }
-                )
-                const dataSolana = await responseSolana.json()
-                const solanaPrice = parseFloat(dataSolana.data.value) // Solana 토큰 가격
-
                 // 2080 토큰 가격 정보 요청
                 const response2080 = await fetch(
                     'https://public-api.birdeye.so/public/price?address=Dwri1iuy5pDFf2u2GwwsH2MxjR6dATyDv9En9Jk8Fkof',
@@ -86,6 +72,20 @@ function Stats() {
                 const data2080 = await response2080.json()
                 const token2080Price = parseFloat(data2080.data.value) // 2080 토큰 가격
 
+                // Solana 토큰 가격 정보 요청
+                const responseSolana = await fetch(
+                    'https://public-api.birdeye.so/public/price?address=So11111111111111111111111111111111111111112',
+                    {
+                        method: 'GET',
+                        headers: {
+                            'x-chain': 'solana',
+                            'X-API-KEY': '72e6d89433b645cf8993ad398f95aeea',
+                        },
+                    }
+                )
+                const dataSolana = await responseSolana.json()
+                const solanaPrice = parseFloat(dataSolana.data.value) // Solana 토큰 가격
+
                 // USD 가치 계산
                 const token2080ToUSD = statsPriceSum * token2080Price
                 setToken2080ToUSD(token2080ToUSD.toFixed(2))
@@ -93,20 +93,6 @@ function Stats() {
                 // Sol 가치 계산
                 const token2080ToSol = token2080ToUSD / solanaPrice
                 setToken2080ToSol(token2080ToSol.toFixed(4))
-
-                // 환율 API 요청
-                const apiUrl = '/exchange-api?authkey=CKxFJAScH4L3j7YmIpni9PZs14LhBams&searchdate=20240306&data=AP01'
-                fetch(apiUrl)
-                    .then(response => response.json())
-                    .then(data => {
-                        // 미국 달러 정보 찾기
-                        const usdInfo = data.find(currency => currency.cur_unit === 'USD')
-                        const kftcDealBasR = parseFloat(usdInfo.kftc_deal_bas_r.replace(/,/g, ''))
-
-                        // token2080ToKRW 및 solanaToKRW 값 설정
-                        setToken2080ToKRW(Math.ceil(token2080ToUSD * kftcDealBasR))
-                    })
-                    .catch(error => console.error('Error fetching data:', error))
             } catch (error) {
                 console.error('가격 정보를 불러오는 중 에러가 발생했습니다:', error)
             }
@@ -114,6 +100,29 @@ function Stats() {
 
         fetchPrices() // 가격 정보 요청 함수 실행
     }, [statsPriceSum])
+
+    // 환율 API 요청(30분마다 갱신)
+    const fetchExchange = async () => {
+        try {
+            // USD와 KRW 환율 정보를 가져오는 API 요청
+            const apiUrl = '/exchange-api?authkey=CKxFJAScH4L3j7YmIpni9PZs14LhBams&searchdate=20240306&data=AP01'
+            const response = await fetch(apiUrl)
+            const data = await response.json()
+            const usdInfo = data.find(currency => currency.cur_unit === 'USD')
+            const kftcDealBasR = parseFloat(usdInfo.kftc_deal_bas_r.replace(/,/g, ''))
+            console.log(kftcDealBasR)
+            setToken2080ToKRW(kftcDealBasR)
+        } catch (error) {
+            console.error('환율 정보를 불러오는 중 에러가 발생했습니다:', error)
+        }
+    }
+
+    useEffect(() => {
+        fetchExchange() // 컴포넌트가 마운트될 때 함수 실행
+        const interval = setInterval(fetchExchange, 1800000) // 30분마다 함수를 반복 실행
+
+        return () => clearInterval(interval) // 컴포넌트가 언마운트될 때 인터벌을 정리
+    }, [])
 
     return (
         <div className="gn-stats">
@@ -217,7 +226,11 @@ function Stats() {
                                     {statsPriceSum.toLocaleString()}
                                 </dd>
                             </dl>
-                            <dl>
+                            {/* <dl>
+                                <dt>USD</dt>
+                                <dd>${token2080ToUSD.toLocaleString()}</dd>
+                            </dl> */}
+                            {/* <dl>
                                 <dt>$SOL</dt>
                                 <dd>
                                     <i className="image-token-sol"></i>
@@ -231,7 +244,7 @@ function Stats() {
                             <dl>
                                 <dt>KRW</dt>
                                 <dd>{token2080ToKRW.toLocaleString()}원</dd>
-                            </dl>
+                            </dl> */}
                         </dd>
                     </dl>
                     <div className="gn-note">
