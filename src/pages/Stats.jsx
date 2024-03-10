@@ -83,7 +83,7 @@ function Stats() {
             const usdInfo = dataExchange.find(currency => currency.cur_unit === 'USD')
             setUsdKrwExchangeRate(parseFloat(usdInfo.kftc_deal_bas_r.replace(/,/g, '')))
         } catch (error) {
-            console.error('Failed to fetch price data:', error)
+            // 가격 호출 에러
         }
     }, [])
 
@@ -214,15 +214,23 @@ function Stats() {
                                 <dt>
                                     <i className="image-token-sol"></i>
                                 </dt>
-                                <dd>{token2080ToSol} SOL</dd>
+                                <dd>{token2080ToSol ? `${token2080ToSol} SOL` : 'Loading...'}</dd>
                             </dl>
                             <dl>
                                 <dt>USD</dt>
-                                <dd>${token2080ToUSD.toLocaleString(undefined, { maximumFractionDigits: 0 })}</dd>
+                                <dd>
+                                    {token2080ToUSD
+                                        ? `$${token2080ToUSD.toLocaleString(undefined, { maximumFractionDigits: 0 })}`
+                                        : 'Loading...'}
+                                </dd>
                             </dl>
                             <dl>
                                 <dt>KRW</dt>
-                                <dd>{token2080ToKRW.toLocaleString(undefined, { maximumFractionDigits: 0 })}원</dd>
+                                <dd>
+                                    {token2080ToKRW
+                                        ? `${token2080ToKRW.toLocaleString(undefined, { maximumFractionDigits: 0 })}원`
+                                        : 'Loading...'}
+                                </dd>
                             </dl>
                         </dd>
                     </dl>
