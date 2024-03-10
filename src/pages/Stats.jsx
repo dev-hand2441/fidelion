@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { Slider, Typography, Box } from '@mui/material'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRight, faArrowsRotate } from '@fortawesome/free-solid-svg-icons'
+import { debounce } from 'lodash'
 
 import defData from '../json/def.json' // looting.json 파일 import
 import lukData from '../json/luk.json' // looting.json 파일 import
@@ -12,47 +13,43 @@ function Stats() {
     const [lukRange, setLukRange] = useState([0, 46])
     const [dexRange, setDexRange] = useState([0, 38])
     const [statsPriceSum, setStatsPriceSum] = useState(0)
-    const [counterAttack, setCounterAttack] = useState(0)
-    const [fortuneRush, setFortuneRush] = useState(0)
-    const [fortuneRushMultiple, setFortuneRushMultiple] = useState(0)
-    const [decreaseRatio, setDecreaseRatio] = useState(0)
-
-    // 지정된 구간 내의 price 값들을 누적하여 합산
-    const calculatePriceSum = (data, range) => {
-        return data.slice(range[0], range[1] + 1).reduce((acc, item) => acc + item.price, 0)
-    }
+    const [counterAttack, setCounterAttack] = useState('0.00%')
+    const [fortuneRush, setFortuneRush] = useState('1.00')
+    const [fortuneRushMultiple, setFortuneRushMultiple] = useState('2')
+    const [decreaseRatio, setDecreaseRatio] = useState('0.00%')
+    const [token2080Price, setToken2080Price] = useState(null)
+    const [solanaPrice, setSolanaPrice] = useState(null)
+    const [usdKrwExchangeRate, setUsdKrwExchangeRate] = useState(null)
+    const [token2080ToUSD, setToken2080ToUSD] = useState(0)
+    const [token2080ToSol, setToken2080ToSol] = useState(0)
+    const [token2080ToKRW, setToken2080ToKRW] = useState(0)
 
     useEffect(() => {
+        const calculatePriceSum = (data, range) =>
+            data.slice(range[0], range[1] + 1).reduce((acc, item) => acc + item.price, 0)
+
         const defPriceSum = calculatePriceSum(defData, defRange)
         const lukPriceSum = calculatePriceSum(lukData, lukRange)
         const dexPriceSum = calculatePriceSum(dexData, dexRange)
 
         setStatsPriceSum(defPriceSum + lukPriceSum + dexPriceSum)
+    }, [defRange, lukRange, dexRange])
 
-        const defMaxValue = defData.find(item => item.lv === defRange[1])
-        const lukMaxValue = lukData.find(item => item.lv === lukRange[1])
-        const dexMaxValue = dexData.find(item => item.lv === dexRange[1])
+    const calculateValues = useCallback(() => {
+        if (token2080Price && solanaPrice) {
+            const calculatedToken2080ToUSD = statsPriceSum * token2080Price
+            setToken2080ToUSD(calculatedToken2080ToUSD)
 
-        setCounterAttack(defMaxValue?.counter || '0.00%')
-        setFortuneRush(Number(lukMaxValue?.Multiplier).toFixed(2) || '1.00')
-        setFortuneRushMultiple(lukMaxValue?.['Reward Multiplier'] || '2')
-        setDecreaseRatio(dexMaxValue?.reduction || '0.00%')
-    }, [calculatePriceSum, defRange, lukRange, dexRange])
+            const calculatedToken2080ToSol = calculatedToken2080ToUSD / solanaPrice
+            setToken2080ToSol(calculatedToken2080ToSol.toFixed(2))
 
-    //슬라이더 change 이벤트
-    // 각 슬라이더 변경 이벤트 핸들러
-    const handleDefRangeChange = (event, newValue) => setDefRange(newValue)
-    const handleLukRangeChange = (event, newValue) => setLukRange(newValue)
-    const handleDexRangeChange = (event, newValue) => setDexRange(newValue)
+            const calculatedToken2080ToKRW = calculatedToken2080ToUSD * usdKrwExchangeRate
+            setToken2080ToKRW(calculatedToken2080ToKRW)
+        }
+    }, [statsPriceSum, token2080Price, solanaPrice, usdKrwExchangeRate])
 
-    const [token2080ToKRW, setToken2080ToKRW] = useState(0)
-    const [token2080ToSol, setToken2080ToSol] = useState(0)
-    const [token2080ToUSD, setToken2080ToUSD] = useState(0)
-
-    const fetchPrices = async () => {
+    const fetchPrices = useCallback(async () => {
         try {
-            console.log('load api')
-            // 2080 토큰 가격 정보 요청
             const response2080 = await fetch(
                 'https://public-api.birdeye.so/public/price?address=Dwri1iuy5pDFf2u2GwwsH2MxjR6dATyDv9En9Jk8Fkof',
                 {
@@ -64,9 +61,8 @@ function Stats() {
                 }
             )
             const data2080 = await response2080.json()
-            const token2080Price = parseFloat(data2080.data.value) // 2080 토큰 가격
+            setToken2080Price(parseFloat(data2080.data.value))
 
-            // Solana 토큰 가격 정보 요청
             const responseSolana = await fetch(
                 'https://public-api.birdeye.so/public/price?address=So11111111111111111111111111111111111111112',
                 {
@@ -78,33 +74,32 @@ function Stats() {
                 }
             )
             const dataSolana = await responseSolana.json()
-            const solanaPrice = parseFloat(dataSolana.data.value) // Solana 토큰 가격
+            setSolanaPrice(parseFloat(dataSolana.data.value))
 
-            // USD 가치 계산
-            const token2080ToUSD = statsPriceSum * token2080Price
-            setToken2080ToUSD(token2080ToUSD.toFixed(2))
-
-            // Sol 가치 계산
-            const token2080ToSol = token2080ToUSD / solanaPrice
-            setToken2080ToSol(token2080ToSol.toFixed(2))
-
-            // USD와 KRW 환율 정보를 가져오는 API 요청
-            const response = await fetch(
+            const responseExchange = await fetch(
                 '/exchange-api?authkey=CKxFJAScH4L3j7YmIpni9PZs14LhBams&searchdate=20240306&data=AP01'
             )
-            const data = await response.json()
-            const usdInfo = data.find(currency => currency.cur_unit === 'USD')
-            const kftcDealBasR = parseFloat(usdInfo.kftc_deal_bas_r.replace(/,/g, ''))
-
-            setToken2080ToKRW(kftcDealBasR)
+            const dataExchange = await responseExchange.json()
+            const usdInfo = dataExchange.find(currency => currency.cur_unit === 'USD')
+            setUsdKrwExchangeRate(parseFloat(usdInfo.kftc_deal_bas_r.replace(/,/g, '')))
         } catch (error) {
-            console.error('가격 정보를 불러오는 중 에러가 발생했습니다:', error)
+            console.error('Failed to fetch price data:', error)
         }
-    }
+    }, [])
 
+    // Only run fetchPrices once on component mount
     useEffect(() => {
-        fetchPrices() // 페이지 접속 시 1회 API 호출
-    }, [fetchPrices])
+        fetchPrices()
+    }, [])
+
+    // Calculate values whenever one of the dependencies changes
+    useEffect(() => {
+        calculateValues()
+    }, [calculateValues])
+
+    const handleDefRangeChange = (event, newValue) => setDefRange(newValue)
+    const handleLukRangeChange = (event, newValue) => setLukRange(newValue)
+    const handleDexRangeChange = (event, newValue) => setDexRange(newValue)
 
     return (
         <div className="gn-stats">
