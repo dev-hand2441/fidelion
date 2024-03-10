@@ -104,6 +104,7 @@ function Stats() {
     // 환율 API 요청(30분마다 갱신)
     const fetchExchange = async () => {
         try {
+            console.log('fetchExchange')
             // USD와 KRW 환율 정보를 가져오는 API 요청
             const apiUrl = '/exchange-api?authkey=CKxFJAScH4L3j7YmIpni9PZs14LhBams&searchdate=20240306&data=AP01'
             const response = await fetch(apiUrl)
@@ -118,6 +119,7 @@ function Stats() {
     }
 
     useEffect(() => {
+        console.log('exchange useeffect')
         fetchExchange() // 컴포넌트가 마운트될 때 함수 실행
         const interval = setInterval(fetchExchange, 1800000) // 30분마다 함수를 반복 실행
 
