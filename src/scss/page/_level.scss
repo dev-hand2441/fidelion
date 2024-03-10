@@ -27,7 +27,7 @@
 
             &:last-child {
                 font-weight: 500;
-                color: #dc143c;
+                color: $color_highlight;
             }
         }
     }
@@ -39,7 +39,7 @@
             width: 93%;
 
             .MuiSlider-thumb {
-                color: #131313;
+                color: $color_main;
 
                 &::before,
                 &.Mui-focusVisible {
@@ -56,8 +56,8 @@
             }
 
             .MuiSlider-track {
-                border-color: #131313;
-                background-color: #131313;
+                border-color: $color_main;
+                background-color: $color_main;
             }
 
             .MuiSlider-rail {

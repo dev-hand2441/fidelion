@@ -1,24 +1,19 @@
 import React from 'react'
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
+import { Swiper, SwiperSlide } from 'swiper/react'
+import 'swiper/css'
 
-import lootData from '../json/loot.json' // looting.json 파일 import
+import lootData from '../json/looting.json' // looting.json 파일 import
 
 function Levelup() {
     return (
         <div className="gn-looting-info">
-            <Swiper
-                loop={true}
-                spaceBetween={8}
-                slidesPerView={1.2}
-                centeredSlides={true}
-            >
+            <Swiper loop={true} spaceBetween={8} slidesPerView={1.2} centeredSlides={true}>
                 {Object.values(lootData).map((item, index) => (
                     <SwiperSlide key={index}>
                         <div className="gn-block">
                             <div className="gn-looting-info-card">
                                 <h4>{item.faction}</h4>
-                                <span className='text-period'>{Math.floor(item.period / 24)} Day</span>
+                                <span className="text-period">{Math.floor(item.period / 24)} Day</span>
                                 <dl>
                                     <dt>Min Price</dt>
                                     <dd>{item.min}</dd>
@@ -37,7 +32,7 @@ function Levelup() {
                                 </dl>
                                 <dl>
                                     <dt>Average Per Day</dt>
-                                    <dd>{Math.round(((item.min + item.max) / 2) / (item.period / 24))}</dd>
+                                    <dd>{Math.round((item.min + item.max) / 2 / (item.period / 24))}</dd>
                                 </dl>
                             </div>
                         </div>

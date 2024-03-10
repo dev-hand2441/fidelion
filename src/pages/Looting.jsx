@@ -9,129 +9,136 @@ import dexData from '../json/dex.json' // dex.json 파일 import
 import lootingData from '../json/looting.json' // looting.json 파일 import
 
 function Looting() {
-    const [dexLevel, setDexLevel] = useState(38) // 슬라이더의 초기값을 25로 설정
-    const [faction, setFaction] = useState('[BT] Blattas') // 선택된 항목을 저장할 상태
-    const [decreaseTime, setDecreaseTime] = useState('') // 시간 감소 값을 저장할 상태
-    const [lootingTime, setLootingTime] = useState('') // 포맷된 루팅 기간을 저장할 상태
-    const [penaltyTime, setPenaltyTime] = useState('') // 패널티 시간을 저장할 상태
-    const [lootingEndTime, setLootingEndTime] = useState('')
-    const [penaltyEndTime, setPenaltyEndTime] = useState('')
+    const [dexLevel, setDexLevel] = useState(38) // 슬라이더의 초기값을 38로 설정
+    const [selectFaction, setSelectFation] = useState('bt')
+    const [faction, setFaction] = useState() // 선택된 항목을 저장할 상태, 초기값은 비어있음
+    const [decreaseTime, setDecreaseTime] = useState('') // 시간 감소 값을 저장할 상태, 초기값은 비어있음
+    const [lootingTime, setLootingTime] = useState('') // 감소된 루팅 시간을 저장할 상태, 초기값은 비어있음
+    const [penaltyTime, setPenaltyTime] = useState('') // 패널티가 적용된 루팅 시간을 저장할 상태, 초기값은 비어있음
+    const [lootingEndTime, setLootingEndTime] = useState('') // 패널티가 적용된 루팅 시간을 저장할 상태, 초기값은 비어있음
+    const [penaltyEndTime, setPenaltyEndTime] = useState('') // 패널티가 적용된 루팅 시간을 저장할 상태, 초기값은 비어있음
+    const [selectedDate, setSelectedDate] = useState(dayjs()) // 오늘 날짜로 초기화
+    const [hour, setHour] = useState(0) // '시' 선택 초기값
+    const [minute, setMinute] = useState(0) // '분' 선택 초기값
 
-    const [selectedDate, setSelectedDate] = useState(dayjs())
-    const [hour, setHour] = useState(0)
-    const [minute, setMinute] = useState(0)
-
-    //< 레벨 슬라이더
+    // 초기값
     useEffect(() => {
-        setDecreaseTime(dexData[dexLevel.toString()]) // 슬라이더 값에 해당하는 시간 감소 값을 설정
-    }, [dexLevel]) // 슬라이더 값이 변경될 때마다 실행
-
-    const handleSliderChange = (event, newValue) => {
-        setDexLevel(newValue) // 슬라이더의 값을 상태에 저장
-    }
-    //> 레벨 슬라이더
-
-    //< 팩션 선택
-    const handleChange = event => {
-        setFaction(event.target.value) // 선택된 항목을 상태에 저장
-    }
-
-    const parsePercentage = percentageStr => {
-        return parseFloat(percentageStr) / 100
-    }
-
-    const formatTime = (timeInHours, decreasePercentageStr) => {
-        const decreasePercentage = parsePercentage(decreasePercentageStr)
-        const hours = parseInt(timeInHours, 10)
-        const decreasedHours = hours * (1 - decreasePercentage) // 시간 감소 비율 적용
-        const penaltyHours = decreasedHours * 1.2 // 패널티 시간 적용 (20% 증가)
-
-        const format = hours => {
-            const days = Math.floor(hours / 24)
-            const remainingHours = Math.floor(hours % 24)
-            const minutes = Math.floor((hours - days * 24 - remainingHours) * 60)
-            return `${days}일 ${remainingHours}시 ${minutes}분`
+        // Dex Level 기본값으로 decreaseTime 설정
+        const initialDexEntry = dexData.find(entry => entry.lv === dexLevel)
+        if (initialDexEntry) {
+            setDecreaseTime(initialDexEntry.reduction)
         }
 
-        setLootingTime(format(decreasedHours))
-        setPenaltyTime(format(penaltyHours))
-    }
+        // selectFaction 기본값으로 faction 설정
+        const initialLootingEntry = lootingData[selectFaction]
+        if (initialLootingEntry) {
+            setFaction(initialLootingEntry.faction)
 
-    useEffect(() => {
-        if (faction) {
-            const factionKey = faction.match(/\[(.*?)\]/)[1]
-            const time = lootingData[factionKey]
-            if (time && decreaseTime) {
-                formatTime(time, decreaseTime)
-            } else {
-                setLootingTime('')
-                setPenaltyTime('')
+            // decreaseTime과 period 값을 사용하여 lootingTime 계산
+            if (initialDexEntry) {
+                const reductionPercentage = parseFloat(initialDexEntry.reduction.replace('%', '')) / 100
+                const decreasedPeriod = initialLootingEntry.period * (1 - reductionPercentage)
+                setLootingTime(formatPeriod(decreasedPeriod))
+
+                // 패널티 시간 계산 및 설정
+                const penaltyPeriod = decreasedPeriod * 1.2
+                setPenaltyTime(formatPeriod(penaltyPeriod))
             }
         }
-    }, [faction, decreaseTime])
-    //> 팩션 선택
+    }, []) // 빈 의존성 배열을 전달하여 컴포넌트 마운트 시 한 번만 실행되도록 함
 
-    //< 시간 계산
-    const hours = Array.from({ length: 24 }, (_, index) => index)
-    const minutes = Array.from({ length: 60 }, (_, index) => index)
+    // decreaseTime이나 faction 값이 변경될 때마다 lootingTime 재계산
+    useEffect(() => {
+        const lootingEntry = lootingData[selectFaction] // 현재 선택된 Faction의 데이터 가져오기
+        if (lootingEntry && decreaseTime) {
+            const reductionPercentage = parseFloat(decreaseTime.replace('%', '')) / 100 // 감소율을 백분율에서 실수로 변환
+            const decreasedPeriod = lootingEntry.period * (1 - reductionPercentage) // 감소율을 적용하여 기간 계산
+            setLootingTime(formatPeriod(decreasedPeriod)) // 계산된 기간을 일, 시, 분 포맷으로 변환하여 저장
 
-    // 주어진 루팅 시간 문자열을 파싱하여 일, 시간, 분으로 변환
-    function parseLootingTime(lootingTimeStr) {
-        const [daysStr, hoursStr, minutesStr] = lootingTimeStr.match(/\d+/g)
-        return {
-            days: parseInt(daysStr, 10),
-            hours: parseInt(hoursStr, 10),
-            minutes: parseInt(minutesStr, 10),
+            // 패널티 시간 계산 및 설정
+            const penaltyPeriod = decreasedPeriod * 1.2 // 패널티 적용
+            setPenaltyTime(formatPeriod(penaltyPeriod))
+        }
+    }, [selectFaction, decreaseTime]) // 의존성 배열에 selectFaction과 decreaseTime 추가
+
+    // 기간을 일, 시, 분 형식으로 포맷하는 함수
+    function formatPeriod(periodInHours) {
+        const days = Math.floor(periodInHours / 24)
+        const hours = Math.floor(periodInHours % 24)
+        const minutes = Math.round((periodInHours * 60) % 60)
+
+        return `${days}일 ${hours}시간 ${minutes}분`
+    }
+
+    // 기간 문자열(예: "1일 2시간 30분")을 파싱하여 일, 시간, 분으로 변환하는 함수
+    const parsePeriod = periodStr => {
+        const match = periodStr.match(/(\d+)일 (\d+)시간 (\d+)분/)
+        if (match) {
+            return {
+                days: parseInt(match[1], 10),
+                hours: parseInt(match[2], 10),
+                minutes: parseInt(match[3], 10),
+            }
+        }
+        return { days: 0, hours: 0, minutes: 0 }
+    }
+
+    const calculateEndTime = (start, { days, hours, minutes }) => {
+        return start.add(days, 'day').add(hours, 'hour').add(minutes, 'minute')
+    }
+
+    //슬라이더 change 이벤트
+    const dexSliderChangeHandle = (event, newValue) => {
+        setDexLevel(newValue)
+        const dexEntry = dexData.find(entry => entry.lv === newValue)
+        if (dexEntry) {
+            setDecreaseTime(dexEntry.reduction) // reduction 값을 감소시간으로 설정
         }
     }
 
-    // 주어진 시간과 루팅 시간을 이용하여 최종 종료 시간 계산
-    function calculateEndTime(startTime, { days, hours, minutes }) {
-        return startTime.add(days, 'day').add(hours, 'hour').add(minutes, 'minute')
+    // Faction 선택 이벤트
+    const selectFactionHandle = event => {
+        const lootingEntry = lootingData[event.target.value] // looting.json에서 해당 Faction의 데이터를 찾음
+        setFaction(lootingEntry.faction) // 선택된 Faction 값을 상태에 저장
+        setSelectFation(event.target.value)
+
+        if (lootingEntry && decreaseTime) {
+            const reductionPercentage = parseFloat(decreaseTime.replace('%', '')) / 100 // 감소율을 백분율에서 실수로 변환
+            const decreasedPeriod = lootingEntry.period * (1 - reductionPercentage) // 감소율을 적용하여 기간 계산
+            console.log(decreasedPeriod)
+            setLootingTime(formatPeriod(decreasedPeriod)) // 계산된 기간을 일, 시, 분 포맷으로 변환하여 저장
+        }
     }
 
-    // dayjs 객체를 "월 일 시 분" 형식의 문자열로 포맷팅
-    function formatDate(date) {
-        return date.format('M월 D일 HH시 mm분')
+    // 현재 시간을 기준으로 lootingTime 및 penaltyTime 이후의 시간을 계산
+    const todayLootingDateCalc = () => {
+        const now = dayjs() // 현재 시간
+        const lootingPeriod = parsePeriod(lootingTime) // lootingTime 파싱
+        const penaltyPeriod = parsePeriod(penaltyTime) // penaltyTime 파싱
+
+        // lootingTime을 기준으로 종료 시간 계산
+        const lootingEndDate = calculateEndTime(now, lootingPeriod)
+        setLootingEndTime(lootingEndDate.format('M월 D일 HH시 mm분'))
+
+        // penaltyTime을 기준으로 종료 시간 계산
+        const penaltyEndDate = calculateEndTime(now, penaltyPeriod)
+        setPenaltyEndTime(penaltyEndDate.format('M월 D일 HH시 mm분'))
     }
 
-    // 패널티를 적용한 루팅 시간을 계산하는 함수
-    const calculateWithPenalty = lootingTime => {
-        const totalMinutes = lootingTime.days * 24 * 60 + lootingTime.hours * 60 + lootingTime.minutes
-        const totalMinutesWithPenalty = totalMinutes * 1.2 // 20% 패널티 추가
+    // 사용자가 선택한 날짜 및 시간을 기준으로 lootingTime 및 penaltyTime 이후의 시간을 계산
+    const LootingDateCalc = () => {
+        const startDate = selectedDate.hour(hour).minute(minute) // 사용자 선택 날짜 및 시간
+        const lootingPeriod = parsePeriod(lootingTime) // lootingTime 파싱
+        const penaltyPeriod = parsePeriod(penaltyTime) // penaltyTime 파싱
 
-        // 패널티가 적용된 총 시간을 일, 시간, 분으로 변환
-        const daysWithPenalty = Math.floor(totalMinutesWithPenalty / (24 * 60))
-        const hoursWithPenalty = Math.floor((totalMinutesWithPenalty % (24 * 60)) / 60)
-        const minutesWithPenalty = Math.floor(totalMinutesWithPenalty % 60)
+        // lootingTime을 기준으로 종료 시간 계산
+        const lootingEndDate = calculateEndTime(startDate, lootingPeriod)
+        setLootingEndTime(lootingEndDate.format('M월 D일 HH시 mm분'))
 
-        return { days: daysWithPenalty, hours: hoursWithPenalty, minutes: minutesWithPenalty }
+        // penaltyTime을 기준으로 종료 시간 계산
+        const penaltyEndDate = calculateEndTime(startDate, penaltyPeriod)
+        setPenaltyEndTime(penaltyEndDate.format('M월 D일 HH시 mm분'))
     }
-
-    const handleCalculate = () => {
-        const startDate = dayjs(selectedDate).hour(hour).minute(minute)
-        const looting = parseLootingTime(lootingTime)
-
-        const endTime = calculateEndTime(startDate, looting)
-        const penaltyLootingTime = calculateWithPenalty(looting)
-        const penaltyEndTime = calculateEndTime(startDate, penaltyLootingTime)
-
-        setLootingEndTime(formatDate(endTime))
-        setPenaltyEndTime(formatDate(penaltyEndTime))
-    }
-
-    const handleClick = () => {
-        const now = dayjs()
-        const looting = parseLootingTime(lootingTime)
-
-        const endTime = calculateEndTime(now, looting)
-        const penaltyLootingTime = calculateWithPenalty(looting)
-        const penaltyEndTime = calculateEndTime(now, penaltyLootingTime)
-
-        setLootingEndTime(formatDate(endTime))
-        setPenaltyEndTime(formatDate(penaltyEndTime))
-    }
-    //> 시간 계산
 
     return (
         <div className="gn-looting">
@@ -146,7 +153,13 @@ function Looting() {
                         {dexLevel} <span>Lv.</span>
                     </Typography>
                     <Box className="form-slider">
-                        <Slider aria-label="Slider" value={dexLevel} onChange={handleSliderChange} min={0} max={60} />
+                        <Slider
+                            aria-label="Slider"
+                            value={dexLevel}
+                            onChange={dexSliderChangeHandle}
+                            min={0}
+                            max={60}
+                        />
                     </Box>
                 </div>
 
@@ -155,22 +168,18 @@ function Looting() {
                     <FormControl fullWidth className="form-select">
                         <Select
                             displayEmpty // 선택되지 않은 상태에서도 첫 번째 MenuItem 표시
-                            value={faction}
-                            onChange={handleChange}
-                            renderValue={selected => {
-                                if (selected === '') return <em>Faction을 선택하세요</em> // placeholder처럼 보이는 텍스트
-                                return selected
-                            }}
+                            value={selectFaction}
+                            onChange={selectFactionHandle}
                         >
-                            <MenuItem value={`[BT] Blattas`}>[BT] Blattas</MenuItem>
-                            <MenuItem value={`[HT] Hunter`}>[HT] Hunter</MenuItem>
-                            <MenuItem value={`[JB] Jack N Boyz`}>[JB] Jack N Boyz</MenuItem>
-                            <MenuItem value={`[NF] Nine Fingers`}>[NF] Nine Fingers</MenuItem>
-                            <MenuItem value={`[GL] Gary's Lounge`}>[GL] Gary's Lounge</MenuItem>
-                            <MenuItem value={`[CL] Caballeros`}>[CL] Caballeros</MenuItem>
-                            <MenuItem value={`[QS] Quasars`}>[QS] Quasars</MenuItem>
-                            <MenuItem value={`[ZK] Zaikasha`}>[ZK] Zaikasha</MenuItem>
-                            <MenuItem value={`[KS] Kossacks`}>[KS] Kossacks</MenuItem>
+                            <MenuItem value={`bt`}>[BT] Blattas</MenuItem>
+                            <MenuItem value={`ht`}>[HT] Hunter</MenuItem>
+                            <MenuItem value={`jb`}>[JB] Jack N Boyz</MenuItem>
+                            <MenuItem value={`nf`}>[NF] Nine Fingers</MenuItem>
+                            <MenuItem value={`gl`}>[GL] Gary's Lounge</MenuItem>
+                            <MenuItem value={`cl`}>[CL] Caballeros</MenuItem>
+                            <MenuItem value={`qs`}>[QS] Quasars</MenuItem>
+                            <MenuItem value={`zk`}>[ZK] Zaikasha</MenuItem>
+                            <MenuItem value={`ks`}>[KS] Kossacks</MenuItem>
                         </Select>
                     </FormControl>
                 </div>
@@ -192,9 +201,9 @@ function Looting() {
                                 <FormControl className="form-select" fullWidth>
                                     <InputLabel>시간</InputLabel>
                                     <Select value={hour} onChange={e => setHour(e.target.value)} label="시간">
-                                        {hours.map(h => (
-                                            <MenuItem key={h} value={h}>
-                                                {`${h}시`}
+                                        {Array.from({ length: 24 }).map((_, index) => (
+                                            <MenuItem key={index} value={index}>
+                                                {`${index}시`}
                                             </MenuItem>
                                         ))}
                                     </Select>
@@ -202,9 +211,9 @@ function Looting() {
                                 <FormControl className="form-select" fullWidth>
                                     <InputLabel>분</InputLabel>
                                     <Select value={minute} onChange={e => setMinute(e.target.value)} label="분">
-                                        {minutes.map(m => (
-                                            <MenuItem key={m} value={m}>
-                                                {`${m}분`}
+                                        {Array.from({ length: 60 }).map((_, index) => (
+                                            <MenuItem key={index} value={index}>
+                                                {`${index}분`}
                                             </MenuItem>
                                         ))}
                                     </Select>
@@ -212,10 +221,10 @@ function Looting() {
                             </Box>
                         </LocalizationProvider>
                         <Box sx={{ display: 'flex', gap: 1, alignItems: 'center', mt: '16px' }}>
-                            <Button className="btn-calculate" variant="outlined" onClick={handleCalculate}>
+                            <Button className="btn-calculate" variant="outlined" onClick={LootingDateCalc}>
                                 계산
                             </Button>
-                            <Button className="btn-today" variant="contained" onClick={handleClick}>
+                            <Button className="btn-today" variant="contained" onClick={todayLootingDateCalc}>
                                 현재 시간으로 계산
                             </Button>
                         </Box>
@@ -243,7 +252,7 @@ function Looting() {
                         <dd>
                             <dl>
                                 <dt>종료일</dt>
-                                <dd>{lootingEndTime ? lootingEndTime : '-'}</dd>
+                                <dd className="text-highlight">{lootingEndTime ? lootingEndTime : '-'}</dd>
                             </dl>
                             <dl>
                                 <dt>패널티</dt>
