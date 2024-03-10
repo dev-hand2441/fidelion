@@ -24,15 +24,34 @@ function Stats() {
     const [token2080ToSol, setToken2080ToSol] = useState(0)
     const [token2080ToKRW, setToken2080ToKRW] = useState(0)
 
-    useEffect(() => {
-        const calculatePriceSum = (data, range) =>
-            data.slice(range[0], range[1] + 1).reduce((acc, item) => acc + item.price, 0)
+    const calculatePriceSum = (data, range) =>
+        data.slice(range[0], range[1] + 1).reduce((acc, item) => acc + item.price, 0)
 
+    useEffect(() => {
         const defPriceSum = calculatePriceSum(defData, defRange)
         const lukPriceSum = calculatePriceSum(lukData, lukRange)
         const dexPriceSum = calculatePriceSum(dexData, dexRange)
 
         setStatsPriceSum(defPriceSum + lukPriceSum + dexPriceSum)
+
+        // DEF 슬라이더 값 매핑
+        const defItem = defData.find(item => item.lv === defRange[1])
+        if (defItem) {
+            setCounterAttack(defItem.counter)
+        }
+
+        // LUK 슬라이더 값 매핑
+        const lukItem = lukData.find(item => item.lv === lukRange[1])
+        if (lukItem) {
+            setFortuneRush(lukItem.Multiplier)
+            setFortuneRushMultiple(lukItem['Reward Multiplier'])
+        }
+
+        // DEX 슬라이더 값 매핑
+        const dexItem = dexData.find(item => item.lv === dexRange[1])
+        if (dexItem) {
+            setDecreaseRatio(dexItem.reduction)
+        }
     }, [defRange, lukRange, dexRange])
 
     const calculateValues = useCallback(() => {
@@ -141,7 +160,7 @@ function Stats() {
                             </i>
                             {lukRange[1]} <span>Lv.</span>
                         </Typography>
-                        <p className="text-effect">포춘러시 {fortuneRush}배 적용</p>
+                        <p className="text-effect">포춘러시 확률 {fortuneRush}배 적용</p>
                         <Box className="form-slider">
                             <Slider
                                 value={lukRange}
