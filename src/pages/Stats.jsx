@@ -208,7 +208,7 @@ function Stats() {
                         <dd>{decreaseRatio}</dd>
                     </dl>
                     <dl>
-                        <dt>스탯 레벨업 소모 비용</dt>
+                        <dt>스탯 레벨업 예상 비용</dt>
                         <dd>
                             <dl>
                                 <dt>$2080</dt>
@@ -236,7 +236,7 @@ function Stats() {
                     </dl>
                     <div className="gn-note">
                         <ul>
-                            <li>위의 가격은 DEX의 Price Impact에 따라 차이가 발생할 수 있습니다.</li>
+                            <li>위의 가격은 예상 비용으로 DEX의 Price Impact에 따라 차이가 발생할 수 있습니다.</li>
                         </ul>
                     </div>
                 </div>
