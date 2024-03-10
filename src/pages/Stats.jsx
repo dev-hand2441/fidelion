@@ -55,59 +55,6 @@ function Stats() {
     const [token2080ToSol, setToken2080ToSol] = useState(0)
     const [token2080ToUSD, setToken2080ToUSD] = useState(0)
 
-    // useEffect(() => {
-    //     const fetchPrices = async () => {
-    //         // Solana 토큰 가격 정보 요청
-    //         const responseSolana = await fetch(
-    //             'https://public-api.birdeye.so/public/price?address=So11111111111111111111111111111111111111112',
-    //             {
-    //                 method: 'GET',
-    //                 headers: {
-    //                     'x-chain': 'solana',
-    //                     'X-API-KEY': '72e6d89433b645cf8993ad398f95aeea',
-    //                 },
-    //             }
-    //         )
-    //         const dataSolana = await responseSolana.json()
-    //         const solanaPrice = dataSolana.data.value.toFixed(2) // Solana 토큰 가격 정보 저장 (소수점 2자리)
-    //         console.log(solanaPrice)
-    //         setPriceSolana(solanaPrice)
-
-    //         // 2080 토큰 가격 정보 요청
-    //         const response2080 = await fetch(
-    //             'https://public-api.birdeye.so/public/price?address=Dwri1iuy5pDFf2u2GwwsH2MxjR6dATyDv9En9Jk8Fkof',
-    //             {
-    //                 method: 'GET',
-    //                 headers: {
-    //                     'x-chain': 'solana',
-    //                     'X-API-KEY': '72e6d89433b645cf8993ad398f95aeea',
-    //                 },
-    //             }
-    //         )
-    //         const data2080 = await response2080.json()
-    //         const token2080Price = data2080.data.value.toFixed(4) // 2080 토큰 가격 정보 저장 (소수점 5자리)
-    //         console.log(token2080Price)
-    //         setPrice2080(token2080Price)
-
-    //         // 환율
-    //         const apiUrl = '/exchange-api?authkey=CKxFJAScH4L3j7YmIpni9PZs14LhBams&searchdate=20240306&data=AP01'
-    //         fetch(apiUrl)
-    //             .then(response => response.json())
-    //             .then(data => {
-    //                 // 미국 달러 정보 찾기
-    //                 const usdInfo = data.find(currency => currency.cur_unit === 'USD')
-    //                 const kftcDealBasR = parseFloat(usdInfo.kftc_deal_bas_r.replace(/,/g, ''))
-
-    //                 // token2080ToKRW 및 solanaToKRW 값 설정
-    //                 setToken2080ToKRW((token2080Price * kftcDealBasR).toFixed(2))
-    //                 setSolanaToKRW((solanaPrice * kftcDealBasR).toLocaleString('ko-KR', { maximumFractionDigits: 0 }))
-    //             })
-    //             .catch(error => console.error('Error fetching data:', error))
-    //     }
-
-    //     fetchPrices() // 토큰 가격 정보 요청 함수 실행
-    // }, [])
-
     useEffect(() => {
         const fetchPrices = async () => {
             try {
@@ -157,7 +104,7 @@ function Stats() {
                         const kftcDealBasR = parseFloat(usdInfo.kftc_deal_bas_r.replace(/,/g, ''))
 
                         // token2080ToKRW 및 solanaToKRW 값 설정
-                        setToken2080ToKRW(Math.ceil(token2080Price * kftcDealBasR))
+                        setToken2080ToKRW(Math.ceil(token2080ToUSD * kftcDealBasR))
                     })
                     .catch(error => console.error('Error fetching data:', error))
             } catch (error) {
@@ -287,6 +234,11 @@ function Stats() {
                             </dl>
                         </dd>
                     </dl>
+                    <div className="gn-note">
+                        <ul>
+                            <li>위의 가격은 DEX의 Price Impact에 따라 차이가 발생할 수 있습니다.</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
             {/* <div className="gn-block">
