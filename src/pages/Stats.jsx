@@ -218,7 +218,7 @@ function Stats() {
                             </dl>
                             <dl>
                                 <dt>USD</dt>
-                                <dd>${token2080ToUSD.toLocaleString()}</dd>
+                                <dd>${token2080ToUSD.toLocaleString(undefined, { maximumFractionDigits: 0 })}</dd>
                             </dl>
                             <dl>
                                 <dt>KRW</dt>
