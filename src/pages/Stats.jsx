@@ -226,11 +226,11 @@ function Stats() {
                             </dl>
                             <dl>
                                 <dt>USD</dt>
-                                <dd>${token2080ToUSD}</dd>
+                                <dd>${token2080ToUSD.toLocaleString()}</dd>
                             </dl>
                             <dl>
                                 <dt>KRW</dt>
-                                <dd>{token2080ToKRW}원</dd>
+                                <dd>{token2080ToKRW.toLocaleString()}원</dd>
                             </dl>
                         </dd>
                     </dl>
