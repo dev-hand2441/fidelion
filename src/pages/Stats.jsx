@@ -222,7 +222,7 @@ function Stats() {
                             </dl>
                             <dl>
                                 <dt>KRW</dt>
-                                <dd>{token2080ToKRW.toLocaleString()}원</dd>
+                                <dd>{token2080ToKRW.toLocaleString(undefined, { maximumFractionDigits: 0 })}원</dd>
                             </dl>
                         </dd>
                     </dl>

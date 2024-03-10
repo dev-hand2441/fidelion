@@ -16,6 +16,8 @@
     }
 
     &-inner {
+        position: relative;
+
         > ul {
             margin-top: 10px;
 
@@ -52,6 +54,19 @@
                     line-height: 20px;
                     text-align: right;
                 }
+            }
+        }
+
+        .btn-reload-api {
+            position: absolute;
+            top: 4px;
+            right: 0;
+            padding: 10px 0;
+            color: #767676;
+            font-size: 13px;
+
+            i {
+                width: 22px;
             }
         }
     }

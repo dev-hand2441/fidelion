@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowsRotate } from '@fortawesome/free-solid-svg-icons'
 
 function TokenPrices() {
     const [priceSolana, setPriceSolana] = useState(null)
@@ -62,6 +64,12 @@ function TokenPrices() {
             <div className="gn-token-price-inner">
                 <h3 className="text-heading">코인 현재가</h3>
                 <p>Powered by Birdeye</p>
+                <button className="btn-reload-api">
+                    <i>
+                        <FontAwesomeIcon icon={faArrowsRotate} />
+                    </i>
+                    <b>코인 가격 갱신</b>
+                </button>
                 <ul>
                     <li className="gn-box">
                         <i className="image-token">

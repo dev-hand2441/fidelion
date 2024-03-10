@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowsRotate } from '@fortawesome/free-solid-svg-icons'
 
 function NFTPriceInfo() {
     const [floorPrice, setFloorPrice] = useState(null)
@@ -16,7 +18,7 @@ function NFTPriceInfo() {
                 setListedCount(data.listedCount)
             })
             .catch(err => console.error(err))
-    }, []) // 빈 배열을 전달하여 컴포넌트가 마운트될 때 한 번만 API 호출
+    }, [])
 
     return (
         <div className="gn-nft-price">
