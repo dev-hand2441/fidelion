@@ -35,7 +35,7 @@ function Stats() {
 
         // LUK 최대값에 따른 FortuneRush 및 FortuneRushMultiple 설정
         const lukMaxValue = lukData.find(item => item.lv === lukRange[1])
-        setFortuneRush(lukMaxValue ? lukMaxValue.Multiplier : '1.0000')
+        setFortuneRush(lukMaxValue ? Number(lukMaxValue.Multiplier).toFixed(2) : '1.00')
         setFortuneRushMultiple(lukMaxValue ? lukMaxValue['Reward Multiplier'] : '2')
 
         // DEX 최대값에 따른 DecreaseRatio 설정
@@ -54,7 +54,9 @@ function Stats() {
             <div className="gn-block gn-stats-calc">
                 <h3 className="text-heading">스탯 비용 계산</h3>
                 <div className="gn-box">
-                    <h5 className="text-label">DEF Level</h5>
+                    <h5 className="text-label">
+                        DEF Level<small>(백파이어 방어)</small>
+                    </h5>
                     <div className="gn-form-box">
                         <Typography className="text-level" id="slider-value" gutterBottom>
                             {defRange[0]} <span>Lv.</span>
@@ -63,6 +65,9 @@ function Stats() {
                             </i>
                             {defRange[1]} <span>Lv.</span>
                         </Typography>
+                        <p className="text-effect">
+                            백파이어시 {counterAttack} {defRange[1] < 46 ? '복원' : '카운터어택'}
+                        </p>
                         <Box className="form-slider">
                             <Slider
                                 value={defRange}
@@ -73,7 +78,9 @@ function Stats() {
                             />
                         </Box>
                     </div>
-                    <h5 className="text-label">LUK Level</h5>
+                    <h5 className="text-label">
+                        LUK Level<small>(포춘러시 강화)</small>
+                    </h5>
                     <div className="gn-form-box">
                         <Typography className="text-level" id="slider-value" gutterBottom>
                             {lukRange[0]} <span>Lv.</span>
@@ -82,6 +89,7 @@ function Stats() {
                             </i>
                             {lukRange[1]} <span>Lv.</span>
                         </Typography>
+                        <p className="text-effect">포춘러시 {fortuneRush}배 적용</p>
                         <Box className="form-slider">
                             <Slider
                                 value={lukRange}
@@ -92,7 +100,9 @@ function Stats() {
                             />
                         </Box>
                     </div>
-                    <h5 className="text-label">DEX Level</h5>
+                    <h5 className="text-label">
+                        DEX Level<small>(루팅기간 감소)</small>
+                    </h5>
                     <div className="gn-form-box">
                         <Typography className="text-level" id="slider-value" gutterBottom>
                             {dexRange[0]} <span>Lv.</span>
@@ -101,6 +111,7 @@ function Stats() {
                             </i>
                             {dexRange[1]} <span>Lv.</span>
                         </Typography>
+                        <p className="text-effect">루팅 기간 {decreaseRatio} 감소</p>
                         <Box className="form-slider">
                             <Slider
                                 value={dexRange}
@@ -127,7 +138,7 @@ function Stats() {
                         <dd>{fortuneRushMultiple}x</dd>
                     </dl>
                     <dl>
-                        <dt>루팅 시간 감소율</dt>
+                        <dt>루팅 기간 감소율</dt>
                         <dd>{decreaseRatio}</dd>
                     </dl>
                     <dl>
