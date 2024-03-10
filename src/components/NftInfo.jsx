@@ -23,7 +23,7 @@ function NFTPriceInfo() {
             <div className="gn-nft-price-inner">
                 <h3 className="text-heading">NFT Floor Price</h3>
                 <p>Powered by Magiceden</p>
-                <div className="gn-block">
+                <div className="gn-box">
                     <b className="text-collection">
                         FIDELION<span>Listed {listedCount}</span>
                     </b>

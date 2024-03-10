@@ -63,7 +63,7 @@ function TokenPrices() {
                 <h3 className="text-heading">코인 현재가</h3>
                 <p>Powered by Birdeye</p>
                 <ul>
-                    <li className="gn-block">
+                    <li className="gn-box">
                         <i className="image-token">
                             <img src="/image/token_2080.png" alt="" />
                         </i>
@@ -72,7 +72,7 @@ function TokenPrices() {
                             {price2080 ? `$${price2080}` : 'Loading...'} {token2080ToKRW ? `≈ ${token2080ToKRW}원` : ''}
                         </p>
                     </li>
-                    <li className="gn-block">
+                    <li className="gn-box">
                         <i className="image-token">
                             <img src="/image/token_sol.png" alt="" />
                         </i>
