@@ -8,7 +8,7 @@
     margin-bottom: 42px;
 
     .text-heading {
-        margin-bottom: 2px;
+        padding: 0;
 
         + p {
             margin-top: 2px;
@@ -20,7 +20,7 @@
 
     .gn-box {
         display: flex;
-        margin-top: 12px;
+        margin-top: 10px;
         gap: 8px;
         padding: 14px;
         align-items: center;

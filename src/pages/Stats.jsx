@@ -49,6 +49,125 @@ function Stats() {
     const handleLukRangeChange = (event, newValue) => setLukRange(newValue)
     const handleDexRangeChange = (event, newValue) => setDexRange(newValue)
 
+    const [priceSolana, setPriceSolana] = useState(null)
+    const [price2080, setPrice2080] = useState(null)
+    const [token2080ToKRW, setToken2080ToKRW] = useState(0)
+    const [token2080ToSol, setToken2080ToSol] = useState(0)
+    const [token2080ToUSD, setToken2080ToUSD] = useState(0)
+
+    // useEffect(() => {
+    //     const fetchPrices = async () => {
+    //         // Solana 토큰 가격 정보 요청
+    //         const responseSolana = await fetch(
+    //             'https://public-api.birdeye.so/public/price?address=So11111111111111111111111111111111111111112',
+    //             {
+    //                 method: 'GET',
+    //                 headers: {
+    //                     'x-chain': 'solana',
+    //                     'X-API-KEY': '72e6d89433b645cf8993ad398f95aeea',
+    //                 },
+    //             }
+    //         )
+    //         const dataSolana = await responseSolana.json()
+    //         const solanaPrice = dataSolana.data.value.toFixed(2) // Solana 토큰 가격 정보 저장 (소수점 2자리)
+    //         console.log(solanaPrice)
+    //         setPriceSolana(solanaPrice)
+
+    //         // 2080 토큰 가격 정보 요청
+    //         const response2080 = await fetch(
+    //             'https://public-api.birdeye.so/public/price?address=Dwri1iuy5pDFf2u2GwwsH2MxjR6dATyDv9En9Jk8Fkof',
+    //             {
+    //                 method: 'GET',
+    //                 headers: {
+    //                     'x-chain': 'solana',
+    //                     'X-API-KEY': '72e6d89433b645cf8993ad398f95aeea',
+    //                 },
+    //             }
+    //         )
+    //         const data2080 = await response2080.json()
+    //         const token2080Price = data2080.data.value.toFixed(4) // 2080 토큰 가격 정보 저장 (소수점 5자리)
+    //         console.log(token2080Price)
+    //         setPrice2080(token2080Price)
+
+    //         // 환율
+    //         const apiUrl = '/exchange-api?authkey=CKxFJAScH4L3j7YmIpni9PZs14LhBams&searchdate=20240306&data=AP01'
+    //         fetch(apiUrl)
+    //             .then(response => response.json())
+    //             .then(data => {
+    //                 // 미국 달러 정보 찾기
+    //                 const usdInfo = data.find(currency => currency.cur_unit === 'USD')
+    //                 const kftcDealBasR = parseFloat(usdInfo.kftc_deal_bas_r.replace(/,/g, ''))
+
+    //                 // token2080ToKRW 및 solanaToKRW 값 설정
+    //                 setToken2080ToKRW((token2080Price * kftcDealBasR).toFixed(2))
+    //                 setSolanaToKRW((solanaPrice * kftcDealBasR).toLocaleString('ko-KR', { maximumFractionDigits: 0 }))
+    //             })
+    //             .catch(error => console.error('Error fetching data:', error))
+    //     }
+
+    //     fetchPrices() // 토큰 가격 정보 요청 함수 실행
+    // }, [])
+
+    useEffect(() => {
+        const fetchPrices = async () => {
+            try {
+                // Solana 토큰 가격 정보 요청
+                const responseSolana = await fetch(
+                    'https://public-api.birdeye.so/public/price?address=So11111111111111111111111111111111111111112',
+                    {
+                        method: 'GET',
+                        headers: {
+                            'x-chain': 'solana',
+                            'X-API-KEY': '72e6d89433b645cf8993ad398f95aeea',
+                        },
+                    }
+                )
+                const dataSolana = await responseSolana.json()
+                const solanaPrice = parseFloat(dataSolana.data.value) // Solana 토큰 가격
+
+                // 2080 토큰 가격 정보 요청
+                const response2080 = await fetch(
+                    'https://public-api.birdeye.so/public/price?address=Dwri1iuy5pDFf2u2GwwsH2MxjR6dATyDv9En9Jk8Fkof',
+                    {
+                        method: 'GET',
+                        headers: {
+                            'x-chain': 'solana',
+                            'X-API-KEY': '72e6d89433b645cf8993ad398f95aeea',
+                        },
+                    }
+                )
+                const data2080 = await response2080.json()
+                const token2080Price = parseFloat(data2080.data.value) // 2080 토큰 가격
+
+                // USD 가치 계산
+                const token2080ToUSD = statsPriceSum * token2080Price
+                setToken2080ToUSD(token2080ToUSD.toFixed(2))
+
+                // Sol 가치 계산
+                const token2080ToSol = token2080ToUSD / solanaPrice
+                setToken2080ToSol(token2080ToSol.toFixed(4))
+
+                // 환율 API 요청
+                const apiUrl = '/exchange-api?authkey=CKxFJAScH4L3j7YmIpni9PZs14LhBams&searchdate=20240306&data=AP01'
+                fetch(apiUrl)
+                    .then(response => response.json())
+                    .then(data => {
+                        // 미국 달러 정보 찾기
+                        const usdInfo = data.find(currency => currency.cur_unit === 'USD')
+                        const kftcDealBasR = parseFloat(usdInfo.kftc_deal_bas_r.replace(/,/g, ''))
+
+                        // token2080ToKRW 및 solanaToKRW 값 설정
+                        setToken2080ToKRW(Math.ceil(token2080Price * kftcDealBasR))
+                    })
+                    .catch(error => console.error('Error fetching data:', error))
+            } catch (error) {
+                console.error('가격 정보를 불러오는 중 에러가 발생했습니다:', error)
+            }
+        }
+
+        fetchPrices() // 가격 정보 요청 함수 실행
+    }, [statsPriceSum])
+
     return (
         <div className="gn-stats">
             <div className="gn-block gn-stats-calc">
@@ -143,7 +262,30 @@ function Stats() {
                     </dl>
                     <dl>
                         <dt>스탯 레벨업 소모 비용</dt>
-                        <dd className="text-highlight">{statsPriceSum.toLocaleString()}</dd>
+                        <dd>
+                            <dl>
+                                <dt>$2080</dt>
+                                <dd>
+                                    <i className="image-token-2080"></i>
+                                    {statsPriceSum.toLocaleString()}
+                                </dd>
+                            </dl>
+                            <dl>
+                                <dt>$SOL</dt>
+                                <dd>
+                                    <i className="image-token-sol"></i>
+                                    {token2080ToSol}
+                                </dd>
+                            </dl>
+                            <dl>
+                                <dt>USD</dt>
+                                <dd>${token2080ToUSD}</dd>
+                            </dl>
+                            <dl>
+                                <dt>KRW</dt>
+                                <dd>{token2080ToKRW}원</dd>
+                            </dl>
+                        </dd>
                     </dl>
                 </div>
             </div>
