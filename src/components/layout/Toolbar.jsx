@@ -1,9 +1,12 @@
 import React from 'react'
+import { useLanguage } from '../../contexts/LanguageContext'
 import { NavLink } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCircleDollarToSlot, faBolt, faSliders, faChartSimple } from '@fortawesome/free-solid-svg-icons'
+import { faCircleDollarToSlot, faBolt, faSliders, faChartSimple, faUserPlus } from '@fortawesome/free-solid-svg-icons'
 
 function Toolbar() {
+    const { language } = useLanguage()
+
     return (
         <div className="gn-layout-toolbar">
             <ul>
@@ -39,9 +42,16 @@ function Toolbar() {
                         Stats
                     </NavLink>
                 </li>
-                {/* <li>
-                    <NavLink to="/roi" activeClassName="active"><i><FontAwesomeIcon icon={faMoneyBillTransfer} /></i>ROI</NavLink>
-                </li> */}
+                {language !== 'en' && (
+                    <li>
+                        <NavLink to="/guide" className={({ isActive }) => (isActive ? 'active' : undefined)}>
+                            <i>
+                                <FontAwesomeIcon icon={faUserPlus} />
+                            </i>
+                            뉴비
+                        </NavLink>
+                    </li>
+                )}
             </ul>
         </div>
     )

@@ -56,6 +56,12 @@
         }
     }
 
+    &.lang-en {
+        .btn-calculate {
+            width: 100%;
+        }
+    }
+
     &-date {
         .form-datepicker {
             margin-bottom: 16px;

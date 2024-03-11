@@ -141,14 +141,14 @@ function Looting() {
     }
 
     return (
-        <div className="gn-looting">
+        <div className="gn-looting lang-en">
             <div className="gn-block gn-looting-info">
-                <h3 className="text-heading">Looting information</h3>
+                <h3 className="text-heading">Looting Information</h3>
                 <LootingInfo />
             </div>
 
             <div className="gn-block">
-                <h3 className="text-heading">Calculate looting period</h3>
+                <h3 className="text-heading">Looting Period Calcualator</h3>
                 <div className="gn-box">
                     <h5 className="text-label">Dex Level</h5>
                     <div className="gn-form-box">
@@ -199,14 +199,13 @@ function Looting() {
                                         setSelectedDate(newDate)
                                     }}
                                 />
-
                                 <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
                                     <FormControl className="form-select" fullWidth>
                                         <InputLabel>Hour</InputLabel>
                                         <Select value={hour} onChange={e => setHour(e.target.value)} label="Hour">
                                             {Array.from({ length: 24 }).map((_, index) => (
                                                 <MenuItem key={index} value={index}>
-                                                    {`${index}Hour`}
+                                                    {`${index}`}
                                                 </MenuItem>
                                             ))}
                                         </Select>
@@ -216,19 +215,31 @@ function Looting() {
                                         <Select value={minute} onChange={e => setMinute(e.target.value)} label="Minute">
                                             {Array.from({ length: 60 }).map((_, index) => (
                                                 <MenuItem key={index} value={index}>
-                                                    {`${index}Min`}
+                                                    {`${index}`}
                                                 </MenuItem>
                                             ))}
                                         </Select>
                                     </FormControl>
                                 </Box>
                             </LocalizationProvider>
-                            <Box sx={{ display: 'flex', gap: 1, alignItems: 'center', mt: '16px' }}>
-                                <Button className="btn-calculate" variant="outlined" onClick={LootingDateCalc}>
-                                    Calc
+                            <Box sx={{ mt: '16px' }}>
+                                <Button
+                                    className="btn-calculate"
+                                    variant="outlined"
+                                    onClick={LootingDateCalc}
+                                    style={{ textTransform: 'none' }}
+                                    sx={{ width: '100%' }}
+                                >
+                                    Calculate
                                 </Button>
-                                <Button className="btn-today" variant="contained" onClick={todayLootingDateCalc}>
-                                    Calc to current
+                                <Button
+                                    className="btn-today"
+                                    variant="contained"
+                                    onClick={todayLootingDateCalc}
+                                    style={{ textTransform: 'none' }}
+                                    sx={{ mt: '8px', width: '100%' }}
+                                >
+                                    Calculate Real-Time
                                 </Button>
                             </Box>
                         </Box>
@@ -247,18 +258,18 @@ function Looting() {
                             <dd>{lootingTime ? lootingTime : '-'}</dd>
                         </dl>
                         <dl>
-                            <dt>Penalty + 20%</dt>
+                            <dt>Penalized Looting Perid(+20%)</dt>
                             <dd>{penaltyTime ? penaltyTime : '-'}</dd>
                         </dl>
                         <dl className="gn__period-today">
-                            <dt>Next looting end date</dt>
+                            <dt>Looting Return Date/Time</dt>
                             <dd>
                                 <dl>
-                                    <dt>looting end date</dt>
+                                    <dt>Regular Looting</dt>
                                     <dd className="text-highlight">{lootingEndTime ? lootingEndTime : '-'}</dd>
                                 </dl>
                                 <dl>
-                                    <dt>Penalty end date</dt>
+                                    <dt>Penalized Looting</dt>
                                     <dd>{penaltyEndTime ? penaltyEndTime : '-'}</dd>
                                 </dl>
                             </dd>

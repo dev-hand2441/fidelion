@@ -21,7 +21,7 @@ function Header() {
             <FormGroup className="gn-layout-header-lang">
                 <FormControlLabel
                     control={<Switch checked={language === 'en'} onChange={toggleLanguage} />}
-                    label="EN"
+                    label={language === 'en' ? 'EN' : 'KO'}
                 />
             </FormGroup>
         </header>

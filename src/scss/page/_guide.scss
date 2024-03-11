@@ -1,0 +1,29 @@
+@charset 'utf-8';
+
+/**
+ * 가이드
+**/
+
+.gn-guide {
+    .gn-box {
+        padding: 0;
+
+        a {
+            display: block;
+            position: relative;
+            padding: 20px 40px 20px 16px;
+            font-weight: 500;
+
+            i {
+                position: absolute;
+                top: 50%;
+                right: 15px;
+                transform: translateY(-50%);
+            }
+        }
+
+        + .gn-box {
+            margin-top: 12px;
+        }
+    }
+}
