@@ -1,6 +1,6 @@
 import React from 'react'
-import NftInfo from '../components/NftInfo'
-import TokenPrice from '../components/TokenPrice'
+import NftInfo from '../../components/main/en/NftInfo'
+import TokenPrice from '../../components/main/en/TokenPrice'
 
 function Main() {
     return (

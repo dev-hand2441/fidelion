@@ -4,9 +4,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRight, faArrowsRotate } from '@fortawesome/free-solid-svg-icons'
 import { debounce } from 'lodash'
 
-import defData from '../json/def.json' // looting.json 파일 import
-import lukData from '../json/luk.json' // looting.json 파일 import
-import dexData from '../json/dex.json' // looting.json 파일 import
+import defData from '../../json/def.json' // looting.json 파일 import
+import lukData from '../../json/luk.json' // looting.json 파일 import
+import dexData from '../../json/dex.json' // looting.json 파일 import
 
 function Stats() {
     const [defRange, setDefRange] = useState([0, 46])

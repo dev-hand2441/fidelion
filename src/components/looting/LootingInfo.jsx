@@ -2,7 +2,7 @@ import React from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 
-import lootData from '../json/looting.json' // looting.json 파일 import
+import lootData from '../../json/looting.json' // looting.json 파일 import
 
 function Levelup() {
     return (

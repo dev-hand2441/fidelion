@@ -1,39 +1,40 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import Header from './components/Header'
-import Footer from './components/Footer'
-import Toolbar from './components/Toolbar'
-import SideMenu from './components/SideMenu'
+import { LanguageProvider } from './contexts/LanguageContext';
+import Header from './components/layout/Header'
+import Footer from './components/layout/Footer'
+import Toolbar from './components/layout/Toolbar'
 
-import Main from './pages/Main'
-import Looting from './pages/Looting'
-import Level from './pages/Level'
-import Stats from './pages/Stats'
+import Main from './pages/ko/Main'
+import Looting from './pages/ko/Looting'
+import Level from './pages/ko/Level'
+import Stats from './pages/ko/Stats'
 
 import './scss/App.scss'
 
 function App() {
     return (
-        <Router>
-            <SideMenu />
-            <div className="gn-layout-view">
-                <Header />
-                <div className="gn-layout-page">
-                    <div className="gn-scroller">
-                        <div className="gn-layout-page-content">
-                            <Routes>
-                                <Route path="/" element={<Main />} />
-                                <Route path="/looting" element={<Looting />} />
-                                <Route path="/level" element={<Level />} />
-                                <Route path="/stats" element={<Stats />} />
-                            </Routes>
+        <LanguageProvider>
+            <Router>
+                <div className="gn-layout-view">
+                    <Header />
+                    <div className="gn-layout-page">
+                        <div className="gn-scroller">
+                            <div className="gn-layout-page-content">
+                                <Routes>
+                                    <Route path="/" element={<Main />} />
+                                    <Route path="/looting" element={<Looting />} />
+                                    <Route path="/level" element={<Level />} />
+                                    <Route path="/stats" element={<Stats />} />
+                                </Routes>
+                            </div>
+                            <Footer />
                         </div>
-                        <Footer />
                     </div>
+                    <Toolbar />
                 </div>
-                <Toolbar />
-            </div>
-        </Router>
+            </Router>
+        </LanguageProvider>
     )
 }
 

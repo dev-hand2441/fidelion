@@ -12,7 +12,7 @@ function Toolbar() {
                         <i>
                             <FontAwesomeIcon icon={faHouse} />
                         </i>
-                        Home
+                        Coin/NFT
                     </NavLink>
                 </li>
                 <li>

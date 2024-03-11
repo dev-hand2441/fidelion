@@ -4,9 +4,9 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { LocalizationProvider, DatePicker } from '@mui/x-date-pickers'
 import dayjs from 'dayjs'
 
-import LootingInfo from '../components/LootingInfo'
-import dexData from '../json/dex.json' // dex.json 파일 import
-import lootingData from '../json/looting.json' // looting.json 파일 import
+import LootingInfo from '../../components/looting/LootingInfo'
+import dexData from '../../json/dex.json' // dex.json 파일 import
+import lootingData from '../../json/looting.json' // looting.json 파일 import
 
 function Looting() {
     const [dexLevel, setDexLevel] = useState(38) // 슬라이더의 초기값을 38로 설정

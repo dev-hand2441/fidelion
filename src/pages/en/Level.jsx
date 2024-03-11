@@ -3,7 +3,7 @@ import { Slider, Box } from '@mui/material'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
 
-import levelData from '../json/level.json' // level.json 파일 import
+import levelData from '../../json/level.json' // level.json 파일 import
 
 function Level() {
     // 구간 정의 (기본 구간 + 추가 구간)

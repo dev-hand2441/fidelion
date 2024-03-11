@@ -39,6 +39,18 @@
         }
     }
 
+    &-lang {
+        position: absolute;
+        top: 8px;
+        right: 0;
+
+        .MuiTypography-root {
+            color: #767676;
+            font-weight: 600;
+            font-size: 14px;
+        }
+    }
+
     // .btn-menu {
     //     position: absolute;
     //     top: 0;
