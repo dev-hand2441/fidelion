@@ -1,5 +1,7 @@
 // Header.jsx
 import React from 'react'
+import { NavLink } from 'react-router-dom'
+
 import { useLanguage } from '../../contexts/LanguageContext';
 
 import Typography from '@mui/material/Typography';
@@ -12,10 +14,12 @@ function Header() {
 
     return (
         <header className="gn-layout-header">
-            <h1>
-                <i className="icon-logo"></i>
-                <b>Fidelion</b> Calculator
-            </h1>
+            <NavLink to="/">
+                <h1>
+                    <i className="icon-logo"></i>
+                    <b>Fidelion</b> Calculator
+                </h1>
+            </NavLink>
             <FormGroup className='gn-layout-header-lang'>
                 <FormControlLabel
                     control={

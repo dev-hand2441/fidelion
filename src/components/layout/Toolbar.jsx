@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHouse, faBolt, faSliders, faChartSimple } from '@fortawesome/free-solid-svg-icons'
+import { faCircleDollarToSlot, faBolt, faSliders, faChartSimple } from '@fortawesome/free-solid-svg-icons'
 
 function Toolbar() {
     return (
@@ -10,9 +10,9 @@ function Toolbar() {
                 <li>
                     <NavLink to="/" className={({ isActive }) => (isActive ? 'active' : undefined)}>
                         <i>
-                            <FontAwesomeIcon icon={faHouse} />
+                            <FontAwesomeIcon icon={faCircleDollarToSlot} />
                         </i>
-                        Coin/NFT
+                        Token/NFT
                     </NavLink>
                 </li>
                 <li>
