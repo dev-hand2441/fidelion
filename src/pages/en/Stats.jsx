@@ -94,13 +94,6 @@ function Stats() {
             )
             const dataSolana = await responseSolana.json()
             setSolanaPrice(parseFloat(dataSolana.data.value))
-
-            const responseExchange = await fetch(
-                '/exchange-api?authkey=CKxFJAScH4L3j7YmIpni9PZs14LhBams&searchdate=20240306&data=AP01'
-            )
-            const dataExchange = await responseExchange.json()
-            const usdInfo = dataExchange.find(currency => currency.cur_unit === 'USD')
-            setUsdKrwExchangeRate(parseFloat(usdInfo.kftc_deal_bas_r.replace(/,/g, '')))
         } catch (error) {
             // 가격 호출 에러
         }
@@ -123,10 +116,10 @@ function Stats() {
     return (
         <div className="gn-stats">
             <div className="gn-block gn-stats-calc">
-                <h3 className="text-heading">스탯 비용 계산</h3>
+                <h3 className="text-heading">Calculating stats costs</h3>
                 <div className="gn-box">
                     <h5 className="text-label">
-                        DEF Level<small>(백파이어 방어)</small>
+                        DEF Level
                     </h5>
                     <div className="gn-form-box">
                         <Typography className="text-level" id="slider-value" gutterBottom>
@@ -137,7 +130,7 @@ function Stats() {
                             {defRange[1]} <span>Lv.</span>
                         </Typography>
                         <p className="text-effect">
-                            백파이어시 {counterAttack} {defRange[1] < 46 ? '복원' : '카운터어택'}
+                            {counterAttack} {defRange[1] < 46 ? 'restoration' : 'counterattack'} on backfire
                         </p>
                         <Box className="form-slider">
                             <Slider
@@ -150,7 +143,7 @@ function Stats() {
                         </Box>
                     </div>
                     <h5 className="text-label">
-                        LUK Level<small>(포춘러시 강화)</small>
+                        LUK Level
                     </h5>
                     <div className="gn-form-box">
                         <Typography className="text-level" id="slider-value" gutterBottom>
@@ -160,7 +153,7 @@ function Stats() {
                             </i>
                             {lukRange[1]} <span>Lv.</span>
                         </Typography>
-                        <p className="text-effect">포춘러시 확률 {fortuneRush}배 적용</p>
+                        <p className="text-effect">{fortuneRush}x Fortune Rush Chance</p>
                         <Box className="form-slider">
                             <Slider
                                 value={lukRange}
@@ -172,7 +165,7 @@ function Stats() {
                         </Box>
                     </div>
                     <h5 className="text-label">
-                        DEX Level<small>(루팅기간 감소)</small>
+                        DEX Level
                     </h5>
                     <div className="gn-form-box">
                         <Typography className="text-level" id="slider-value" gutterBottom>
@@ -182,7 +175,7 @@ function Stats() {
                             </i>
                             {dexRange[1]} <span>Lv.</span>
                         </Typography>
-                        <p className="text-effect">루팅 기간 {decreaseRatio} 감소</p>
+                        <p className="text-effect">{decreaseRatio} reduction in Looting duration</p>
                         <Box className="form-slider">
                             <Slider
                                 value={dexRange}
@@ -197,29 +190,29 @@ function Stats() {
 
                 <div className="gn-box">
                     <dl>
-                        <dt>백파이어 카운터어택</dt>
+                        <dt>Backfire Counterattack</dt>
                         <dd>{counterAttack}</dd>
                     </dl>
                     <dl>
-                        <dt>포춘러시 멀티플라이어</dt>
+                        <dt>FortuneRush Multiplier</dt>
                         <dd>{fortuneRush}x</dd>
                     </dl>
                     <dl>
-                        <dt>포춘러시 적용 배율</dt>
+                        <dt>FortuneRush Price Multiplier</dt>
                         <dd>{fortuneRushMultiple}x</dd>
                     </dl>
                     <dl>
-                        <dt>루팅 기간 감소율</dt>
+                        <dt>Duration reduction rate</dt>
                         <dd>{decreaseRatio}</dd>
                     </dl>
                     <dl>
                         <dt>
-                            스탯 레벨업 예상 비용{' '}
+                            Estimated cost {' '}
                             <button className="btn-reload-api" onClick={fetchPrices}>
                                 <i>
                                     <FontAwesomeIcon icon={faArrowsRotate} />
                                 </i>
-                                <b>코인 가격 갱신</b>
+                                <b>Update price</b>
                             </button>
                         </dt>
                         <dd>
@@ -243,29 +236,15 @@ function Stats() {
                                         : 'Loading...'}
                                 </dd>
                             </dl>
-                            <dl>
-                                <dt>KRW</dt>
-                                <dd>
-                                    {token2080ToKRW
-                                        ? `${token2080ToKRW.toLocaleString(undefined, { maximumFractionDigits: 0 })}원`
-                                        : 'Loading...'}
-                                </dd>
-                            </dl>
                         </dd>
                     </dl>
                     <div className="gn-note">
                         <ul>
-                            <li>위의 가격은 예상 비용으로 DEX의 Price Impact에 따라 차이가 발생할 수 있습니다.</li>
+                            <li>The above prices are estimates and may vary depending on the price impact of the DEX.</li>
                         </ul>
                     </div>
                 </div>
             </div>
-            {/* <div className="gn-block">
-                <h3 className="text-heading">스탯 조합</h3>
-                <div className="gn-box">
-                    <p>준비 중입니다.</p>
-                </div>
-            </div> */}
         </div>
     )
 }

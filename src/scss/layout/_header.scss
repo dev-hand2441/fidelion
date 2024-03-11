@@ -49,6 +49,14 @@
             font-weight: 600;
             font-size: 14px;
         }
+
+        .MuiSwitch-track {
+            background-color: $color_main !important;
+        }
+
+        .MuiButtonBase-root {
+            color: $color_main !important;
+        }
     }
 
     // .btn-menu {

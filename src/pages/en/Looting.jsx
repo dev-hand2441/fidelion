@@ -67,7 +67,7 @@ function Looting() {
         const hours = Math.floor(periodInHours % 24)
         const minutes = Math.round((periodInHours * 60) % 60)
 
-        return `${days}일 ${hours}시간 ${minutes}분`
+        return `${days}D ${hours}H ${minutes}M`
     }
 
     // 기간 문자열(예: "1일 2시간 30분")을 파싱하여 일, 시간, 분으로 변환하는 함수
@@ -118,11 +118,11 @@ function Looting() {
 
         // lootingTime을 기준으로 종료 시간 계산
         const lootingEndDate = calculateEndTime(now, lootingPeriod)
-        setLootingEndTime(lootingEndDate.format('M월 D일 HH시 mm분'))
+        setLootingEndTime(lootingEndDate.format('M/D HH:mm'))
 
         // penaltyTime을 기준으로 종료 시간 계산
         const penaltyEndDate = calculateEndTime(now, penaltyPeriod)
-        setPenaltyEndTime(penaltyEndDate.format('M월 D일 HH시 mm분'))
+        setPenaltyEndTime(penaltyEndDate.format('M/D HH:mm'))
     }
 
     // 사용자가 선택한 날짜 및 시간을 기준으로 lootingTime 및 penaltyTime 이후의 시간을 계산
@@ -133,22 +133,22 @@ function Looting() {
 
         // lootingTime을 기준으로 종료 시간 계산
         const lootingEndDate = calculateEndTime(startDate, lootingPeriod)
-        setLootingEndTime(lootingEndDate.format('M월 D일 HH시 mm분'))
+        setLootingEndTime(lootingEndDate.format('M/D HH:mm'))
 
         // penaltyTime을 기준으로 종료 시간 계산
         const penaltyEndDate = calculateEndTime(startDate, penaltyPeriod)
-        setPenaltyEndTime(penaltyEndDate.format('M월 D일 HH시 mm분'))
+        setPenaltyEndTime(penaltyEndDate.format('M/D HH:mm'))
     }
 
     return (
         <div className="gn-looting">
             <div className="gn-block gn-looting-info">
-                <h3 className="text-heading">루팅 정보</h3>
+                <h3 className="text-heading">Looting information</h3>
                 <LootingInfo />
             </div>
 
             <div className="gn-block">
-                <h3 className="text-heading">루팅 시간 계산</h3>
+                <h3 className="text-heading">Calculate looting period</h3>
                 <div className="gn-box">
                     <h5 className="text-label">Dex Level</h5>
                     <div className="gn-form-box">
@@ -186,7 +186,7 @@ function Looting() {
                             </Select>
                         </FormControl>
                     </div>
-                    <h5 className="text-label">루팅 시간 입력</h5>
+                    <h5 className="text-label">Enter the looting time</h5>
                     <div className="gn-form-box">
                         <Box className="gn-looting-date">
                             <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -202,21 +202,21 @@ function Looting() {
 
                                 <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
                                     <FormControl className="form-select" fullWidth>
-                                        <InputLabel>시간</InputLabel>
-                                        <Select value={hour} onChange={e => setHour(e.target.value)} label="시간">
+                                        <InputLabel>Hour</InputLabel>
+                                        <Select value={hour} onChange={e => setHour(e.target.value)} label="Hour">
                                             {Array.from({ length: 24 }).map((_, index) => (
                                                 <MenuItem key={index} value={index}>
-                                                    {`${index}시`}
+                                                    {`${index}Hour`}
                                                 </MenuItem>
                                             ))}
                                         </Select>
                                     </FormControl>
                                     <FormControl className="form-select" fullWidth>
-                                        <InputLabel>분</InputLabel>
-                                        <Select value={minute} onChange={e => setMinute(e.target.value)} label="분">
+                                        <InputLabel>Minute</InputLabel>
+                                        <Select value={minute} onChange={e => setMinute(e.target.value)} label="Minute">
                                             {Array.from({ length: 60 }).map((_, index) => (
                                                 <MenuItem key={index} value={index}>
-                                                    {`${index}분`}
+                                                    {`${index}Min`}
                                                 </MenuItem>
                                             ))}
                                         </Select>
@@ -225,10 +225,10 @@ function Looting() {
                             </LocalizationProvider>
                             <Box sx={{ display: 'flex', gap: 1, alignItems: 'center', mt: '16px' }}>
                                 <Button className="btn-calculate" variant="outlined" onClick={LootingDateCalc}>
-                                    계산
+                                    Calc
                                 </Button>
                                 <Button className="btn-today" variant="contained" onClick={todayLootingDateCalc}>
-                                    현재 시간으로 계산
+                                    Calc to current
                                 </Button>
                             </Box>
                         </Box>
@@ -239,26 +239,26 @@ function Looting() {
                     <div className="gn-looting-period">
                         <h5 className="text-faction">{faction ? faction : 'Faction'}</h5>
                         <dl>
-                            <dt>기간 감소율</dt>
+                            <dt>Duration reduction rate</dt>
                             <dd>{decreaseTime ? decreaseTime : '-'}</dd>
                         </dl>
                         <dl>
-                            <dt>루팅 기간</dt>
+                            <dt>Looting Period</dt>
                             <dd>{lootingTime ? lootingTime : '-'}</dd>
                         </dl>
                         <dl>
-                            <dt>패널티 + 20%</dt>
+                            <dt>Penalty + 20%</dt>
                             <dd>{penaltyTime ? penaltyTime : '-'}</dd>
                         </dl>
                         <dl className="gn__period-today">
-                            <dt>다음 루팅 종료일</dt>
+                            <dt>Next looting end date</dt>
                             <dd>
                                 <dl>
-                                    <dt>종료일</dt>
+                                    <dt>looting end date</dt>
                                     <dd className="text-highlight">{lootingEndTime ? lootingEndTime : '-'}</dd>
                                 </dl>
                                 <dl>
-                                    <dt>패널티</dt>
+                                    <dt>Penalty end date</dt>
                                     <dd>{penaltyEndTime ? penaltyEndTime : '-'}</dd>
                                 </dl>
                             </dd>

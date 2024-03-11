@@ -5,10 +5,10 @@ import Header from './components/layout/Header'
 import Footer from './components/layout/Footer'
 import Toolbar from './components/layout/Toolbar'
 
-import Main from './pages/ko/Main'
-import Looting from './pages/ko/Looting'
-import Level from './pages/ko/Level'
-import Stats from './pages/ko/Stats'
+import Main from './pages/LocalizedMain'
+import Looting from './pages/LocalizedLooting'
+import Level from './pages/LocalizedLevel'
+import Stats from './pages/LocalizedStats'
 
 import './scss/App.scss'
 

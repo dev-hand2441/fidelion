@@ -53,7 +53,7 @@ function Level() {
     return (
         <div className="gn-level">
             <div className="gn-block">
-                <h3 className="text-heading">레벨업 비용 계산</h3>
+                <h3 className="text-heading">Calculating the cost of fame Level up</h3>
                 <div className="gn-box">
                     <div className="gn-level-calc">
                         <Box className="form-slider">
@@ -61,7 +61,7 @@ function Level() {
                         </Box>
                         <dl>
                             <dt>
-                                {value[0]}Lv ~ {value[1]}Lv 까지의 레벨업 비용
+                                Cost to level up to {value[0]}Lv ~ {value[1]}Lv
                             </dt>
                             <dd>
                                 <i className="image-token-2080"></i>
@@ -73,7 +73,7 @@ function Level() {
             </div>
             <div className="gn-block">
                 <div className="gn-box">
-                    <h4 className="text-strapline">레벨 구간 별 비용</h4>
+                    <h4 className="text-strapline">Cost per level tier</h4>
                     <table>
                         <thead>
                             <tr>
@@ -110,7 +110,7 @@ function Level() {
                     </table>
                 </div>
                 <div className="gn-box">
-                    <h4 className="text-strapline">블랙마켓 마켓플레이스 레벨업 이벤트</h4>
+                    <h4 className="text-strapline">Black Market Marketplace<br></br>Level Up Event</h4>
                     <table>
                         <thead>
                             <tr>
@@ -142,7 +142,7 @@ function Level() {
                     <div className="gn-note">
                         <ul>
                             <li>
-                                블랙마켓 마켓플레이스에서 15레벨 이하 NFT 구매시 자동으로 15렙까지 레벨업 이벤트 진행중
+                                NFT purchases below level 15 on the Black Market Marketplace will automatically level up to level 15 during the event
                             </li>
                         </ul>
                     </div>

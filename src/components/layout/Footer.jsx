@@ -32,7 +32,7 @@ function Footer() {
                             <i className="icon">
                                 <FontAwesomeIcon icon={faDiscord} />
                             </i>
-                            공식 디스코드
+                            {language === 'en' ? 'Official Discord' : '공식 디스코드'}
                         </b>
                     </a>
                 </li>
