@@ -51,7 +51,7 @@ function TokenPrices() {
                     <i>
                         <FontAwesomeIcon icon={faArrowsRotate} />
                     </i>
-                    <b>Update price</b>
+                    <b>Update Price</b>
                 </button>
                 <ul>
                     <li className="gn-box">
@@ -59,18 +59,14 @@ function TokenPrices() {
                             <img src="/image/token_2080.png" alt="" />
                         </i>
                         <b className="text-token">2080</b>
-                        <p className="text-price">
-                            {price2080 ? `$${price2080}` : 'Loading...'}
-                        </p>
+                        <p className="text-price">{price2080 ? `$${price2080}` : 'Loading...'}</p>
                     </li>
                     <li className="gn-box">
                         <i className="image-token">
                             <img src="/image/token_sol.png" alt="" />
                         </i>
                         <b className="text-token">Solana</b>
-                        <p className="text-price">
-                            {priceSolana ? `$${priceSolana}` : 'Loading...'}
-                        </p>
+                        <p className="text-price">{priceSolana ? `$${priceSolana}` : 'Loading...'}</p>
                     </li>
                 </ul>
             </div>

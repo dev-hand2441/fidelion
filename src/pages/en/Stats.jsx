@@ -116,11 +116,9 @@ function Stats() {
     return (
         <div className="gn-stats">
             <div className="gn-block gn-stats-calc">
-                <h3 className="text-heading">Calculating stats costs</h3>
+                <h3 className="text-heading">Stats Boost Calculator</h3>
                 <div className="gn-box">
-                    <h5 className="text-label">
-                        DEF Level
-                    </h5>
+                    <h5 className="text-label">DEF Level</h5>
                     <div className="gn-form-box">
                         <Typography className="text-level" id="slider-value" gutterBottom>
                             {defRange[0]} <span>Lv.</span>
@@ -142,9 +140,7 @@ function Stats() {
                             />
                         </Box>
                     </div>
-                    <h5 className="text-label">
-                        LUK Level
-                    </h5>
+                    <h5 className="text-label">LUK Level</h5>
                     <div className="gn-form-box">
                         <Typography className="text-level" id="slider-value" gutterBottom>
                             {lukRange[0]} <span>Lv.</span>
@@ -164,9 +160,7 @@ function Stats() {
                             />
                         </Box>
                     </div>
-                    <h5 className="text-label">
-                        DEX Level
-                    </h5>
+                    <h5 className="text-label">DEX Level</h5>
                     <div className="gn-form-box">
                         <Typography className="text-level" id="slider-value" gutterBottom>
                             {dexRange[0]} <span>Lv.</span>
@@ -202,17 +196,17 @@ function Stats() {
                         <dd>{fortuneRushMultiple}x</dd>
                     </dl>
                     <dl>
-                        <dt>Duration reduction rate</dt>
+                        <dt>Duration Reduction Rate</dt>
                         <dd>{decreaseRatio}</dd>
                     </dl>
                     <dl>
                         <dt>
-                            Estimated cost {' '}
+                            Estimated Cost{' '}
                             <button className="btn-reload-api" onClick={fetchPrices}>
                                 <i>
                                     <FontAwesomeIcon icon={faArrowsRotate} />
                                 </i>
-                                <b>Update price</b>
+                                <b>Update Price</b>
                             </button>
                         </dt>
                         <dd>
@@ -240,7 +234,9 @@ function Stats() {
                     </dl>
                     <div className="gn-note">
                         <ul>
-                            <li>The above prices are estimates and may vary depending on the price impact of the DEX.</li>
+                            <li>
+                                The above prices are estimates and may vary depending on the price impact of the DEX.
+                            </li>
                         </ul>
                     </div>
                 </div>

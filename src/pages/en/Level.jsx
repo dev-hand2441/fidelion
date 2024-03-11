@@ -53,7 +53,7 @@ function Level() {
     return (
         <div className="gn-level">
             <div className="gn-block">
-                <h3 className="text-heading">Calculating the cost of fame Level up</h3>
+                <h3 className="text-heading">FAME Level Upgrade Calculator</h3>
                 <div className="gn-box">
                     <div className="gn-level-calc">
                         <Box className="form-slider">
@@ -110,7 +110,9 @@ function Level() {
                     </table>
                 </div>
                 <div className="gn-box">
-                    <h4 className="text-strapline">Black Market Marketplace<br></br>Level Up Event</h4>
+                    <h4 className="text-strapline">
+                        Black Market Marketplace<br></br>Level-Up Discount Event
+                    </h4>
                     <table>
                         <thead>
                             <tr>
@@ -142,7 +144,8 @@ function Level() {
                     <div className="gn-note">
                         <ul>
                             <li>
-                                NFT purchases below level 15 on the Black Market Marketplace will automatically level up to level 15 during the event
+                                Your NFT will receive an additional mercenary to aid in looting when you level up to a
+                                higher tier.
                             </li>
                         </ul>
                     </div>
