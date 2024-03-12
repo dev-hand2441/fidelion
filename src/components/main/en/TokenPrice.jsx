@@ -39,8 +39,7 @@ function TokenPrices() {
                         </i>
                         <b className="text-token">2080</b>
                         <p className="text-price">
-                            {token2080Price ? `$${token2080Price}` : 'Loading...'}{' '}
-                            {token2080ToKRW ? `≈ ${token2080ToKRW}원` : ''}
+                            {token2080Price ? `$${token2080Price}` : 'Loading...'}
                         </p>
                     </li>
                     <li className="gn-box">
@@ -49,7 +48,7 @@ function TokenPrices() {
                         </i>
                         <b className="text-token">Solana</b>
                         <p className="text-price">
-                            {solanaPrice ? `$${solanaPrice}` : 'Loading...'} {solanaToKRW ? `≈ ${solanaToKRW}원` : ''}
+                            {solanaPrice ? `$${solanaPrice}` : 'Loading...'}
                         </p>
                     </li>
                 </ul>

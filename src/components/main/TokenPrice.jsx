@@ -49,7 +49,7 @@ function TokenPrices() {
                         </i>
                         <b className="text-token">Solana</b>
                         <p className="text-price">
-                            {solanaPrice ? `$${solanaPrice}` : 'Loading...'} {solanaToKRW ? `≈ ${solanaToKRW.toLocaleString}원` : ''}
+                            {solanaPrice ? `$${solanaPrice}` : 'Loading...'} {solanaToKRW ? `≈ ${solanaToKRW.toLocaleString()}원` : ''}
                         </p>
                     </li>
                 </ul>
