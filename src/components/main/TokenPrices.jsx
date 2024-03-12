@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowsRotate } from '@fortawesome/free-solid-svg-icons'
-
 import usePrices from '../../contexts/usePrices'
 
-function TokenPrices() {
+export function TokenPrices() {
     const [priceSolana, setPriceSolana] = useState(null)
     const [price2080, setPrice2080] = useState(null)
     const [token2080ToKRW, setToken2080ToKRW] = useState(null)
     const [solanaToKRW, setSolanaToKRW] = useState(null)
 
     const { solanaPrice, token2080Price, usdKrwExchangeRate } = usePrices()
-    console.log(solanaPrice, token2080Price, usdKrwExchangeRate)
+    console.log(solanaPrice, token2080Price)
 
     useEffect(() => {
         const fetchPrices = async () => {
@@ -61,7 +60,7 @@ function TokenPrices() {
                 .catch(error => console.error('Error fetching data:', error))
         }
 
-        fetchPrices() // 토큰 가격 정보 요청 함수 실행
+        // fetchPrices() // 토큰 가격 정보 요청 함수 실행
     }, [])
 
     return (
@@ -104,5 +103,3 @@ function TokenPrices() {
         </div>
     )
 }
-
-export default TokenPrices
