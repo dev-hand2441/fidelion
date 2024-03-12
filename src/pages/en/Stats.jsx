@@ -211,16 +211,12 @@ function Stats() {
                         </dt>
                         <dd>
                             <dl>
-                                <dt>
-                                    <i className="image-token-2080"></i>
-                                </dt>
-                                <dd>{statsPriceSum.toLocaleString()}</dd>
+                                <dt>$2080</dt>
+                                <dd><i className="image-token-2080"></i>{statsPriceSum.toLocaleString()}</dd>
                             </dl>
                             <dl>
-                                <dt>
-                                    <i className="image-token-sol"></i>
-                                </dt>
-                                <dd>{token2080ToSol ? `${token2080ToSol} SOL` : 'Loading...'}</dd>
+                                <dt>$SOL</dt>
+                                <dd><i className="image-token-sol"></i>{token2080ToSol ? `${token2080ToSol} SOL` : 'Loading...'}</dd>
                             </dl>
                             <dl>
                                 <dt>USD</dt>

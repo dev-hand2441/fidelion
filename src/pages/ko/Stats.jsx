@@ -4,6 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRight, faArrowsRotate } from '@fortawesome/free-solid-svg-icons'
 import { debounce } from 'lodash'
 
+import CombinationChart from '../../components/stats/combinationChart'
+
 import defData from '../../json/def.json' // looting.json 파일 import
 import lukData from '../../json/luk.json' // looting.json 파일 import
 import dexData from '../../json/dex.json' // looting.json 파일 import
@@ -122,6 +124,7 @@ function Stats() {
 
     return (
         <div className="gn-stats">
+            <CombinationChart />
             <div className="gn-block gn-stats-calc">
                 <h3 className="text-heading">스탯 비용 계산</h3>
                 <div className="gn-box">
@@ -224,16 +227,12 @@ function Stats() {
                         </dt>
                         <dd>
                             <dl>
-                                <dt>
-                                    <i className="image-token-2080"></i>
-                                </dt>
-                                <dd>{statsPriceSum.toLocaleString()}</dd>
+                                <dt>$2080</dt>
+                                <dd><i className="image-token-2080"></i>{statsPriceSum.toLocaleString()}</dd>
                             </dl>
                             <dl>
-                                <dt>
-                                    <i className="image-token-sol"></i>
-                                </dt>
-                                <dd>{token2080ToSol ? `${token2080ToSol} SOL` : 'Loading...'}</dd>
+                                <dt>$SOL</dt>
+                                <dd><i className="image-token-sol"></i>{token2080ToSol ? `${token2080ToSol}` : 'Loading...'}</dd>
                             </dl>
                             <dl>
                                 <dt>USD</dt>
