@@ -2,7 +2,8 @@ import React, { useState, useEffect, useCallback } from 'react'
 import { Slider, Typography, Box } from '@mui/material'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRight, faArrowsRotate } from '@fortawesome/free-solid-svg-icons'
-import { debounce } from 'lodash'
+
+import usePrices from '../../contexts/usePrices'
 
 import defData from '../../json/def.json' // looting.json 파일 import
 import lukData from '../../json/luk.json' // looting.json 파일 import
@@ -17,12 +18,15 @@ function Stats() {
     const [fortuneRush, setFortuneRush] = useState('1.00')
     const [fortuneRushMultiple, setFortuneRushMultiple] = useState('2')
     const [decreaseRatio, setDecreaseRatio] = useState('0.00%')
-    const [token2080Price, setToken2080Price] = useState(null)
-    const [solanaPrice, setSolanaPrice] = useState(null)
-    const [usdKrwExchangeRate, setUsdKrwExchangeRate] = useState(null)
+
     const [token2080ToUSD, setToken2080ToUSD] = useState(0)
     const [token2080ToSol, setToken2080ToSol] = useState(0)
-    const [token2080ToKRW, setToken2080ToKRW] = useState(0)
+
+    const { solanaPrice, token2080Price, usdKrwExchangeRate, fetchPrices } = usePrices()
+
+    const handleRefreshClick = () => {
+        fetchPrices()
+    }
 
     const calculatePriceSum = (data, range) =>
         data.slice(range[0], range[1] + 1).reduce((acc, item) => acc + item.price, 0)
@@ -61,48 +65,8 @@ function Stats() {
 
             const calculatedToken2080ToSol = calculatedToken2080ToUSD / solanaPrice
             setToken2080ToSol(calculatedToken2080ToSol.toFixed(2))
-
-            const calculatedToken2080ToKRW = calculatedToken2080ToUSD * usdKrwExchangeRate
-            setToken2080ToKRW(calculatedToken2080ToKRW)
         }
     }, [statsPriceSum, token2080Price, solanaPrice, usdKrwExchangeRate])
-
-    const fetchPrices = useCallback(async () => {
-        try {
-            const response2080 = await fetch(
-                'https://public-api.birdeye.so/public/price?address=Dwri1iuy5pDFf2u2GwwsH2MxjR6dATyDv9En9Jk8Fkof',
-                {
-                    method: 'GET',
-                    headers: {
-                        'x-chain': 'solana',
-                        'X-API-KEY': '72e6d89433b645cf8993ad398f95aeea',
-                    },
-                }
-            )
-            const data2080 = await response2080.json()
-            setToken2080Price(parseFloat(data2080.data.value))
-
-            const responseSolana = await fetch(
-                'https://public-api.birdeye.so/public/price?address=So11111111111111111111111111111111111111112',
-                {
-                    method: 'GET',
-                    headers: {
-                        'x-chain': 'solana',
-                        'X-API-KEY': '72e6d89433b645cf8993ad398f95aeea',
-                    },
-                }
-            )
-            const dataSolana = await responseSolana.json()
-            setSolanaPrice(parseFloat(dataSolana.data.value))
-        } catch (error) {
-            // 가격 호출 에러
-        }
-    }, [])
-
-    // Only run fetchPrices once on component mount
-    useEffect(() => {
-        fetchPrices()
-    }, [])
 
     // Calculate values whenever one of the dependencies changes
     useEffect(() => {
@@ -202,7 +166,7 @@ function Stats() {
                     <dl>
                         <dt>
                             Estimated Cost{' '}
-                            <button className="btn-reload-api" onClick={fetchPrices}>
+                            <button className="btn-reload-api" onClick={handleRefreshClick}>
                                 <i>
                                     <FontAwesomeIcon icon={faArrowsRotate} />
                                 </i>
