@@ -1,13 +1,16 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 
+import usePrices from '../../contexts/usePrices'
 import combinationData from '../../json/combination.json'
 import defData from '../../json/def.json' // looting.json 파일 import
 import lukData from '../../json/luk.json' // looting.json 파일 import
 import dexData from '../../json/dex.json' // looting.json 파일 import
 
 function CombinationChart() {
+    const { solanaPrice, token2080Price, usdKrwExchangeRate } = usePrices()
+
     const getPriceSum = (def, luk, dex) => {
         // 누적 가격 계산을 위한 함수
         const calculateAccumulatedPrice = (data, level) => {
@@ -30,7 +33,10 @@ function CombinationChart() {
             <h3 className="text-heading">스탯 조합표</h3>
             <Swiper loop={true} spaceBetween={8} slidesPerView={1.2} centeredSlides={true}>
                 {Object.entries(combinationData).map(([title, { def, luk, dex }]) => {
-                    const price2080 = getPriceSum(def, luk, dex);
+                    const statsPriceSum = getPriceSum(def, luk, dex);
+                    const token2080ToUSD = statsPriceSum * token2080Price;
+                    const token2080ToSol = token2080ToUSD / solanaPrice;
+                    const token2080ToKRW = token2080ToUSD * usdKrwExchangeRate;
 
                     return (
                         <SwiperSlide key={title}>
@@ -51,7 +57,19 @@ function CombinationChart() {
                                     </dl>
                                     <dl>
                                         <dt>$2080</dt>
-                                        <dd><i className="image-token-2080"></i> {price2080.toLocaleString()}</dd>
+                                        <dd><i className="image-token-2080"></i> {statsPriceSum.toLocaleString()}</dd>
+                                    </dl>
+                                    <dl>
+                                        <dt>$SOL</dt>
+                                        <dd><i className="image-token-sol"></i> {token2080ToSol ? `${token2080ToSol.toFixed(2)}` : 'Loading...'}</dd>
+                                    </dl>
+                                    <dl>
+                                        <dt>USD</dt>
+                                        <dd>{token2080ToUSD ? `$${token2080ToUSD.toLocaleString(undefined, { maximumFractionDigits: 0 })}` : 'Loading...'}</dd>
+                                    </dl>
+                                    <dl>
+                                        <dt>KRW</dt>
+                                        <dd>{token2080ToKRW ? `${token2080ToKRW.toLocaleString(undefined, { maximumFractionDigits: 0 })}원` : 'Loading...'}</dd>
                                     </dl>
                                 </div>
                             </div>
