@@ -13,7 +13,7 @@ function TokenPrices() {
     useEffect(() => {
         if (usdKrwExchangeRate) {
             setToken2080ToKRW((token2080Price * usdKrwExchangeRate).toFixed(2));
-            setSolanaToKRW((solanaPrice * usdKrwExchangeRate).toFixed(2));
+            setSolanaToKRW((solanaPrice * usdKrwExchangeRate).toLocaleString(undefined, { maximumFractionDigits: 0 }));
         }
     }, [usdKrwExchangeRate, token2080Price, solanaPrice]);
 
@@ -50,7 +50,7 @@ function TokenPrices() {
                         <b className="text-token">Solana</b>
                         <p className="text-price">
                             {solanaPrice ? `$${solanaPrice}` : 'Loading...'}{' '}
-                            {solanaToKRW ? `≈ ${Number(solanaToKRW).toLocaleString()}원` : ''}
+                            {solanaToKRW ? `≈ ${solanaToKRW}원` : ''}
                         </p>
                     </li>
                 </ul>
