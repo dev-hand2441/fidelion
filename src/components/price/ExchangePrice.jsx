@@ -80,6 +80,7 @@ function ExchangePrice() {
                     </FormControl>
                     <TextField
                         variant="outlined"
+                        type="number" // 숫자 키패드를 위한 type 설정
                         value={tokenValue}
                         onChange={changeTokenValue}
                         placeholder="0.00" // Placeholder 추가
