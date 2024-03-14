@@ -61,7 +61,7 @@ function CombinationChart() {
                                     </dl>
                                     <dl>
                                         <dt>$SOL</dt>
-                                        <dd><i className="image-token-sol"></i> {token2080ToSol ? `${token2080ToSol.toFixed(2)}` : 'Loading...'}</dd>
+                                        <dd><i className="image-token-solana"></i> {token2080ToSol ? `${token2080ToSol.toFixed(2)}` : 'Loading...'}</dd>
                                     </dl>
                                     <dl>
                                         <dt>USD</dt>

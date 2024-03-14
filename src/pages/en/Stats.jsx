@@ -180,7 +180,7 @@ function Stats() {
                             </dl>
                             <dl>
                                 <dt>$SOL</dt>
-                                <dd><i className="image-token-sol"></i>{token2080ToSol ? `${token2080ToSol} SOL` : 'Loading...'}</dd>
+                                <dd><i className="image-token-solana"></i>{token2080ToSol ? `${token2080ToSol} SOL` : 'Loading...'}</dd>
                             </dl>
                             <dl>
                                 <dt>USD</dt>

@@ -3,3 +3,36 @@
 /**
  * 메인 홈
 **/
+
+.MuiPaper-root {
+    [class*="image-token-"] {
+        margin: -2px 4px 0 0;
+        margin-right: 4px;
+    }
+
+    .text-token {
+        font-weight: 700;
+        font-size: 16px;
+    }
+}
+
+.gn-price-exchange {
+    .gn-box {
+        padding: 16px 2px;
+    }
+
+    [class*="image-token-"] {
+        margin: 1px 4px 0 0;
+        margin-right: 4px;
+    }
+
+    .text-token {
+        font-weight: 700;
+        font-size: 16px;
+    }
+
+    .MuiInputBase-input,
+    .MuiSelect-select {
+        padding: 8px 14px;
+    }
+}
