@@ -1,7 +1,3 @@
-// Header.jsx
-import React from 'react'
-import { Link } from 'react-router-dom'
-
 import { useLanguage } from '../../contexts/LanguageContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faComment } from '@fortawesome/free-solid-svg-icons'

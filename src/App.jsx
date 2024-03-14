@@ -1,4 +1,3 @@
-import React from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Header from './components/layout/Header'
 import Footer from './components/layout/Footer'
@@ -7,7 +6,7 @@ import Toolbar from './components/layout/Toolbar'
 import { LanguageProvider } from './contexts/LanguageContext'
 import { PriceProvider } from './contexts/inquiryPrice';
 
-import Main from './pages/LocalizedMain'
+import Price from './pages/LocalizedPrice'
 import Looting from './pages/LocalizedLooting'
 import Level from './pages/LocalizedLevel'
 import Stats from './pages/LocalizedStats'
@@ -26,7 +25,7 @@ function App() {
                             <div className="gn-scroller">
                                 <div className="gn-layout-page-content">
                                     <Routes>
-                                        <Route path="/" element={<Main />} />
+                                        <Route path="/" element={<Price />} />
                                         <Route path="/looting" element={<Looting />} />
                                         <Route path="/level" element={<Level />} />
                                         <Route path="/stats" element={<Stats />} />

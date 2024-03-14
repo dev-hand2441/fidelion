@@ -1,5 +1,3 @@
-// Header.jsx
-import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { useLanguage } from '../../contexts/LanguageContext'
 

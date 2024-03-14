@@ -1,21 +1,10 @@
-import React, { useState, useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowsRotate } from '@fortawesome/free-solid-svg-icons'
 
 import usePrices from '../../../contexts/usePrices'
 
 function TokenPrices() {
-    const [token2080ToKRW, setToken2080ToKRW] = useState(null)
-    const [solanaToKRW, setSolanaToKRW] = useState(null)
-
-    const { solanaPrice, token2080Price, usdKrwExchangeRate, fetchPrices } = usePrices()
-
-    useEffect(() => {
-        if (usdKrwExchangeRate) {
-            setToken2080ToKRW((token2080Price * usdKrwExchangeRate).toFixed(2));
-            setSolanaToKRW((solanaPrice * usdKrwExchangeRate).toFixed(2));
-        }
-    }, [usdKrwExchangeRate, token2080Price, solanaPrice]);
+    const { solanaPrice, token2080Price, fetchPrices } = usePrices()
 
     const handleRefreshClick = () => {
         fetchPrices()

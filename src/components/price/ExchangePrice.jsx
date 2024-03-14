@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import { Box, Select, MenuItem, TextField, InputLabel, FormControl } from '@mui/material';
+import { useState } from 'react'
+import { Box, Select, MenuItem, TextField, FormControl } from '@mui/material';
 
 import { usePrice } from '../../contexts/inquiryPrice';
 

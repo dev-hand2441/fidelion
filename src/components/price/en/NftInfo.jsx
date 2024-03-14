@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowsRotate } from '@fortawesome/free-solid-svg-icons'
+import { useState, useEffect } from 'react'
 
 function NFTPriceInfo() {
     const [floorPrice, setFloorPrice] = useState(null)
@@ -33,7 +31,7 @@ function NFTPriceInfo() {
                 </div>
                 <div className="gn-note">
                     <ul>
-                        <li>Creator Royalties(5%)만 반영된 가격으로 수수료는 미포함된 Floor Price입니다.</li>
+                        <li>Floor prices reflect Creator Royalties (5%) only and do not include fees.</li>
                     </ul>
                 </div>
             </div>
