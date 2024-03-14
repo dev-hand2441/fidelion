@@ -7,7 +7,7 @@ function Price() {
         <div>
             <NftInfo />
             <TokenPrice />
-            {/* <ExchangePrice /> */}
+            <ExchangePrice />
         </div>
     )
 }

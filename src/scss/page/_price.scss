@@ -17,22 +17,32 @@
 }
 
 .gn-price-exchange {
+    margin-top: 42px;
+
     .gn-box {
-        padding: 16px 2px;
+        padding: 16px 0;
+
+        .MuiBox-root {
+            &:nth-child(n+2) {
+                margin-top: 8px;
+            }
+        }
     }
 
     [class*="image-token-"] {
-        margin: 1px 4px 0 0;
-        margin-right: 4px;
+        margin: -1px 4px 0 0;
+        width: 22px;
+        height: 22px;
     }
 
     .text-token {
         font-weight: 700;
         font-size: 16px;
+        line-height: 22px;
     }
 
     .MuiInputBase-input,
     .MuiSelect-select {
-        padding: 8px 14px;
+        padding: 8px 16px;
     }
 }

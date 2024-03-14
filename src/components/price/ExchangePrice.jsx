@@ -1,35 +1,64 @@
-import { useState } from 'react'
+import { useState, useEffect, useCallback } from 'react';
 import { Box, Select, MenuItem, TextField, FormControl } from '@mui/material';
 
 import tokenPrices from '../../json/tokenPrice.json';
 import { usePrice } from '../../contexts/inquiryPrice';
 
 function ExchangePrice() {
-
     const [selectedToken, setSelectedToken] = useState('2080');
     const [tokenValue, setTokenValue] = useState('');
-
-    const [convertSelectedToken, setConvertSelectedToken] = useState('SOLANA');
+    const [convertSelectedToken, setConvertSelectedToken] = useState('USDC');
     const [convertTokenValue, setConvertTokenValue] = useState('');
+    const { fetchPrice } = usePrice();
+
+    const [firstTokenPrice, setFirstTokenPrice] = useState(null);
+    const [secondTokenPrice, setSecondTokenPrice] = useState(null);
+
+    useEffect(() => {
+        if (selectedToken && tokenPrices[selectedToken]) {
+            fetchPrice(tokenPrices[selectedToken]).then(fetchedPrice => {
+                setFirstTokenPrice(fetchedPrice);
+            });
+        }
+    }, [selectedToken]); // fetchPrice 의존성 제거
+
+    useEffect(() => {
+        if (convertSelectedToken && tokenPrices[convertSelectedToken]) {
+            fetchPrice(tokenPrices[convertSelectedToken]).then(fetchedPrice => {
+                setSecondTokenPrice(fetchedPrice);
+            });
+        }
+    }, [convertSelectedToken]); // fetchPrice 의존성 제거
+
+    useEffect(() => {
+        if (firstTokenPrice && secondTokenPrice && tokenValue) {
+            const numericTokenValue = Number(tokenValue.replace(/,/g, ''));
+            if (!isNaN(numericTokenValue)) {
+                const convertedValue = ((numericTokenValue * firstTokenPrice) / secondTokenPrice).toFixed(3);
+                setConvertTokenValue(convertedValue.toLocaleString());
+            }
+        }
+    }, [firstTokenPrice, secondTokenPrice, tokenValue]);
 
     const selectToken = (event) => {
         setSelectedToken(event.target.value);
     };
 
     const changeTokenValue = (event) => {
-        setTokenValue(event.target.value);
+        const value = event.target.value.replace(/,/g, ''); // 콤마 제거
+        const numericValue = Number(value); // 숫자로 변환
+        if (!isNaN(numericValue)) { // 숫자인 경우만 업데이트
+            setTokenValue(numericValue.toLocaleString()); // 콤마 추가
+        }
     };
 
     const convertSelectToken = (event) => {
         setConvertSelectedToken(event.target.value);
     };
 
-    const CovertChangeTokenValue = (event) => {
-        setConvertTokenValue(event.target.value);
-    };
-
     return (
         <div className='gn-block gn-price-exchange'>
+            <h3 className="text-heading">코인 가격 환산</h3>
             <div className="gn-box">
                 <Box display="flex" alignItems="center" width="100%">
                     <FormControl sx={{ width: 'auto', marginRight: '16px' }}>
@@ -37,7 +66,7 @@ function ExchangePrice() {
                             value={selectedToken}
                             onChange={selectToken}
                             sx={{
-                                width: 140,
+                                width: 160,
                                 border: 'none',
                                 '& .MuiOutlinedInput-notchedOutline': {
                                     border: 'none'
@@ -71,7 +100,7 @@ function ExchangePrice() {
                             value={convertSelectedToken}
                             onChange={convertSelectToken}
                             sx={{
-                                width: 140,
+                                width: 160,
                                 border: 'none',
                                 '& .MuiOutlinedInput-notchedOutline': {
                                     border: 'none'
@@ -88,8 +117,6 @@ function ExchangePrice() {
                     <TextField
                         variant="outlined"
                         value={convertTokenValue}
-                        onChange={CovertChangeTokenValue}
-                        placeholder="0.00" // Placeholder 추가
                         InputProps={{
                             readOnly: true,
                         }}
