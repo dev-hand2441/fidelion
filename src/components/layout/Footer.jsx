@@ -13,9 +13,6 @@ function Footer() {
                     <li>
                         <a className="btn-kakao" href="https://open.kakao.com/o/g10WY6vf" target="_blank" rel="noreferrer">
                             <b>
-                                <i className="icon">
-                                    {/* <FontAwesomeIcon icon={faComment} /> */}
-                                </i>
                                 카카오톡 오픈 채팅
                                 <small>비밀번호: 191191</small>
                             </b>
