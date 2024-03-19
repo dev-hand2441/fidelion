@@ -1,10 +1,10 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowsRotate } from '@fortawesome/free-solid-svg-icons'
 
-import usePrices from '../../../contexts/usePrices'
+import { usePrice } from '../../../contexts/inquiryPrice';
 
 function TokenPrices() {
-    const { solanaPrice, token2080Price, fetchPrices } = usePrices()
+    const { token2080Price, solanaPrice, fetchPrices } = usePrice();
 
     const handleRefreshClick = () => {
         fetchPrices()

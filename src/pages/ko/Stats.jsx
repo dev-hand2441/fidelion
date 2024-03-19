@@ -3,7 +3,7 @@ import { Slider, Typography, Box } from '@mui/material'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRight, faArrowsRotate } from '@fortawesome/free-solid-svg-icons'
 
-import usePrices from '../../contexts/usePrices'
+import { usePrice } from '../../contexts/inquiryPrice';
 import CombinationChart from '../../components/stats/combinationChart'
 
 import defData from '../../json/def.json'
@@ -24,7 +24,7 @@ function Stats() {
     const [token2080ToSol, setToken2080ToSol] = useState(0)
     const [token2080ToKRW, setToken2080ToKRW] = useState(0)
 
-    const { solanaPrice, token2080Price, usdKrwExchangeRate, fetchPrices } = usePrices()
+    const { token2080Price, solanaPrice, usdKrwExchangeRate, fetchPrices } = usePrice();
 
     const handleRefreshClick = () => {
         fetchPrices()

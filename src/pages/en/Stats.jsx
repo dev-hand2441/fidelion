@@ -3,11 +3,11 @@ import { Slider, Typography, Box } from '@mui/material'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRight, faArrowsRotate } from '@fortawesome/free-solid-svg-icons'
 
-import usePrices from '../../contexts/usePrices'
+import { usePrice } from '../../contexts/inquiryPrice';
 
-import defData from '../../json/def.json' // looting.json 파일 import
-import lukData from '../../json/luk.json' // looting.json 파일 import
-import dexData from '../../json/dex.json' // looting.json 파일 import
+import defData from '../../json/def.json'
+import lukData from '../../json/luk.json'
+import dexData from '../../json/dex.json'
 
 function Stats() {
     const [defRange, setDefRange] = useState([0, 46])
@@ -22,7 +22,7 @@ function Stats() {
     const [token2080ToUSD, setToken2080ToUSD] = useState(0)
     const [token2080ToSol, setToken2080ToSol] = useState(0)
 
-    const { solanaPrice, token2080Price, usdKrwExchangeRate, fetchPrices } = usePrices()
+    const { token2080Price, solanaPrice, fetchPrices } = usePrice();
 
     const handleRefreshClick = () => {
         fetchPrices()
@@ -66,7 +66,7 @@ function Stats() {
             const calculatedToken2080ToSol = calculatedToken2080ToUSD / solanaPrice
             setToken2080ToSol(calculatedToken2080ToSol.toFixed(2))
         }
-    }, [statsPriceSum, token2080Price, solanaPrice, usdKrwExchangeRate])
+    }, [statsPriceSum, token2080Price, solanaPrice])
 
     // Calculate values whenever one of the dependencies changes
     useEffect(() => {

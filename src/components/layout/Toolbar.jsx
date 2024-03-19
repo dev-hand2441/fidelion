@@ -1,7 +1,7 @@
 import { useLanguage } from '../../contexts/LanguageContext'
 import { NavLink } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCircleDollarToSlot, faBolt, faSliders, faChartSimple, faUserPlus } from '@fortawesome/free-solid-svg-icons'
+import { faBolt, faSliders, faChartSimple, faUserPlus } from '@fortawesome/free-solid-svg-icons'
 
 function Toolbar() {
     const { language } = useLanguage()
@@ -11,14 +11,6 @@ function Toolbar() {
             <ul>
                 <li>
                     <NavLink to="/" className={({ isActive }) => (isActive ? 'active' : undefined)}>
-                        <i>
-                            <FontAwesomeIcon icon={faCircleDollarToSlot} />
-                        </i>
-                        Token/NFT
-                    </NavLink>
-                </li>
-                <li>
-                    <NavLink to="/looting" className={({ isActive }) => (isActive ? 'active' : undefined)}>
                         <i>
                             <FontAwesomeIcon icon={faBolt} />
                         </i>

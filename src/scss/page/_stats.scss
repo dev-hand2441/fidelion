@@ -112,8 +112,8 @@
 
             &:nth-of-type(5) {
                 display: block;
-                margin-top: 8px;
-                padding-top: 8px;
+                margin-top: 14px;
+                padding-top: 14px;
                 border-top: 1px solid #ddd;
 
                 > dt {
@@ -197,15 +197,9 @@
                     margin-top: 3px;
                 }
 
-                // &:nth-last-child(2) {
-                //     dd {
-                //         color: #dc143c;
-                //     }
-                // }
-
                 &:nth-of-type(4) {
-                    margin-top: 8px;
-                    padding-top: 8px;
+                    margin-top: 14px;
+                    padding-top: 14px;
                     border-top: 1px solid #ddd;
                 }
             }

@@ -2,14 +2,14 @@ import React, { useState, useEffect } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 
-import usePrices from '../../contexts/usePrices'
+import { usePrice } from '../../contexts/inquiryPrice';
 import combinationData from '../../json/combination.json'
 import defData from '../../json/def.json' // looting.json 파일 import
 import lukData from '../../json/luk.json' // looting.json 파일 import
 import dexData from '../../json/dex.json' // looting.json 파일 import
 
 function CombinationChart() {
-    const { solanaPrice, token2080Price, usdKrwExchangeRate } = usePrices()
+    const { token2080Price, solanaPrice, usdKrwExchangeRate } = usePrice();
 
     const getPriceSum = (def, luk, dex) => {
         // 누적 가격 계산을 위한 함수
