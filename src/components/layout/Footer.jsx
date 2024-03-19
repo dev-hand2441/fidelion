@@ -22,11 +22,13 @@ function Footer() {
                         </a>
                     </li>
                 )}
-                <li>
-                    <a className="btn-discord" href="https://discord.gg/officialfidelion" target="_blank">
-                        <b>네이버 카페</b>
-                    </a>
-                </li>
+                {language !== 'en' && (
+                    <li>
+                        <a className="btn-discord" href="https://cafe.naver.com/fidelion" target="_blank">
+                            <b>네이버 카페</b>
+                        </a>
+                    </li>
+                )}
                 <li>
                     <a className="btn-discord" href="https://discord.gg/officialfidelion" target="_blank">
                         <b>
