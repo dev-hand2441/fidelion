@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { Box, Select, MenuItem, TextField, FormControl } from '@mui/material';
 
 import tokenPrices from '../../json/tokenPrice.json';
-import { usePrice } from '../../contexts/InquiryPrice';
+import { usePrice } from '../../contexts/InquiryPrices';
 
 function ExchangePrice() {
     const [selectedToken, setSelectedToken] = useState('2080');

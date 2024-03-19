@@ -9,7 +9,7 @@ import Toolbar from './components/layout/Toolbar'
 import BottomSheet from './components/layout/BottomSheet'
 
 import { LanguageProvider } from './contexts/LanguageContext'
-import { PriceProvider } from './contexts/InquiryPrice';
+import { PriceProvider } from './contexts/InquiryPrices';
 
 import Price from './pages/LocalizedPrice'
 import Looting from './pages/LocalizedLooting'
