@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 
-import { usePrice } from '../../contexts/inquiryPrice';
+import { usePrice } from '../../contexts/InquiryPrice';
 import combinationData from '../../json/combination.json'
 import defData from '../../json/def.json' // looting.json 파일 import
 import lukData from '../../json/luk.json' // looting.json 파일 import

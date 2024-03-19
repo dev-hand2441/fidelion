@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowsRotate } from '@fortawesome/free-solid-svg-icons'
 
-import { usePrice } from '../../../contexts/inquiryPrice';
+import { usePrice } from '../../../contexts/InquiryPrice';
 
 function TokenPrices() {
     const { token2080Price, solanaPrice, fetchPrices } = usePrice();

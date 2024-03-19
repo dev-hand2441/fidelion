@@ -3,7 +3,7 @@ import { Slider, Typography, Box } from '@mui/material'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRight, faArrowsRotate } from '@fortawesome/free-solid-svg-icons'
 
-import { usePrice } from '../../contexts/inquiryPrice';
+import { usePrice } from '../../contexts/InquiryPrice';
 import CombinationChart from '../../components/stats/combinationChart'
 
 import defData from '../../json/def.json'
