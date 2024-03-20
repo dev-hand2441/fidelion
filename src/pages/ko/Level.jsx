@@ -1,11 +1,17 @@
-import { useState } from 'react'
+import React, { useState, useEffect } from 'react';
 import { Slider, Box } from '@mui/material'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
 
+import { usePrice } from '../../contexts/InquiryPrices';
 import levelData from '../../json/level.json' // level.json 파일 import
 
 function Level() {
+    const { token2080Price, usdKrwExchangeRate } = usePrice();
+    const [token2080ToKRW, setToken2080ToKRW] = useState(0);
+    const [value, setValue] = useState([0, 50])
+    const handleChange = (event, newValue) => setValue(newValue)
+
     // 구간 정의 (기본 구간 + 추가 구간)
     const ranges = [
         // 기본 구간
@@ -21,12 +27,9 @@ function Level() {
         { start: 15, end: 50, mercenary: 5, isAdditional: true },
     ]
 
-    const [value, setValue] = useState([0, 50])
-    const handleChange = (event, newValue) => setValue(newValue)
-
     const selectedSum = levelData
         .filter(({ lv }) => lv > value[0] && lv <= value[1])
-        .reduce((sum, { Price }) => sum + Price, 0)
+        .reduce((sum, { Price }) => sum + Price, 0);
 
     // 기본 구간과 추가 구간을 분리하여 계산
     const basicRanges = ranges.filter(range => !range.isAdditional)
@@ -50,6 +53,12 @@ function Level() {
         return { ...range, sum }
     })
 
+    useEffect(() => {
+        if (usdKrwExchangeRate && token2080Price) {
+            setToken2080ToKRW((selectedSum * (token2080Price * usdKrwExchangeRate)).toLocaleString(undefined, { maximumFractionDigits: 0 }));
+        }
+    }, [usdKrwExchangeRate, token2080Price, selectedSum]);
+
     return (
         <div className="gn-level">
             <div className="gn-block">
@@ -66,6 +75,7 @@ function Level() {
                             <dd>
                                 <i className="image-token-2080"></i>
                                 {selectedSum.toLocaleString()}
+                                {` ≈ ${token2080ToKRW}원`}
                             </dd>
                         </dl>
                     </div>

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowsRotate } from '@fortawesome/free-solid-svg-icons'
+import { faArrowsRotate, faSpinner } from '@fortawesome/free-solid-svg-icons'
 
 import { usePrice } from '../../contexts/InquiryPrices';
 
@@ -39,8 +39,8 @@ function TokenPrices() {
                         </i>
                         <b className="text-token">2080</b>
                         <p className="text-price">
-                            {token2080Price ? `$${token2080Price}` : 'Loading...'}{' '}
-                            {token2080ToKRW ? `≈ ${token2080ToKRW}원` : ''}
+                            {token2080Price ? `$${token2080Price}` : <FontAwesomeIcon icon={faSpinner} spin />}
+                            {token2080ToKRW ? ` ≈ ${token2080ToKRW}원` : ''}
                         </p>
                     </li>
                     <li className="gn-box">
@@ -49,8 +49,8 @@ function TokenPrices() {
                         </i>
                         <b className="text-token">Solana</b>
                         <p className="text-price">
-                            {solanaPrice ? `$${solanaPrice}` : 'Loading...'}{' '}
-                            {solanaToKRW ? `≈ ${solanaToKRW}원` : ''}
+                            {solanaPrice ? `$${solanaPrice}` : <FontAwesomeIcon icon={faSpinner} spin />}
+                            {solanaToKRW ? ` ≈ ${solanaToKRW}원` : ''}
                         </p>
                     </li>
                 </ul>

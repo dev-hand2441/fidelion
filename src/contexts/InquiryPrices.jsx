@@ -11,6 +11,12 @@ export const PriceProvider = ({ children }) => {
 
     const fetchPrices = async () => {
         try {
+            setPrices({
+                token2080Price: null,
+                solanaPrice: null,
+                usdKrwExchangeRate: null
+            });
+
             // 각 코인 및 환율에 대한 API 호출 로직 구현
             // 예시 코드이므로 실제 API 요청에 맞게 수정 필요
             const token2080Response = await fetch(

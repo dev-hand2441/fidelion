@@ -37,14 +37,6 @@ function Guide() {
                         </i>
                     </a>
                 </li>
-                <li className="gn-box">
-                    <a href="https://open.kakao.com/o/sNEP96eg" target="_blank">
-                        <b>구구봇 내 지갑 수익률 시뮬레이터</b>
-                        <i>
-                            <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
-                        </i>
-                    </a>
-                </li>
             </ul>
         </div>
     )

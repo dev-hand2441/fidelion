@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSpinner } from '@fortawesome/free-solid-svg-icons'
+
 import { usePrice } from '../../contexts/InquiryPrices';
 import combinationData from '../../json/combination.json'
 import defData from '../../json/def.json' // looting.json 파일 import
@@ -61,15 +64,17 @@ function CombinationChart() {
                                     </dl>
                                     <dl>
                                         <dt>$SOL</dt>
-                                        <dd><i className="image-token-solana"></i> {token2080ToSol ? `${token2080ToSol.toFixed(2)}` : 'Loading...'}</dd>
+                                        <dd><i className="image-token-solana"></i> {token2080ToSol ? `${token2080ToSol.toFixed(2)}` : <FontAwesomeIcon icon={faSpinner} spin />}</dd>
                                     </dl>
                                     <dl>
                                         <dt>USD</dt>
-                                        <dd>{token2080ToUSD ? `$${token2080ToUSD.toLocaleString(undefined, { maximumFractionDigits: 0 })}` : 'Loading...'}</dd>
+                                        <dd>
+                                            {token2080ToUSD ? `$${token2080ToUSD.toLocaleString(undefined, { maximumFractionDigits: 0 })}` : <FontAwesomeIcon icon={faSpinner} spin />}
+                                        </dd>
                                     </dl>
                                     <dl>
                                         <dt>KRW</dt>
-                                        <dd>{token2080ToKRW ? `${token2080ToKRW.toLocaleString(undefined, { maximumFractionDigits: 0 })}원` : 'Loading...'}</dd>
+                                        <dd>{token2080ToKRW ? `${token2080ToKRW.toLocaleString(undefined, { maximumFractionDigits: 0 })}원` : <FontAwesomeIcon icon={faSpinner} spin />}</dd>
                                     </dl>
                                 </div>
                             </div>

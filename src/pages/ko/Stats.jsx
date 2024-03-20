@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import { Slider, Typography, Box } from '@mui/material'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowRight, faArrowsRotate } from '@fortawesome/free-solid-svg-icons'
+import { faArrowRight, faArrowsRotate, faSpinner } from '@fortawesome/free-solid-svg-icons'
 
 import { usePrice } from '../../contexts/InquiryPrices';
 import CombinationChart from '../../components/stats/combinationChart'
@@ -191,14 +191,14 @@ function Stats() {
                             </dl>
                             <dl>
                                 <dt>$SOL</dt>
-                                <dd><i className="image-token-solana"></i>{token2080ToSol ? `${token2080ToSol}` : 'Loading...'}</dd>
+                                <dd><i className="image-token-solana"></i>{token2080ToSol ? `${token2080ToSol}` : <FontAwesomeIcon icon={faSpinner} spin />}</dd>
                             </dl>
                             <dl>
                                 <dt>USD</dt>
                                 <dd>
                                     {token2080ToUSD
                                         ? `$${token2080ToUSD.toLocaleString(undefined, { maximumFractionDigits: 0 })}`
-                                        : 'Loading...'}
+                                        : <FontAwesomeIcon icon={faSpinner} spin />}
                                 </dd>
                             </dl>
                             <dl>
@@ -206,7 +206,7 @@ function Stats() {
                                 <dd>
                                     {token2080ToKRW
                                         ? `${token2080ToKRW.toLocaleString(undefined, { maximumFractionDigits: 0 })}원`
-                                        : 'Loading...'}
+                                        : <FontAwesomeIcon icon={faSpinner} spin />}
                                 </dd>
                             </dl>
                         </dd>

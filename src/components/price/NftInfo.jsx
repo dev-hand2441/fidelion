@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 
 function NFTPriceInfo() {
     const [floorPrice, setFloorPrice] = useState(null)
@@ -27,7 +29,9 @@ function NFTPriceInfo() {
                     <b className="text-collection">
                         FIDELION<span>Listed {listedCount}</span>
                     </b>
-                    <p className="text-price">{floorPrice ? `${floorPrice.toFixed(2)} SOL` : 'Loading...'}</p>
+                    <p className="text-price">
+                        {floorPrice ? `${floorPrice.toFixed(2)} SOL` : <FontAwesomeIcon icon={faSpinner} spin />}
+                    </p>
                 </div>
                 <div className="gn-note">
                     <ul>
